@@ -29,13 +29,31 @@ namespace ChillExe
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.elementsList1 = new ChillExe.Controls.ElementsList();
+            this.SuspendLayout();
+            // 
+            // elementsList1
+            // 
+            this.elementsList1.Location = new System.Drawing.Point(101, 36);
+            this.elementsList1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.elementsList1.Name = "elementsList1";
+            this.elementsList1.Size = new System.Drawing.Size(594, 324);
+            this.elementsList1.TabIndex = 0;
+            // 
+            // Form1
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Text = "Form1";
+            this.ClientSize = new System.Drawing.Size(797, 452);
+            this.Controls.Add(this.elementsList1);
+            this.Name = "Form1";
+            this.Text = "ChillExe";
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+        private Controls.ElementsList elementsList1;
     }
 }
 
