@@ -36,10 +36,10 @@ namespace ChillExe.Controls
             this.cleanButton = new System.Windows.Forms.Button();
             this.downloadButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.urlList = new System.Windows.Forms.DataGridView();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.urlList)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -51,7 +51,7 @@ namespace ChillExe.Controls
             this.saveButton.TabIndex = 1;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
-            this.saveButton.Click += new System.EventHandler(this.saveButton_Click);
+            this.saveButton.Click += new System.EventHandler(this.SaveButton_Click);
             // 
             // exportButton
             // 
@@ -62,7 +62,7 @@ namespace ChillExe.Controls
             this.exportButton.TabIndex = 2;
             this.exportButton.Text = "Export list";
             this.exportButton.UseVisualStyleBackColor = true;
-            this.exportButton.Click += new System.EventHandler(this.exportButton_Click);
+            this.exportButton.Click += new System.EventHandler(this.ExportButton_Click);
             // 
             // importButton
             // 
@@ -73,7 +73,7 @@ namespace ChillExe.Controls
             this.importButton.TabIndex = 3;
             this.importButton.Text = "Import list";
             this.importButton.UseVisualStyleBackColor = true;
-            this.importButton.Click += new System.EventHandler(this.importButton_Click);
+            this.importButton.Click += new System.EventHandler(this.ImportButton_Click);
             // 
             // cleanButton
             // 
@@ -84,7 +84,7 @@ namespace ChillExe.Controls
             this.cleanButton.TabIndex = 4;
             this.cleanButton.Text = "Clean list";
             this.cleanButton.UseVisualStyleBackColor = true;
-            this.cleanButton.Click += new System.EventHandler(this.cleanButton_Click);
+            this.cleanButton.Click += new System.EventHandler(this.CleanButton_Click);
             // 
             // downloadButton
             // 
@@ -95,21 +95,21 @@ namespace ChillExe.Controls
             this.downloadButton.TabIndex = 5;
             this.downloadButton.Text = "Download and install exes";
             this.downloadButton.UseVisualStyleBackColor = true;
-            this.downloadButton.Click += new System.EventHandler(this.downloadButton_Click);
+            this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
             // dataGridView1
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.urlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.urlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Url,
             this.LastUpdate});
-            this.dataGridView1.Location = new System.Drawing.Point(17, 31);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 51;
-            this.dataGridView1.RowTemplate.Height = 29;
-            this.dataGridView1.Size = new System.Drawing.Size(542, 353);
-            this.dataGridView1.TabIndex = 8;
-            this.dataGridView1.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellValueChanged);
+            this.urlList.Location = new System.Drawing.Point(17, 31);
+            this.urlList.Name = "dataGridView1";
+            this.urlList.RowHeadersWidth = 51;
+            this.urlList.RowTemplate.Height = 29;
+            this.urlList.Size = new System.Drawing.Size(542, 353);
+            this.urlList.TabIndex = 8;
+            this.urlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UrlList_CellValueChanged);
             // 
             // Url
             // 
@@ -130,7 +130,7 @@ namespace ChillExe.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.urlList);
             this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.cleanButton);
             this.Controls.Add(this.importButton);
@@ -139,7 +139,7 @@ namespace ChillExe.Controls
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ElementsList";
             this.Size = new System.Drawing.Size(679, 439);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.urlList)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -151,7 +151,7 @@ namespace ChillExe.Controls
         private System.Windows.Forms.Button cleanButton;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView urlList;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdate;
     }
