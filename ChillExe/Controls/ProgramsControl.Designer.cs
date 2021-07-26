@@ -1,7 +1,7 @@
 ﻿
 namespace ChillExe.Controls
 {
-    partial class ElementsList
+    partial class ProgramsControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,10 +36,10 @@ namespace ChillExe.Controls
             this.cleanButton = new System.Windows.Forms.Button();
             this.downloadButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.urlList = new System.Windows.Forms.DataGridView();
+            this.programsGridView = new System.Windows.Forms.DataGridView();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.urlList)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.programsGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -97,19 +97,19 @@ namespace ChillExe.Controls
             this.downloadButton.UseVisualStyleBackColor = true;
             this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
-            // dataGridView1
+            // programsGridView
             // 
-            this.urlList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.urlList.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.programsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.programsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Url,
             this.LastUpdate});
-            this.urlList.Location = new System.Drawing.Point(17, 31);
-            this.urlList.Name = "dataGridView1";
-            this.urlList.RowHeadersWidth = 51;
-            this.urlList.RowTemplate.Height = 29;
-            this.urlList.Size = new System.Drawing.Size(542, 353);
-            this.urlList.TabIndex = 8;
-            this.urlList.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UrlList_CellValueChanged);
+            this.programsGridView.Location = new System.Drawing.Point(17, 31);
+            this.programsGridView.Name = "dataGridView1";
+            this.programsGridView.RowHeadersWidth = 51;
+            this.programsGridView.RowTemplate.Height = 29;
+            this.programsGridView.Size = new System.Drawing.Size(542, 353);
+            this.programsGridView.TabIndex = 8;
+            this.programsGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UrlList_CellValueChanged);
             // 
             // Url
             // 
@@ -126,11 +126,11 @@ namespace ChillExe.Controls
             this.LastUpdate.ReadOnly = true;
             this.LastUpdate.Width = 190;
             // 
-            // ElementsList
+            // ProgramsControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.urlList);
+            this.Controls.Add(this.programsGridView);
             this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.cleanButton);
             this.Controls.Add(this.importButton);
@@ -139,7 +139,7 @@ namespace ChillExe.Controls
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ElementsList";
             this.Size = new System.Drawing.Size(679, 439);
-            ((System.ComponentModel.ISupportInitialize)(this.urlList)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.programsGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -151,7 +151,7 @@ namespace ChillExe.Controls
         private System.Windows.Forms.Button cleanButton;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.DataGridView urlList;
+        private System.Windows.Forms.DataGridView programsGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdate;
     }

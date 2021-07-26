@@ -1,7 +1,7 @@
 ﻿
 namespace ChillExe
 {
-    partial class Form1
+    partial class ProgramsForms
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,23 +29,23 @@ namespace ChillExe
         /// </summary>
         private void InitializeComponent()
         {
-            this.elementsList1 = new ChillExe.Controls.ElementsList();
+            this.programsControl = new ChillExe.Controls.ProgramsControl();
             this.SuspendLayout();
             // 
-            // elementsList1
+            // programsControl
             // 
-            this.elementsList1.Location = new System.Drawing.Point(101, 36);
-            this.elementsList1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.elementsList1.Name = "elementsList1";
-            this.elementsList1.Size = new System.Drawing.Size(594, 324);
-            this.elementsList1.TabIndex = 0;
+            this.programsControl.Location = new System.Drawing.Point(101, 36);
+            this.programsControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.programsControl.Name = "elementsList1";
+            this.programsControl.Size = new System.Drawing.Size(594, 324);
+            this.programsControl.TabIndex = 0;
             // 
-            // Form1
+            // ProgramsForms
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(797, 452);
-            this.Controls.Add(this.elementsList1);
+            this.Controls.Add(this.programsControl);
             this.Name = "Form1";
             this.Text = "ChillExe";
             this.ResumeLayout(false);
@@ -53,7 +53,7 @@ namespace ChillExe
         }
 
         #endregion
-        private Controls.ElementsList elementsList1;
+        private Controls.ProgramsControl programsControl;
     }
 }
 
