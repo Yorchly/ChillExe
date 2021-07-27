@@ -1,11 +1,11 @@
 ﻿using ChillExe.Models;
+using ChillExe.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using System.Xml.Serialization;
 
 namespace ChillExe.Controls
 {
@@ -13,13 +13,17 @@ namespace ChillExe.Controls
     {
         #region Fields
         private readonly Regex cellStringValueRegex = new Regex(@"^http[s]?\:\/\/");
-        private readonly string filename = Path.Join(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "applications_info.xml");
         private const string ERROR_IN_URL = "Text specified is not a http/https";
+        private readonly XmlRepositoryManager<ApplicationsInformation> xmlRepository;
         #endregion
 
         #region Constructor
         public ApplicationsInstallerControl()
         {
+            xmlRepository = new XmlRepositoryManager<ApplicationsInformation>() 
+            { 
+                Filename = Path.Join(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "applications_info.xml") 
+            };
             InitializeComponent();
             Init();
         }
@@ -31,51 +35,10 @@ namespace ChillExe.Controls
         /// </summary>
         private void Init()
         {
-            List<ApplicationInformation> applicationInformationList = ReadInfoFromXml();
+            List<ApplicationInformation> applicationInformationList = xmlRepository.ReadInfoFromXml().ApplicationsInfo;
 
             foreach(ApplicationInformation info in applicationInformationList)
                 applicationInfoGridView.Rows.Add(info.Url, info.LastUpdate);
-        }
-
-        private void SaveInfoInXml(List<ApplicationInformation> applicationsInfo)
-        {
-            if (applicationInfoGridView.Rows.Count <= 0)
-                return;
-
-            try
-            {
-                var serializer = new XmlSerializer(typeof(ApplicationsInformation));
-                var writer = new StreamWriter(filename);
-
-                serializer.Serialize(writer, new ApplicationsInformation() { ApplicationsInfo = applicationsInfo });
-
-                writer.Close();
-
-                MessageBox.Show("Info saved successfully");
-            }
-            catch (Exception ex)
-            {
-                // TODO: logger
-                throw;
-            }
-        }
-
-        private List<ApplicationInformation> ReadInfoFromXml()
-        {
-            try
-            {
-                var serializer = new XmlSerializer(typeof(ApplicationsInformation));
-                var fileStream = new FileStream(filename, FileMode.Open);
-
-                var applicationsInformation = (ApplicationsInformation)serializer.Deserialize(fileStream);
-
-                return applicationsInformation.ApplicationsInfo;
-            }
-            catch(Exception ex)
-            {
-                // TODO: logger.
-                return new List<ApplicationInformation>();
-            }
         }
         #endregion Methods
 
@@ -107,7 +70,9 @@ namespace ChillExe.Controls
                     applicationsInfo.Add(new ApplicationInformation() { Url = urlValue, LastUpdate = lastUpdate });
             }
 
-            SaveInfoInXml(applicationsInfo);
+            if (xmlRepository.SaveInfoInXml(new ApplicationsInformation { ApplicationsInfo = applicationsInfo }))
+                MessageBox.Show("Info saved successfully");
+
         }
 
         private void ExportButton_Click(object sender, EventArgs e)
