@@ -1,7 +1,7 @@
 ﻿
 namespace ChillExe.Controls
 {
-    partial class ProgramsControl
+    partial class ApplicationsInstallerControl
     {
         /// <summary> 
         /// Required designer variable.
@@ -36,10 +36,10 @@ namespace ChillExe.Controls
             this.cleanButton = new System.Windows.Forms.Button();
             this.downloadButton = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
-            this.programsGridView = new System.Windows.Forms.DataGridView();
+            this.applicationInfoGridView = new System.Windows.Forms.DataGridView();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)(this.programsGridView)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationInfoGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // saveButton
@@ -99,17 +99,17 @@ namespace ChillExe.Controls
             // 
             // programsGridView
             // 
-            this.programsGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.programsGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.applicationInfoGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.applicationInfoGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Url,
             this.LastUpdate});
-            this.programsGridView.Location = new System.Drawing.Point(17, 31);
-            this.programsGridView.Name = "dataGridView1";
-            this.programsGridView.RowHeadersWidth = 51;
-            this.programsGridView.RowTemplate.Height = 29;
-            this.programsGridView.Size = new System.Drawing.Size(542, 353);
-            this.programsGridView.TabIndex = 8;
-            this.programsGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UrlList_CellValueChanged);
+            this.applicationInfoGridView.Location = new System.Drawing.Point(17, 31);
+            this.applicationInfoGridView.Name = "dataGridView1";
+            this.applicationInfoGridView.RowHeadersWidth = 51;
+            this.applicationInfoGridView.RowTemplate.Height = 29;
+            this.applicationInfoGridView.Size = new System.Drawing.Size(542, 353);
+            this.applicationInfoGridView.TabIndex = 8;
+            this.applicationInfoGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UrlList_CellValueChanged);
             // 
             // Url
             // 
@@ -130,7 +130,7 @@ namespace ChillExe.Controls
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.programsGridView);
+            this.Controls.Add(this.applicationInfoGridView);
             this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.cleanButton);
             this.Controls.Add(this.importButton);
@@ -139,7 +139,7 @@ namespace ChillExe.Controls
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ElementsList";
             this.Size = new System.Drawing.Size(679, 439);
-            ((System.ComponentModel.ISupportInitialize)(this.programsGridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.applicationInfoGridView)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -151,7 +151,7 @@ namespace ChillExe.Controls
         private System.Windows.Forms.Button cleanButton;
         private System.Windows.Forms.Button downloadButton;
         private System.Windows.Forms.ToolTip toolTip1;
-        private System.Windows.Forms.DataGridView programsGridView;
+        private System.Windows.Forms.DataGridView applicationInfoGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdate;
     }
