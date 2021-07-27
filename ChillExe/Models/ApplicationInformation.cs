@@ -4,7 +4,7 @@ using System.Xml.Serialization;
 
 namespace ChillExe.Models
 {
-    public class ApplicationInfo
+    public class ApplicationInformation
     {
         [XmlElement("url")]
         public string Url { get; set; }
@@ -16,6 +16,6 @@ namespace ChillExe.Models
     [XmlRoot("applications")]
     public class ApplicationsInformation
     {
-        public List<ApplicationInfo> applicationsInfo { get; set; }
+        public List<ApplicationInformation> ApplicationsInfo { get; set; }
     }
 }

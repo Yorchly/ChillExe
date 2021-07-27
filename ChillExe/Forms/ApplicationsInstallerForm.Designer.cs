@@ -1,7 +1,9 @@
 ﻿
+using ChillExe.Controls;
+
 namespace ChillExe
 {
-    partial class ProgramsForms
+    partial class ApplicationsInstallerForm
     {
         /// <summary>
         ///  Required designer variable.
@@ -29,7 +31,7 @@ namespace ChillExe
         /// </summary>
         private void InitializeComponent()
         {
-            this.programsControl = new ChillExe.Controls.ProgramsControl();
+            this.programsControl = new ChillExe.Controls.ApplicationsInstallerControl();
             this.SuspendLayout();
             // 
             // programsControl
@@ -53,7 +55,7 @@ namespace ChillExe
         }
 
         #endregion
-        private Controls.ProgramsControl programsControl;
+        private ApplicationsInstallerControl programsControl;
     }
 }
 
