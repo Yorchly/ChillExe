@@ -35,7 +35,10 @@ namespace ChillExe.Controls
         /// </summary>
         private void Init()
         {
-            List<ApplicationInformation> applicationInformationList = xmlRepository.ReadInfoFromXml().ApplicationsInfo;
+            List<ApplicationInformation> applicationInformationList = xmlRepository.ReadInfoFromXml()?.ApplicationsInfo;
+
+            if (applicationInformationList == null)
+                return;
 
             foreach(ApplicationInformation info in applicationInformationList)
                 applicationInfoGridView.Rows.Add(info.Url, info.LastUpdate);
