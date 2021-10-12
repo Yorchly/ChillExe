@@ -1,84 +1,101 @@
 ﻿using ChillExe.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.IO;
 using System.Net;
 using System.Text;
-using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace ChillExe.Controls
 {
     public partial class DownloadAndInstallControl : UserControl
     {
-        private readonly StringBuilder downloadingErrorText = new StringBuilder();
-        public List<ApplicationInformation> ApplicationInformation { get; set; }
+        private readonly StringBuilder downloadErrors = new StringBuilder();
+        private readonly StringBuilder installErrors = new StringBuilder();
 
         public DownloadAndInstallControl()
         {
             InitializeComponent();
         }
 
-        public void DownloadAndInstall(List<ApplicationInformation> appInfo)
+        public void DownloadAndInstall(List<ApplicationInformation> appInfoList)
         {
-            if (appInfo == null || appInfo.Count == 0)
+            if (appInfoList == null || appInfoList.Count == 0)
             {
                 MessageBox.Show("There is an error with downloading list.", "Error with list", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            ApplicationInformation = appInfo;
-            downloadInfoGridView.Rows.Clear();
-            DownloadQueue(); //Install();
-        }
 
-        private void DownloadQueue()
-        {
-            int newRowIndex = -1;
-            foreach (ApplicationInformation appInfo in ApplicationInformation)
+            downloadAndInstallProgressBar.Value = 0;
+            downloadAndInstallProgressBar.Minimum = 0;
+            downloadAndInstallProgressBar.Maximum = appInfoList.Count;
+
+            foreach(ApplicationInformation appInfo in appInfoList)
             {
-                try
-                {
-                    var webClient = new WebClient();
+                Refresh();
+                bool downloaded = Download(appInfo);
 
-                    if (File.Exists(appInfo.Filename))
-                        File.Delete(appInfo.Filename);
+                Refresh();
+                if (downloaded)
+                    Install(appInfo);
 
-                    appInfo.DownloadStatus = DownloadStatus.Downloading;
-
-                    newRowIndex = downloadInfoGridView.Rows.Add(appInfo.Filename, Enum.GetName(typeof(DownloadStatus), appInfo.DownloadStatus));
-                    Refresh();
-
-                    webClient.DownloadFile(appInfo.Url, appInfo.Filename);
-
-                    appInfo.DownloadStatus = DownloadStatus.Downloaded;
-
-                    downloadInfoGridView.Rows[newRowIndex].Cells[1].Value = Enum.GetName(typeof(DownloadStatus), appInfo.DownloadStatus);
-                }
-                catch (Exception ex)
-                {
-                    appInfo.DownloadStatus = DownloadStatus.Error;
-                    if (newRowIndex != -1)
-                        downloadInfoGridView.Rows[newRowIndex].Cells[1].Value = Enum.GetName(typeof(DownloadStatus), appInfo.DownloadStatus);
-                    // TODO: logger
-                    if (downloadingErrorText.Length == 0)
-                        downloadingErrorText.Append("Error downloading: ");
-                    downloadingErrorText.Append($"- {appInfo.Filename}");
-                }
+                IncreaseProgressBar(downloadAndInstallProgressBar.Value++);
             }
-            // In order to user can see the result.
-            Thread.Sleep(1500);
+
+            if (downloadErrors.Length > 0 || installErrors.Length > 0)
+                MessageBox.Show(downloadErrors.ToString() + "\n" + installErrors.ToString(), "Errors!");
         }
 
-        private void Install()
+        private void IncreaseProgressBar(int value) =>
+            downloadAndInstallProgressBar.Value = value;
+
+        private bool Download(ApplicationInformation appInfo)
         {
-            //var process = new Process();
-            //process.StartInfo.FileName = filename;
-            //process.StartInfo.UseShellExecute = true;
-            //process.StartInfo.CreateNoWindow = false;
-            //// Get higher privileges
-            //process.StartInfo.Verb = "runas";
-            //process.Start();
-            //process.WaitForExit();
+            try
+            {
+                var webClient = new WebClient();
+
+                if (File.Exists(appInfo.Filename))
+                    File.Delete(appInfo.Filename);
+
+                webClient.DownloadFile(new Uri(appInfo.Url), appInfo.Filename);
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // TODO: logger
+                if (downloadErrors.Length == 0)
+                    downloadErrors.Append("Error downloading: ");
+                downloadErrors.Append($"- {appInfo.Filename} \n");
+
+                return false;
+            }
+        }
+
+        private void Install(ApplicationInformation appInfo)
+        {
+            try
+            {
+                var process = new Process();
+                process.StartInfo.FileName = appInfo.Filename;
+                process.StartInfo.UseShellExecute = true;
+                process.StartInfo.CreateNoWindow = false;
+                // Get higher privileges
+                process.StartInfo.Verb = "runas";
+                process.Start();
+                process.WaitForExit();
+            }
+            catch (Exception ex)
+            {
+                // TODO: logger
+                if (installErrors.Length == 0)
+                    installErrors.Append("Error installing: ");
+                installErrors.Append($"- {appInfo.Filename} \n");
+
+            }
         }
     }
 }

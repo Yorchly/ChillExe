@@ -45,9 +45,10 @@ namespace ChillExe.Controls
             // 
             // saveButton
             // 
-            this.saveButton.Location = new System.Drawing.Point(495, 69);
+            this.saveButton.Location = new System.Drawing.Point(566, 92);
+            this.saveButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.saveButton.Name = "saveButton";
-            this.saveButton.Size = new System.Drawing.Size(75, 23);
+            this.saveButton.Size = new System.Drawing.Size(86, 31);
             this.saveButton.TabIndex = 1;
             this.saveButton.Text = "Save";
             this.saveButton.UseVisualStyleBackColor = true;
@@ -55,9 +56,10 @@ namespace ChillExe.Controls
             // 
             // exportButton
             // 
-            this.exportButton.Location = new System.Drawing.Point(495, 112);
+            this.exportButton.Location = new System.Drawing.Point(566, 149);
+            this.exportButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.exportButton.Name = "exportButton";
-            this.exportButton.Size = new System.Drawing.Size(75, 23);
+            this.exportButton.Size = new System.Drawing.Size(86, 31);
             this.exportButton.TabIndex = 2;
             this.exportButton.Text = "Export list";
             this.exportButton.UseVisualStyleBackColor = true;
@@ -65,9 +67,10 @@ namespace ChillExe.Controls
             // 
             // importButton
             // 
-            this.importButton.Location = new System.Drawing.Point(495, 155);
+            this.importButton.Location = new System.Drawing.Point(566, 207);
+            this.importButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.importButton.Name = "importButton";
-            this.importButton.Size = new System.Drawing.Size(75, 23);
+            this.importButton.Size = new System.Drawing.Size(86, 31);
             this.importButton.TabIndex = 3;
             this.importButton.Text = "Import list";
             this.importButton.UseVisualStyleBackColor = true;
@@ -75,9 +78,10 @@ namespace ChillExe.Controls
             // 
             // cleanButton
             // 
-            this.cleanButton.Location = new System.Drawing.Point(495, 198);
+            this.cleanButton.Location = new System.Drawing.Point(566, 264);
+            this.cleanButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cleanButton.Name = "cleanButton";
-            this.cleanButton.Size = new System.Drawing.Size(75, 23);
+            this.cleanButton.Size = new System.Drawing.Size(86, 31);
             this.cleanButton.TabIndex = 4;
             this.cleanButton.Text = "Clean list";
             this.cleanButton.UseVisualStyleBackColor = true;
@@ -85,9 +89,10 @@ namespace ChillExe.Controls
             // 
             // downloadButton
             // 
-            this.downloadButton.Location = new System.Drawing.Point(198, 293);
+            this.downloadButton.Location = new System.Drawing.Point(226, 391);
+            this.downloadButton.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.downloadButton.Name = "downloadButton";
-            this.downloadButton.Size = new System.Drawing.Size(170, 23);
+            this.downloadButton.Size = new System.Drawing.Size(194, 31);
             this.downloadButton.TabIndex = 5;
             this.downloadButton.Text = "Download and install exes";
             this.downloadButton.UseVisualStyleBackColor = true;
@@ -99,12 +104,11 @@ namespace ChillExe.Controls
             this.applicationInfoGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Url,
             this.LastUpdate});
-            this.applicationInfoGridView.Location = new System.Drawing.Point(15, 23);
-            this.applicationInfoGridView.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.applicationInfoGridView.Location = new System.Drawing.Point(17, 31);
             this.applicationInfoGridView.Name = "applicationInfoGridView";
             this.applicationInfoGridView.RowHeadersWidth = 51;
             this.applicationInfoGridView.RowTemplate.Height = 29;
-            this.applicationInfoGridView.Size = new System.Drawing.Size(474, 265);
+            this.applicationInfoGridView.Size = new System.Drawing.Size(542, 353);
             this.applicationInfoGridView.TabIndex = 8;
             this.applicationInfoGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.UrlList_CellValueChanged);
             // 
@@ -125,15 +129,16 @@ namespace ChillExe.Controls
             // 
             // downloadAndInstallControl1
             // 
-            this.downloadAndInstallControl1.Location = new System.Drawing.Point(98, 36);
+            this.downloadAndInstallControl1.Location = new System.Drawing.Point(83, 166);
+            this.downloadAndInstallControl1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.downloadAndInstallControl1.Name = "downloadAndInstallControl1";
-            this.downloadAndInstallControl1.Size = new System.Drawing.Size(340, 240);
+            this.downloadAndInstallControl1.Size = new System.Drawing.Size(396, 61);
             this.downloadAndInstallControl1.TabIndex = 9;
             this.downloadAndInstallControl1.Visible = false;
             // 
             // ApplicationsInstallerControl
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.downloadAndInstallControl1);
             this.Controls.Add(this.applicationInfoGridView);
@@ -142,8 +147,9 @@ namespace ChillExe.Controls
             this.Controls.Add(this.importButton);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.saveButton);
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "ApplicationsInstallerControl";
-            this.Size = new System.Drawing.Size(594, 329);
+            this.Size = new System.Drawing.Size(679, 439);
             ((System.ComponentModel.ISupportInitialize)(this.applicationInfoGridView)).EndInit();
             this.ResumeLayout(false);
 

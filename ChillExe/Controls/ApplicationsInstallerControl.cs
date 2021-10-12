@@ -55,7 +55,6 @@ namespace ChillExe.Controls
             if (applicationInfoGridView.Rows.Count <= 0)
                 return (false, "List of URLs is empty.");
 
-            // TODO -> new download and install status are not saved.
             applicationInformationList.Clear();
 
             foreach (DataGridViewRow row in applicationInfoGridView.Rows)
@@ -147,9 +146,6 @@ namespace ChillExe.Controls
             downloadAndInstallControl1.Visible = false;
 
             downloadButton.Enabled = true;
-
-            // Saving to update Download and Install status in XML
-            SaveInfoFromList();
         }
 
         private void UrlList_CellValueChanged(object sender, DataGridViewCellEventArgs e)
