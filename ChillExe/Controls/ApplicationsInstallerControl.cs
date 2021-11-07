@@ -13,7 +13,7 @@ namespace ChillExe.Controls
     {
         #region Fields
         private readonly Regex cellStringValueRegex = new Regex(@"^http[s]?\:\/\/");
-        private readonly Regex appExecutableName = new Regex(@"\w+\.(exe|msi)");
+        private readonly Regex appExecutableName = new Regex(@"[\w\d\-\_\.]+\.(exe|msi)");
         private const string ERROR_IN_URL = "Text specified is not a http/https";
         private const string ERROR_WITH_EXECUTABLE = "Exe/msi cannot be obtained from url added";
         // TODO -> Change for current downloadAndInstallPath
