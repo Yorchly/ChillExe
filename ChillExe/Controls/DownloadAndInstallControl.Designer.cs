@@ -47,7 +47,7 @@ namespace ChillExe.Controls
             this.DownloadAndInstallLabel.Name = "DownloadAndInstallLabel";
             this.DownloadAndInstallLabel.Size = new System.Drawing.Size(201, 20);
             this.DownloadAndInstallLabel.TabIndex = 1;
-            this.DownloadAndInstallLabel.Text = "Donwloading and installing...";
+            this.DownloadAndInstallLabel.Text = "Donwloading...";
             // 
             // DownloadAndInstallControl
             // 
