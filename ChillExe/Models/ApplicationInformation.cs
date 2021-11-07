@@ -11,6 +11,8 @@ namespace ChillExe.Models
 
         [XmlElement("lastUpdate")]
         public DateTime LastUpdate { get; set; }
+
+        public string Filename { get; set; }
     }
 
     [XmlRoot("applications")]

@@ -39,6 +39,7 @@ namespace ChillExe.Controls
             this.applicationInfoGridView = new System.Windows.Forms.DataGridView();
             this.Url = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.LastUpdate = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.downloadAndInstallControl1 = new ChillExe.Controls.DownloadAndInstallControl();
             ((System.ComponentModel.ISupportInitialize)(this.applicationInfoGridView)).BeginInit();
             this.SuspendLayout();
             // 
@@ -97,14 +98,14 @@ namespace ChillExe.Controls
             this.downloadButton.UseVisualStyleBackColor = true;
             this.downloadButton.Click += new System.EventHandler(this.DownloadButton_Click);
             // 
-            // programsGridView
+            // applicationInfoGridView
             // 
             this.applicationInfoGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.applicationInfoGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Url,
             this.LastUpdate});
             this.applicationInfoGridView.Location = new System.Drawing.Point(17, 31);
-            this.applicationInfoGridView.Name = "dataGridView1";
+            this.applicationInfoGridView.Name = "applicationInfoGridView";
             this.applicationInfoGridView.RowHeadersWidth = 51;
             this.applicationInfoGridView.RowTemplate.Height = 29;
             this.applicationInfoGridView.Size = new System.Drawing.Size(542, 353);
@@ -126,10 +127,20 @@ namespace ChillExe.Controls
             this.LastUpdate.ReadOnly = true;
             this.LastUpdate.Width = 190;
             // 
-            // ProgramsControl
+            // downloadAndInstallControl1
+            // 
+            this.downloadAndInstallControl1.Location = new System.Drawing.Point(83, 166);
+            this.downloadAndInstallControl1.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.downloadAndInstallControl1.Name = "downloadAndInstallControl1";
+            this.downloadAndInstallControl1.Size = new System.Drawing.Size(396, 61);
+            this.downloadAndInstallControl1.TabIndex = 9;
+            this.downloadAndInstallControl1.Visible = false;
+            // 
+            // ApplicationsInstallerControl
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.Controls.Add(this.downloadAndInstallControl1);
             this.Controls.Add(this.applicationInfoGridView);
             this.Controls.Add(this.downloadButton);
             this.Controls.Add(this.cleanButton);
@@ -137,7 +148,7 @@ namespace ChillExe.Controls
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.saveButton);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ElementsList";
+            this.Name = "ApplicationsInstallerControl";
             this.Size = new System.Drawing.Size(679, 439);
             ((System.ComponentModel.ISupportInitialize)(this.applicationInfoGridView)).EndInit();
             this.ResumeLayout(false);
@@ -154,5 +165,6 @@ namespace ChillExe.Controls
         private System.Windows.Forms.DataGridView applicationInfoGridView;
         private System.Windows.Forms.DataGridViewTextBoxColumn Url;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdate;
+        private DownloadAndInstallControl downloadAndInstallControl1;
     }
 }

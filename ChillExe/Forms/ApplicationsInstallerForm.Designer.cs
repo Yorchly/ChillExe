@@ -36,19 +36,20 @@ namespace ChillExe
             // 
             // programsControl
             // 
-            this.programsControl.Location = new System.Drawing.Point(101, 36);
-            this.programsControl.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.programsControl.Name = "elementsList1";
-            this.programsControl.Size = new System.Drawing.Size(594, 324);
+            this.programsControl.Location = new System.Drawing.Point(115, 48);
+            this.programsControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
+            this.programsControl.Name = "programsControl";
+            this.programsControl.Size = new System.Drawing.Size(679, 432);
             this.programsControl.TabIndex = 0;
             // 
-            // ProgramsForms
+            // ApplicationsInstallerForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(797, 452);
+            this.ClientSize = new System.Drawing.Size(911, 603);
             this.Controls.Add(this.programsControl);
-            this.Name = "Form1";
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.Name = "ApplicationsInstallerForm";
             this.Text = "ChillExe";
             this.ResumeLayout(false);
 
