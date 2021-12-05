@@ -6,10 +6,8 @@ namespace ChillExe.Models
 {
     public class ApplicationInformation
     {
-        [XmlElement("url")]
         public string Url { get; set; }
 
-        [XmlElement("lastUpdate")]
         public DateTime LastUpdate { get; set; }
 
         public string Filename { get; set; }

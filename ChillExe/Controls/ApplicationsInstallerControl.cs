@@ -24,10 +24,10 @@ namespace ChillExe.Controls
         #region Constructor
         public ApplicationsInstallerControl()
         {
-            xmlRepository = new XmlRepositoryManager<ApplicationsInformation>() 
-            { 
-                Filename = Path.Join(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "applications_info.xml") 
-            };
+            xmlRepository = new XmlRepositoryManager<ApplicationsInformation>(
+                Path.Join(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "applications_info.xml")
+            );
+            
             InitializeComponent();
             Init();
         }

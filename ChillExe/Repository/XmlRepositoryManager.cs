@@ -6,7 +6,15 @@ namespace ChillExe.Repository
 {
     public class XmlRepositoryManager<T>
     {
-        public string Filename { get; set; }
+        public string Filename { get; }
+
+        public XmlRepositoryManager(string filename) 
+        {
+            if (!File.Exists(filename))
+                File.Create(filename);
+
+            Filename = filename;
+        }
 
         public bool SaveInfoInXml(T information)
         {
