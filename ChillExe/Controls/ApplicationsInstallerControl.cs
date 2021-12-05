@@ -16,9 +16,7 @@ namespace ChillExe.Controls
         private readonly Regex appExecutableName = new Regex(@"[\w\d\-\\_\.]+\.(exe|msi)");
         private const string ERROR_IN_URL = "Text specified is not a http/https";
         private const string ERROR_WITH_EXECUTABLE = "Exe/msi cannot be obtained from url added";
-        // TODO -> Change for current downloadAndInstallPath
-        //private string downloadAndInstallPath = Path.Join(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "Temp");
-        private string downloadAndInstallPath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        private readonly string downloadAndInstallPath = Path.GetTempPath();
         private readonly XmlRepositoryManager<ApplicationsInformation> xmlRepository;
         private List<ApplicationInformation> applicationInformationList;
         #endregion
