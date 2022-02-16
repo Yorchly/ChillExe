@@ -3,7 +3,7 @@ using ChillExe.Controls;
 
 namespace ChillExe
 {
-    partial class ApplicationsInstallerForm
+    partial class Main
     {
         /// <summary>
         ///  Required designer variable.
@@ -31,25 +31,16 @@ namespace ChillExe
         /// </summary>
         private void InitializeComponent()
         {
-            this.programsControl = new ChillExe.Controls.ApplicationsInstallerControl();
             this.SuspendLayout();
             // 
-            // programsControl
-            // 
-            this.programsControl.Location = new System.Drawing.Point(115, 48);
-            this.programsControl.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
-            this.programsControl.Name = "programsControl";
-            this.programsControl.Size = new System.Drawing.Size(679, 432);
-            this.programsControl.TabIndex = 0;
-            // 
-            // ApplicationsInstallerForm
+            // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(911, 603);
-            this.Controls.Add(this.programsControl);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "ApplicationsInstallerForm";
+            this.Name = "Main";
             this.Text = "ChillExe";
             this.ResumeLayout(false);
 

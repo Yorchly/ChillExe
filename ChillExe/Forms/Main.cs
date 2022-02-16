@@ -2,9 +2,9 @@
 
 namespace ChillExe
 {
-    public partial class ApplicationsInstallerForm : Form
+    public partial class Main : Form
     {
-        public ApplicationsInstallerForm()
+        public Main()
         {
             InitializeComponent();
         }
