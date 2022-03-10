@@ -27,7 +27,7 @@ namespace ChillExe
 
         public List<App> Get()
         {
-            CheckAndCreateXmlFile();
+            CheckAndCreateXmlFile(FilenameFullPath);
 
             if (!IsXmlValid(FilenameFullPath))
                 return default;
@@ -53,9 +53,11 @@ namespace ChillExe
 
         public bool Save(List<App> apps)
         {
-            CheckAndCreateXmlFile();
+            CheckAndCreateXmlFile(FilenameCopyFullPath);
+            CheckAndCreateXmlFile(FilenameFullPath);
 
             var writer = new StreamWriter(FilenameCopyFullPath);
+            bool isSaved = false;
             try
             {
                 var serializer = new XmlSerializer(typeof(Apps));
@@ -64,22 +66,24 @@ namespace ChillExe
 
                 writer.Close();
 
-                // ¿Se podría pasar esta lógica a un método aparte?
-                if (!IsXmlValid(FilenameCopyFullPath))
-                {
-                    File.Delete(FilenameCopyFullPath);
-                    return false;
-                }
-                else
+                if (IsXmlValid(FilenameCopyFullPath))
                 {
                     File.Copy(FilenameCopyFullPath, FilenameFullPath, overwrite: true);
-                    return true;
+                    isSaved = true;
                 }
+
+                File.Delete(FilenameCopyFullPath);
+
+                return isSaved;
             }
             catch (Exception ex)
             {
                 Logger.Instance.WriteLine($"Error in AppXmlService.Save() -> {ex.Message}", LogLevel.ERROR);
-                return false;
+
+                if (ex is DirectoryNotFoundException)
+                    throw ex;
+
+                return isSaved;
             }
             finally
             {
@@ -87,12 +91,21 @@ namespace ChillExe
             }
         }
 
-        private void CheckAndCreateXmlFile()
+        private void CheckAndCreateXmlFile(string filename)
         {
-            if (!File.Exists(FilenameFullPath))
+            if (!File.Exists(filename))
             {
-                FileStream fileStream = File.Create(FilenameFullPath);
-                fileStream.Close();
+                try
+                {
+                    FileStream fileStream = File.Create(filename);
+                    fileStream.Close();
+                }
+                catch(Exception ex)
+                {
+                    Logger.Instance.WriteLine($"Error in AppXmlService.CheckAndCreateXmlFile -> {ex.Message}");
+                    throw ex;
+                }
+                
             }
         }
 
