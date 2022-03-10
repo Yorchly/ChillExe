@@ -1,5 +1,4 @@
 ﻿using ChillExe.Models;
-using ChillExe.Repository;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -17,16 +16,16 @@ namespace ChillExe.Controls
         private const string ERROR_IN_URL = "Text specified is not a http/https";
         private const string ERROR_WITH_EXECUTABLE = "Exe/msi cannot be obtained from url added";
         private readonly string downloadAndInstallPath = Path.GetTempPath();
-        private readonly XmlRepositoryManager<ApplicationsInformation> xmlRepository;
-        private List<ApplicationInformation> applicationInformationList;
+        //private readonly XmlRepositoryManager<ApplicationsInformation> xmlRepository;
+        private List<App> applicationInformationList;
         #endregion
 
         #region Constructor
         public ApplicationsInstallerControl()
         {
-            xmlRepository = new XmlRepositoryManager<ApplicationsInformation>(
-                Path.Join(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "applications_info.xml")
-            );
+            //xmlRepository = new XmlRepositoryManager<ApplicationsInformation>(
+            //    Path.Join(Path.GetDirectoryName(Assembly.GetEntryAssembly().Location), "applications_info.xml")
+            //);
             
             InitializeComponent();
             Init();
@@ -39,13 +38,13 @@ namespace ChillExe.Controls
         /// </summary>
         private void Init()
         {
-            applicationInformationList = xmlRepository.ReadInfoFromXml()?.ApplicationsInfo;
+            //applicationInformationList = xmlRepository.ReadInfoFromXml()?.ApplicationsInfo;
 
-            if (applicationInformationList == null)
-                return;
+            //if (applicationInformationList == null)
+            //    return;
 
-            foreach(ApplicationInformation info in applicationInformationList)
-                applicationInfoGridView.Rows.Add(info.Url, info.LastUpdate);
+            //foreach(App info in applicationInformationList)
+            //    applicationInfoGridView.Rows.Add(info.Url, info.LastUpdate);
         }
 
         private (bool isSaved, string resultMessage) SaveInfoFromList()
@@ -61,7 +60,6 @@ namespace ChillExe.Controls
                     continue;
 
                 var urlValue = row.Cells[0].Value.ToString();
-                var lastUpdate = DateTime.Parse(row.Cells[1].Value.ToString());
 
                 if (!cellStringValueRegex.IsMatch(urlValue))
                 {
@@ -75,17 +73,17 @@ namespace ChillExe.Controls
                 }
                 else
                     applicationInformationList.Add(
-                        new ApplicationInformation() { 
+                        new App() { 
                             Url = urlValue, 
-                            LastUpdate = lastUpdate,
+                            LastUpdate = row.Cells[1].Value.ToString(),
                             Filename = Path.Combine(downloadAndInstallPath, appExecutableName.Match(urlValue).Value)
                         }
                     );
             }
 
-            if (xmlRepository.SaveInfoInXml(new ApplicationsInformation { ApplicationsInfo = applicationInformationList }))
-                return (true, "Info saved successfully.");
-            else
+            //if (xmlRepository.SaveInfoInXml(new ApplicationsInformation { ApplicationsInfo = applicationInformationList }))
+            //    return (true, "Info saved successfully.");
+            //else
                 return (false, "Error saving information in XML.");
         }
         #endregion Methods

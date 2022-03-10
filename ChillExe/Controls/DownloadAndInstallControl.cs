@@ -21,7 +21,7 @@ namespace ChillExe.Controls
             InitializeComponent();
         }
 
-        public async void DownloadAndInstall(List<ApplicationInformation> appInfoList)
+        public async void DownloadAndInstall(List<App> appInfoList)
         {
             if (appInfoList == null || appInfoList.Count == 0)
             {
@@ -40,10 +40,10 @@ namespace ChillExe.Controls
                 downloadAndInstallProgressBar.Value = value;
             });
 
-            var appDownloaded = new List<(ApplicationInformation appInfo, bool downloaded)>();
+            var appDownloaded = new List<(App appInfo, bool downloaded)>();
             int count = 1;
 
-            foreach (ApplicationInformation appInfo in appInfoList)
+            foreach (App appInfo in appInfoList)
             {
                 appDownloaded.Add((appInfo, Download(appInfo)));
                 await Task.Run(() => UpdateProgressBar(progress, count));
@@ -56,7 +56,7 @@ namespace ChillExe.Controls
                 Refresh();
             }
 
-            foreach ((ApplicationInformation appInfo, bool downloaded) in appDownloaded.Where(tupleElement => tupleElement.downloaded))
+            foreach ((App appInfo, bool downloaded) in appDownloaded.Where(tupleElement => tupleElement.downloaded))
             {
                 await Task.Run(() =>
                 {
@@ -73,7 +73,7 @@ namespace ChillExe.Controls
 
         private static void UpdateProgressBar(IProgress<int> progress, int value) => progress?.Report(value);
 
-        private bool Download(ApplicationInformation appInfo)
+        private bool Download(App appInfo)
         {
             try
             {
@@ -97,7 +97,7 @@ namespace ChillExe.Controls
             }
         }
 
-        private bool Install(ApplicationInformation appInfo)
+        private bool Install(App appInfo)
         {
             try
             {
