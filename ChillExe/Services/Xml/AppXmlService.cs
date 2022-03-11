@@ -80,9 +80,6 @@ namespace ChillExe
             {
                 Logger.Instance.WriteLine($"Error in AppXmlService.Save() -> {ex.Message}", LogLevel.ERROR);
 
-                if (ex is DirectoryNotFoundException)
-                    throw ex;
-
                 return isSaved;
             }
             finally
@@ -102,7 +99,9 @@ namespace ChillExe
                 }
                 catch(Exception ex)
                 {
-                    Logger.Instance.WriteLine($"Error in AppXmlService.CheckAndCreateXmlFile -> {ex.Message}");
+                    Logger.Instance.WriteLine(
+                        $"Error in AppXmlService.CheckAndCreateXmlFile -> {ex.Message}", LogLevel.ERROR
+                    );
                     throw ex;
                 }
                 

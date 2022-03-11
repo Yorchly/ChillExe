@@ -22,7 +22,7 @@ namespace ChillExe
             get => instance;
         }
 
-        private static readonly string filename = 
+        public string FilenameFullPath { get; set; } =
             Path.Join(AppContext.BaseDirectory, "log.txt");
 
         private string GetFormattedLine(string line, LogLevel logLevel)
@@ -32,15 +32,23 @@ namespace ChillExe
         
         public void WriteLine(string line, LogLevel logLevel = LogLevel.INFO)
         {
-            using var streamWriter = new StreamWriter(filename);
+            if (string.IsNullOrEmpty(line))
+                return;
+
+            using var streamWriter = new StreamWriter(FilenameFullPath);
 
             streamWriter.WriteLine(GetFormattedLine(line, logLevel));
         }
 
-        public void FlushLogFile()
+        public bool FlushLogFile()
         {
-            if (File.Exists(filename))
-                File.Delete(filename);
+            if (File.Exists(FilenameFullPath))
+            {
+                File.Delete(FilenameFullPath);
+                return true;
+            }
+
+            return false;    
         }
     }
 }
