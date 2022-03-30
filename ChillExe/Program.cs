@@ -1,3 +1,7 @@
+using ChillExe.Logger;
+using ChillExe.Services;
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +12,8 @@ namespace ChillExe
 {
     static class Program
     {
+        public static IServiceProvider ServiceProvider { get; private set; }
+
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -17,7 +23,21 @@ namespace ChillExe
             Application.SetHighDpiMode(HighDpiMode.SystemAware);
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new Main());
+
+            IHost host = CreateHostBuilder().Build();
+            ServiceProvider = host.Services;
+
+            Application.Run(ServiceProvider.GetRequiredService<Main>());
+        }
+
+        static IHostBuilder CreateHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) => {
+                    services.AddTransient<ICustomLogger, CustomLogger>();
+                    services.AddTransient<IAppService, AppXmlService>();
+                    services.AddTransient<Main>();
+                });
         }
     }
 }

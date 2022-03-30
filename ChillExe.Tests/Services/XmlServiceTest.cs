@@ -1,4 +1,5 @@
 using ChillExe.Models;
+using ChillExe.Services;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -12,13 +13,15 @@ namespace ChillExe.Tests
             Path.Combine(AppContext.BaseDirectory, "test_app.xml");
         private static readonly string testCopyFilenameFullPath =
             Path.Combine(AppContext.BaseDirectory, "test_copy_app.xml");
+        private AppXmlService xmlService;
 
         [SetUp]
         public void Setup()
         {
-            AppXmlService.Instance.FilenameFullPath =
+            xmlService = new AppXmlService();
+            xmlService.FilenameFullPath =
                 testFilenameFullPath;
-            AppXmlService.Instance.FilenameCopyFullPath =
+            xmlService.FilenameCopyFullPath =
                 testCopyFilenameFullPath;
         }
 
@@ -35,7 +38,7 @@ namespace ChillExe.Tests
         [Test]
         public void Get_XmlIsEmpty_ReturnsEmptyList()
         {
-            List<App> apps = AppXmlService.Instance.Get();
+            List<App> apps = xmlService.Get();
 
             Assert.AreEqual(default, apps);
         }
@@ -45,7 +48,7 @@ namespace ChillExe.Tests
         {
             WriteInvalidXml();
 
-            List<App> apps = AppXmlService.Instance.Get();
+            List<App> apps = xmlService.Get();
 
             Assert.AreEqual(default, apps);
         }
@@ -71,7 +74,7 @@ namespace ChillExe.Tests
         {
             WriteValidXml();
 
-            List<App> apps = AppXmlService.Instance.Get();
+            List<App> apps = xmlService.Get();
 
             Assert.AreEqual(apps.Count, 2);
             Assert.AreEqual(apps[0].Url, @"https://test.com");
@@ -96,17 +99,17 @@ namespace ChillExe.Tests
         [Test]
         public void Get_FilenameInDirectoryThatDoesNotExists_ThrowsException()
         {
-            AppXmlService.Instance.FilenameFullPath = "/fail_test_path/test.xml";
+            xmlService.FilenameFullPath = "/fail_test_path/test.xml";
 
-            Assert.Throws<DirectoryNotFoundException>(() => AppXmlService.Instance.Get());
+            Assert.Throws<DirectoryNotFoundException>(() => xmlService.Get());
         }
 
         [Test]
         public void Get_EmptyFilenamePath_ThrowsException()
         {
-            AppXmlService.Instance.FilenameFullPath = "";
+            xmlService.FilenameFullPath = "";
 
-            Assert.Throws<ArgumentException>(() => AppXmlService.Instance.Get());
+            Assert.Throws<ArgumentException>(() => xmlService.Get());
         }
 
         [Test]
@@ -114,7 +117,7 @@ namespace ChillExe.Tests
         {
             var apps = new List<App>();
 
-            bool isSaved = AppXmlService.Instance.Save(apps);
+            bool isSaved = xmlService.Save(apps);
 
             Assert.IsFalse(isSaved);
         }
@@ -124,7 +127,7 @@ namespace ChillExe.Tests
         {
             var apps = new List<App> { new App() };
 
-            bool isSaved = AppXmlService.Instance.Save(apps);
+            bool isSaved = xmlService.Save(apps);
 
             Assert.IsFalse(isSaved);
         }
@@ -132,37 +135,37 @@ namespace ChillExe.Tests
         [Test]
         public void Save_CopyFilenameInDirectoryThatDoesNotExists_ThrowsException()
         {
-            AppXmlService.Instance.FilenameCopyFullPath = "/fail_test_path/copy_test.xml";
+            xmlService.FilenameCopyFullPath = "/fail_test_path/copy_test.xml";
             var apps = GetValidAppList();
 
-            Assert.Throws<DirectoryNotFoundException>(() => AppXmlService.Instance.Save(apps));
+            Assert.Throws<DirectoryNotFoundException>(() => xmlService.Save(apps));
         }
 
         [Test]
         public void Save_FilenameInDirectoryThatDoesNotExists_ThrowsException()
         {
-            AppXmlService.Instance.FilenameFullPath = "/fail_test_path/test.xml";
+            xmlService.FilenameFullPath = "/fail_test_path/test.xml";
             var apps = GetValidAppList();
 
-            Assert.Throws<DirectoryNotFoundException>(() => AppXmlService.Instance.Save(apps));
+            Assert.Throws<DirectoryNotFoundException>(() => xmlService.Save(apps));
         }
 
         [Test]
         public void Save_EmptyCopyFilenamePath_ThrowsException()
         {
-            AppXmlService.Instance.FilenameCopyFullPath = "";
+            xmlService.FilenameCopyFullPath = "";
             var apps = GetValidAppList();
 
-            Assert.Throws<ArgumentException>(() => AppXmlService.Instance.Save(apps));
+            Assert.Throws<ArgumentException>(() => xmlService.Save(apps));
         }
 
         [Test]
         public void Save_EmptyFilenamePath_ThrowsException()
         {
-            AppXmlService.Instance.FilenameFullPath = "";
+            xmlService.FilenameFullPath = "";
             var apps = GetValidAppList();
 
-            Assert.Throws<ArgumentException>(() => AppXmlService.Instance.Save(apps));
+            Assert.Throws<ArgumentException>(() => xmlService.Save(apps));
         }
 
 
@@ -171,7 +174,7 @@ namespace ChillExe.Tests
         {
             List<App> apps = GetValidAppList();
 
-            bool isSaved = AppXmlService.Instance.Save(apps);
+            bool isSaved = xmlService.Save(apps);
 
             Assert.IsTrue(isSaved);
         }

@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace ChillExe
+namespace ChillExe.Logger
 {
     public enum LogLevel
     {
@@ -11,17 +11,8 @@ namespace ChillExe
         ERROR
     }
 
-    public class Logger
+    public class CustomLogger : ICustomLogger
     {
-        private Logger() { }
-
-        private static readonly Logger instance = new Logger();
-
-        public static Logger Instance
-        {
-            get => instance;
-        }
-
         public string FilenameFullPath { get; set; } =
             Path.Join(AppContext.BaseDirectory, "log.txt");
 
