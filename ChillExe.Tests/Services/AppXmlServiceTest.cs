@@ -1,5 +1,7 @@
+using ChillExe.Logger;
 using ChillExe.Models;
 using ChillExe.Services;
+using Moq;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -7,22 +9,23 @@ using System.IO;
 
 namespace ChillExe.Tests
 {
-    public class XmlServiceTest
+    public class AppXmlServiceTest
     {
         private static readonly string testFilenameFullPath =
             Path.Combine(AppContext.BaseDirectory, "test_app.xml");
         private static readonly string testCopyFilenameFullPath =
             Path.Combine(AppContext.BaseDirectory, "test_copy_app.xml");
-        private AppXmlService xmlService;
+        private readonly AppXmlService xmlService = new AppXmlService();
+        private readonly Mock<ICustomLogger> customLogger = new Mock<ICustomLogger>();
 
         [SetUp]
         public void Setup()
         {
-            xmlService = new AppXmlService();
             xmlService.FilenameFullPath =
                 testFilenameFullPath;
             xmlService.FilenameCopyFullPath =
                 testCopyFilenameFullPath;
+            customLogger.Setup(x => x.WriteLine(It.IsAny<string>(), LogLevel.ERROR));
         }
 
         [TearDown]

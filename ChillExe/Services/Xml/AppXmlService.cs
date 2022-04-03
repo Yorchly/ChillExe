@@ -18,7 +18,6 @@ namespace ChillExe.Services
         public string FilenameCopyFullPath { get; set; } =
             Path.Join(AppContext.BaseDirectory, "apps-copy.xml");
 
-        private static readonly AppXmlService instance = new AppXmlService();
         private static readonly string xsdFilename =
             Path.Join(AppContext.BaseDirectory, "Services/Xml/app.xsd");
         private readonly CustomLogger logger = new CustomLogger();
