@@ -1,18 +1,22 @@
-﻿using NUnit.Framework;
+﻿using ChillExe.Logger;
+using NUnit.Framework;
 using System;
 using System.IO;
 
 namespace ChillExe.Tests
 {
-    public class LoggerTest
+    public class CustomLoggerTest
     {
         private static readonly string testFileFullPath =
             Path.Join(AppContext.BaseDirectory, "test_logger.txt");
 
+        private CustomLogger logger;
+
         [SetUp]
         public void SetUp()
         {
-            Logger.Instance.FilenameFullPath = testFileFullPath;
+            logger = new CustomLogger();
+            logger.FilenameFullPath = testFileFullPath;
         }
 
         [TearDown]
@@ -27,7 +31,7 @@ namespace ChillExe.Tests
         {
             string testLine = "This is a test line";
 
-            Logger.Instance.WriteLine(testLine);
+            logger.WriteLine(testLine);
 
             CheckIfContentFromFileIsCorrect(testLine, LogLevel.INFO);
         }
@@ -38,7 +42,7 @@ namespace ChillExe.Tests
             string testLine = "This is a test line";
             var logLevel = LogLevel.ERROR;
 
-            Logger.Instance.WriteLine(testLine, logLevel);
+            logger.WriteLine(testLine, logLevel);
 
             CheckIfContentFromFileIsCorrect(testLine, logLevel);
         }
@@ -49,7 +53,7 @@ namespace ChillExe.Tests
             string testLine = "This is a test line";
             var logLevel = LogLevel.WARNING;
 
-            Logger.Instance.WriteLine(testLine, logLevel);
+            logger.WriteLine(testLine, logLevel);
 
             CheckIfContentFromFileIsCorrect(testLine, logLevel);
         }
@@ -71,7 +75,7 @@ namespace ChillExe.Tests
             FileStream fileStream = File.Create(testFileFullPath);
             fileStream.Close();
 
-            Logger.Instance.WriteLine(testLine);
+            logger.WriteLine(testLine);
 
             CheckIfFileHasNoContent();
         }
@@ -82,7 +86,7 @@ namespace ChillExe.Tests
             string testLine = null;
             CreateTestFile();
 
-            Logger.Instance.WriteLine(testLine);
+            logger.WriteLine(testLine);
 
             CheckIfFileHasNoContent();
         }
@@ -100,7 +104,7 @@ namespace ChillExe.Tests
         {
             CreateTestFile();
 
-            bool result = Logger.Instance.FlushLogFile();
+            bool result = logger.FlushLogFile();
 
             Assert.IsTrue(result);
         }
@@ -114,9 +118,9 @@ namespace ChillExe.Tests
         [Test]
         public void FlushLogFile_FilenameFullPathDoesNotExists_ReturnsFalse()
         {
-            Logger.Instance.FilenameFullPath = "test_directory/test_file.txt";
+            logger.FilenameFullPath = "test_directory/test_file.txt";
 
-            bool result = Logger.Instance.FlushLogFile();
+            bool result = logger.FlushLogFile();
 
             Assert.IsFalse(result);
         }
@@ -124,17 +128,17 @@ namespace ChillExe.Tests
         [Test]
         public void WriteLine_FilenameFullPathIsEmpty_ThrowsArgumentException()
         {
-            Logger.Instance.FilenameFullPath = "";
+            logger.FilenameFullPath = "";
 
-            Assert.Throws<ArgumentException>(() => Logger.Instance.WriteLine("Test line"));
+            Assert.Throws<ArgumentException>(() => logger.WriteLine("Test line"));
         }
 
         [Test]
         public void WriteLine_FilenameIsInDirectoryThatDoesNotExists_ThrowsArgumentException()
         {
-            Logger.Instance.FilenameFullPath = "test-directory/test_logger.txt";
+            logger.FilenameFullPath = "test-directory/test_logger.txt";
 
-            Assert.Throws<DirectoryNotFoundException>(() => Logger.Instance.WriteLine("Test line"));
+            Assert.Throws<DirectoryNotFoundException>(() => logger.WriteLine("Test line"));
         }
     }
 }

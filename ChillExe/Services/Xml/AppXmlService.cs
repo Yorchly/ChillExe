@@ -1,4 +1,5 @@
-﻿using ChillExe.Models;
+﻿using ChillExe.Logger;
+using ChillExe.Models;
 using ChillExe.Services;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Xml.Linq;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 
-namespace ChillExe
+namespace ChillExe.Services
 {
     public class AppXmlService: IAppService
     {
@@ -17,13 +18,9 @@ namespace ChillExe
         public string FilenameCopyFullPath { get; set; } =
             Path.Join(AppContext.BaseDirectory, "apps-copy.xml");
 
-        private static readonly AppXmlService instance = new AppXmlService();
         private static readonly string xsdFilename =
             Path.Join(AppContext.BaseDirectory, "Services/Xml/app.xsd");
-
-        public static AppXmlService Instance { get => instance; }
-
-        private AppXmlService() { }
+        private readonly CustomLogger logger = new CustomLogger();
 
         public List<App> Get()
         {
@@ -42,7 +39,7 @@ namespace ChillExe
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteLine($"Error in AppXmlService.GetAll() -> '{ex.Message}'", LogLevel.ERROR);
+                logger.WriteLine($"Error in AppXmlService.GetAll() -> '{ex.Message}'", LogLevel.ERROR);
                 return default;
             }
             finally
@@ -78,7 +75,7 @@ namespace ChillExe
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteLine($"Error in AppXmlService.Save() -> {ex.Message}", LogLevel.ERROR);
+                logger.WriteLine($"Error in AppXmlService.Save() -> {ex.Message}", LogLevel.ERROR);
 
                 return isSaved;
             }
@@ -99,7 +96,7 @@ namespace ChillExe
                 }
                 catch(Exception ex)
                 {
-                    Logger.Instance.WriteLine(
+                    logger.WriteLine(
                         $"Error in AppXmlService.CheckAndCreateXmlFile -> {ex.Message}", LogLevel.ERROR
                     );
                     throw ex;
@@ -108,7 +105,7 @@ namespace ChillExe
             }
         }
 
-        private static bool IsXmlValid(string filename)
+        private bool IsXmlValid(string filename)
         {
             bool isValid = true;
 
@@ -121,19 +118,19 @@ namespace ChillExe
 
                 document.Validate(
                     schemas,
-                    (o, validationEventArgs) =>
+                    (ValidationEventHandler)((o, validationEventArgs) =>
                     {
-                        Logger.Instance.WriteLine(
+                        new CustomLogger().WriteLine(
                             $"Error in AppXmlService.IsXmlValid, validating xml against xsd -> {validationEventArgs.Message}",
                             LogLevel.ERROR
                         );
                         isValid = false;
-                    }
+                    })
                 );
             }
             catch(Exception ex)
             {
-                Logger.Instance.WriteLine($"Error in AppXmlService.IsXmlValid -> {ex.Message}", LogLevel.ERROR);
+                logger.WriteLine($"Error in AppXmlService.IsXmlValid -> {ex.Message}", LogLevel.ERROR);
                 isValid = false;
             }
             
