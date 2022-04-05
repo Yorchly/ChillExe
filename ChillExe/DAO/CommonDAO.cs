@@ -7,9 +7,9 @@ namespace ChillExe.DAO
     public abstract class CommonDAO : IDAO
     {
         private List<App> apps;
-        private IAppService appService;
+        private readonly IAppService appService;
 
-        public virtual void Init(IAppService appService)
+        public CommonDAO(IAppService appService)
         {
             this.appService = appService;
             apps = this.appService.Get();
@@ -17,17 +17,33 @@ namespace ChillExe.DAO
 
         public virtual List<App> Get() => apps;
 
-        public virtual void Set(App app) => apps.Add(app);
-
-        public virtual void Set(List<App> apps, bool overwrite = false)
+        public virtual List<App> Set(App app)
         {
+            if (app != null)
+                apps.Add(app);
+
+            return apps;
+        }
+
+        public virtual List<App> Set(List<App> apps, bool overwrite = false)
+        {
+            if (apps == null)
+                return this.apps;
+
             if (overwrite)
                 this.apps = apps;
             else
                 this.apps.AddRange(apps);
+
+            return this.apps;
         }
 
-        public virtual void Clear() => apps.Clear();
+        public virtual bool Clear() 
+        {
+            apps.Clear();
+
+            return true;
+        } 
 
         public virtual bool Save() => appService.Save(apps);
     }

@@ -8,15 +8,13 @@ namespace ChillExe.DAO
 {
     public interface IDAO
     {
-        public void Init(IAppService appService);
-
         public List<App> Get();
 
-        public void Set(App app);
+        public List<App> Set(App app);
 
-        public void Set(List<App> apps, bool overwrite = false);
+        public List<App> Set(List<App> apps, bool overwrite = false);
 
-        public void Clear();
+        public bool Clear();
 
         public bool Save();
     }
