@@ -1,3 +1,4 @@
+using ChillExe.DAO;
 using ChillExe.Logger;
 using ChillExe.Services;
 using Microsoft.Extensions.DependencyInjection;
@@ -34,9 +35,10 @@ namespace ChillExe
         {
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
-                    services.AddTransient<ICustomLogger, CustomLogger>();
-                    services.AddTransient<IAppService, AppXmlService>();
-                    services.AddTransient<Main>();
+                    services.AddSingleton<ICustomLogger, CustomLogger>()
+                            .AddSingleton<IAppService, AppXmlService>()
+                            .AddSingleton<IDAO, AppXmlDAO>()
+                            .AddSingleton<Main>();
                 });
         }
     }
