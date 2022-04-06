@@ -17,8 +17,14 @@ namespace ChillExe.Tests.DAO
         private AppXmlDAO xmlDAO; 
         private List<App> testApps = new List<App>
         {
-            new App { Filename = "Test1", LastUpdate = DateTime.Now.ToString(), Url = "https://test-url.com"},
-            new App { Filename = "Test2", LastUpdate = DateTime.Now.ToString(), Url = "https://test2-url.com"},
+            new App { 
+                Filename = "Test1", LastUpdate = DateTime.Now.ToString(), 
+                Url = "https://test-url.com"
+            },
+            new App { 
+                Filename = "Test2", LastUpdate = DateTime.Now.ToString(), 
+                Url = "https://test2-url.com"
+            },
         };
 
         [SetUp]
@@ -26,7 +32,7 @@ namespace ChillExe.Tests.DAO
         {
             appXmlServiceMockup.Setup(
                 appServiceMock => appServiceMock.Get()
-            ).Returns(testApps);
+            ).Returns(new List<App>(testApps));
 
             xmlDAO = new AppXmlDAO(appXmlServiceMockup.Object);
         }
@@ -49,7 +55,7 @@ namespace ChillExe.Tests.DAO
             List<App> apps = xmlDAO.Set(app);
 
             Assert.AreEqual(apps.Count, 3);
-            Assert.AreEqual(testApps[2], app);
+            Assert.AreEqual(apps[2], app);
         }
 
         private List<App> GetAppList(int length)
@@ -81,8 +87,8 @@ namespace ChillExe.Tests.DAO
             List<App> appsFromDAO = xmlDAO.Set(apps);
 
             Assert.AreEqual(appsFromDAO.Count, 4);
-            Assert.AreEqual(testApps[2], apps[0]);
-            Assert.AreEqual(testApps[3], apps[1]);
+            Assert.AreEqual(appsFromDAO[2], apps[0]);
+            Assert.AreEqual(appsFromDAO[3], apps[1]);
         }
 
         [Test]

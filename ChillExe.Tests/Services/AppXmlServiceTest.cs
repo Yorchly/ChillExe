@@ -15,8 +15,11 @@ namespace ChillExe.Tests
             Path.Combine(AppContext.BaseDirectory, "test_app.xml");
         private static readonly string testCopyFilenameFullPath =
             Path.Combine(AppContext.BaseDirectory, "test_copy_app.xml");
-        private readonly AppXmlService xmlService = new AppXmlService();
         private readonly Mock<ICustomLogger> customLogger = new Mock<ICustomLogger>();
+        private readonly AppXmlService xmlService;
+
+        public AppXmlServiceTest() => 
+            xmlService = new AppXmlService(customLogger.Object);
 
         [SetUp]
         public void Setup()

@@ -20,7 +20,10 @@ namespace ChillExe.Services
 
         private static readonly string xsdFilename =
             Path.Join(AppContext.BaseDirectory, "Services/Xml/app.xsd");
-        private readonly CustomLogger logger = new CustomLogger();
+        private readonly ICustomLogger logger;
+
+        public AppXmlService(ICustomLogger customLogger) => 
+            logger = customLogger;
 
         public List<App> Get()
         {
