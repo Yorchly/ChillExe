@@ -7,7 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ChillExe.Tests
+namespace ChillExe.Tests.Services
 {
     public class AppXmlServiceTest
     {

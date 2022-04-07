@@ -3,7 +3,7 @@ using NUnit.Framework;
 using System;
 using System.IO;
 
-namespace ChillExe.Tests
+namespace ChillExe.Tests.Logger
 {
     public class CustomLoggerTest
     {

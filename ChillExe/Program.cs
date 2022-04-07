@@ -37,7 +37,6 @@ namespace ChillExe
                 .ConfigureServices((context, services) => {
                     services.AddSingleton<ICustomLogger, CustomLogger>()
                             .AddSingleton<IAppService, AppXmlService>()
-                            .AddSingleton<IDAO, AppXmlDAO>()
                             .AddSingleton<Main>();
                 });
         }

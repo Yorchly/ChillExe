@@ -9,7 +9,7 @@ namespace ChillExe
 {
     public partial class Main : Form
     {
-        public Main(ICustomLogger logger, IDAO xmlDAO)
+        public Main(ICustomLogger logger, IAppService xmlService)
         {
             InitializeComponent();
         }
