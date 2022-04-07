@@ -4,20 +4,20 @@ using System.Collections.Generic;
 
 namespace ChillExe.DAO
 {
-    public abstract class CommonDAO : IDAO
+    public class AppDAO
     {
         private List<App> apps;
         private readonly IAppService appService;
 
-        public CommonDAO(IAppService appService)
+        public AppDAO(IAppService appService)
         {
             this.appService = appService;
             apps = this.appService.Get();
         }
 
-        public virtual List<App> Get() => apps;
+        public List<App> Get() => apps;
 
-        public virtual List<App> Set(App app)
+        public List<App> Set(App app)
         {
             if (app != null)
                 apps.Add(app);
@@ -25,7 +25,7 @@ namespace ChillExe.DAO
             return apps;
         }
 
-        public virtual List<App> Set(List<App> apps, bool overwrite = false)
+        public List<App> Set(List<App> apps, bool overwrite = false)
         {
             if (apps == null)
                 return this.apps;
@@ -38,13 +38,13 @@ namespace ChillExe.DAO
             return this.apps;
         }
 
-        public virtual bool Clear() 
+        public bool Clear() 
         {
             apps.Clear();
 
             return true;
         } 
 
-        public virtual bool Save() => appService.Save(apps);
+        public bool Save() => appService.Save(apps);
     }
 }
