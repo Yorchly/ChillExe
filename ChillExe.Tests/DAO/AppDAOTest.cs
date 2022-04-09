@@ -12,27 +12,31 @@ namespace ChillExe.Tests.DAO
 {
     public class AppDAOTest
     {
-        private readonly Mock<IAppService> appServiceMockup = 
-            new Mock<IAppService>();
-        private AppDAO dao; 
-        private List<App> testApps = new List<App>
-        {
-            new App { 
-                Filename = "Test1", LastUpdate = DateTime.Now.ToString(), 
-                Url = "https://test-url.com"
-            },
-            new App { 
-                Filename = "Test2", LastUpdate = DateTime.Now.ToString(), 
-                Url = "https://test2-url.com"
-            },
-        };
+        private readonly Mock<IService<Apps>> appServiceMockup = 
+            new Mock<IService<Apps>>();
+        private AppDAO dao;
+        private Apps testApps;
 
         [SetUp]
         public void SetUp()
         {
+            testApps = new Apps
+            {
+                AppList = new List<App>
+                {
+                    new App {
+                        Filename = "Test1", LastUpdate = DateTime.Now.ToString(),
+                        Url = "https://test-url.com"
+                    },
+                    new App {
+                        Filename = "Test2", LastUpdate = DateTime.Now.ToString(),
+                        Url = "https://test2-url.com"
+                    },
+                }
+            };
             appServiceMockup.Setup(
                 appServiceMock => appServiceMock.Get()
-            ).Returns(new List<App>(testApps));
+            ).Returns(testApps);
 
             dao = new AppDAO(appServiceMockup.Object);
         }
@@ -43,8 +47,8 @@ namespace ChillExe.Tests.DAO
             List<App> apps = dao.Get();
 
             Assert.Greater(apps.Count, 0);
-            Assert.AreEqual(testApps[0], apps[0]);
-            Assert.AreEqual(testApps[1], apps[1]);
+            Assert.AreEqual(testApps.AppList[0], apps[0]);
+            Assert.AreEqual(testApps.AppList[1], apps[1]);
         }
 
         [Test]
@@ -75,8 +79,8 @@ namespace ChillExe.Tests.DAO
             List<App> apps = dao.Set(app);
 
             Assert.AreEqual(apps.Count, 2);
-            Assert.AreEqual(apps[0], testApps[0]);
-            Assert.AreEqual(apps[1], testApps[1]);
+            Assert.AreEqual(apps[0], testApps.AppList[0]);
+            Assert.AreEqual(apps[1], testApps.AppList[1]);
         }
 
         [Test]
@@ -112,8 +116,8 @@ namespace ChillExe.Tests.DAO
             List<App> appsFromDAO = dao.Set(apps);
 
             Assert.AreEqual(appsFromDAO.Count, 2);
-            Assert.AreEqual(appsFromDAO[0], testApps[0]);
-            Assert.AreEqual(appsFromDAO[1], testApps[1]);
+            Assert.AreEqual(appsFromDAO[0], testApps.AppList[0]);
+            Assert.AreEqual(appsFromDAO[1], testApps.AppList[1]);
         }
 
         [Test]
@@ -130,7 +134,7 @@ namespace ChillExe.Tests.DAO
         public void Save_ReturnsTrue()
         {
             appServiceMockup.Setup(
-                xmlService => xmlService.Save(testApps)
+                xmlService => xmlService.Save(It.IsAny<Apps>())
             ).Returns(true);
 
             bool response = dao.Save();

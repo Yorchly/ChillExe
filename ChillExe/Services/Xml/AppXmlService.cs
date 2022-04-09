@@ -1,6 +1,7 @@
 ﻿using ChillExe.Logger;
 using ChillExe.Models;
 using ChillExe.Services;
+using ChillExe.Services.Xml;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -11,133 +12,34 @@ using System.Xml.Serialization;
 
 namespace ChillExe.Services
 {
-    public class AppXmlService: IAppService
+    public class AppXmlService : CommonXmlService<Apps>
     {
-        public string FilenameFullPath { get; set; } =
+        private string filenameFullPath =
             Path.Join(AppContext.BaseDirectory, "apps.xml");
-        public string FilenameCopyFullPath { get; set; } =
-            Path.Join(AppContext.BaseDirectory, "apps-copy.xml");
+        private string xsdFilenameFullPath =
+            Path.Join(AppContext.BaseDirectory, "Services\\Xml\\Xsd\\app.xsd");
 
-        private static readonly string xsdFilename =
-            Path.Join(AppContext.BaseDirectory, "Services/Xml/app.xsd");
-        private readonly ICustomLogger logger;
-
-        public AppXmlService(ICustomLogger customLogger) => 
-            logger = customLogger;
-
-        public List<App> Get()
+        public string FilenameFullPath
         {
-            CheckAndCreateXmlFile(FilenameFullPath);
-
-            if (!IsXmlValid(FilenameFullPath))
-                return default;
-
-            FileStream fileStream = new FileStream(FilenameFullPath, FileMode.Open);
-            try
+            get => filenameFullPath; 
+            set
             {
-                var serializer = new XmlSerializer(typeof(Apps));
-                var deserializedInfo = (Apps)serializer.Deserialize(fileStream);
-
-                return deserializedInfo.AppList;
-            }
-            catch (Exception ex)
-            {
-                logger.WriteLine($"Error in AppXmlService.GetAll() -> '{ex.Message}'", LogLevel.ERROR);
-                return default;
-            }
-            finally
-            {
-                fileStream.Close();
+                filenameFullPath = value;
+                SetXmlAndXsdFilenamePath(filenameFullPath, xsdFilenameFullPath);
             }
         }
 
-        public bool Save(List<App> apps)
-        {
-            CheckAndCreateXmlFile(FilenameCopyFullPath);
-            CheckAndCreateXmlFile(FilenameFullPath);
-
-            var writer = new StreamWriter(FilenameCopyFullPath);
-            bool isSaved = false;
-            try
+        public string XsdFilenameFullPath
+        { 
+            get => xsdFilenameFullPath; 
+            set
             {
-                var serializer = new XmlSerializer(typeof(Apps));
-
-                serializer.Serialize(writer, new Apps() { AppList = apps });
-
-                writer.Close();
-
-                if (IsXmlValid(FilenameCopyFullPath))
-                {
-                    File.Copy(FilenameCopyFullPath, FilenameFullPath, overwrite: true);
-                    isSaved = true;
-                }
-
-                File.Delete(FilenameCopyFullPath);
-
-                return isSaved;
-            }
-            catch (Exception ex)
-            {
-                logger.WriteLine($"Error in AppXmlService.Save() -> {ex.Message}", LogLevel.ERROR);
-
-                return isSaved;
-            }
-            finally
-            {
-                writer.Close();
+                xsdFilenameFullPath = value;
+                SetXmlAndXsdFilenamePath(filenameFullPath, xsdFilenameFullPath);
             }
         }
 
-        private void CheckAndCreateXmlFile(string filename)
-        {
-            if (!File.Exists(filename))
-            {
-                try
-                {
-                    FileStream fileStream = File.Create(filename);
-                    fileStream.Close();
-                }
-                catch(Exception ex)
-                {
-                    logger.WriteLine(
-                        $"Error in AppXmlService.CheckAndCreateXmlFile -> {ex.Message}", LogLevel.ERROR
-                    );
-                    throw ex;
-                }
-                
-            }
-        }
-
-        private bool IsXmlValid(string filename)
-        {
-            bool isValid = true;
-
-            try
-            {
-                var schemas = new XmlSchemaSet();
-                schemas.Add("", xsdFilename);
-
-                var document = XDocument.Load(filename);
-
-                document.Validate(
-                    schemas,
-                    (ValidationEventHandler)((o, validationEventArgs) =>
-                    {
-                        new CustomLogger().WriteLine(
-                            $"Error in AppXmlService.IsXmlValid, validating xml against xsd -> {validationEventArgs.Message}",
-                            LogLevel.ERROR
-                        );
-                        isValid = false;
-                    })
-                );
-            }
-            catch(Exception ex)
-            {
-                logger.WriteLine($"Error in AppXmlService.IsXmlValid -> {ex.Message}", LogLevel.ERROR);
-                isValid = false;
-            }
-            
-            return isValid;
-        }
+        public AppXmlService(ICustomLogger customLogger) : base(customLogger) =>
+            SetXmlAndXsdFilenamePath(FilenameFullPath, XsdFilenameFullPath);
     }
 }
