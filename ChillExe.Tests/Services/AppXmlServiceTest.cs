@@ -1,6 +1,6 @@
 using ChillExe.Logger;
 using ChillExe.Models;
-using ChillExe.Services;
+using ChillExe.Services.Xml;
 using Moq;
 using NUnit.Framework;
 using System;

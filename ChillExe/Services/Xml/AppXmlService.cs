@@ -1,16 +1,9 @@
 ﻿using ChillExe.Logger;
 using ChillExe.Models;
-using ChillExe.Services;
-using ChillExe.Services.Xml;
 using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
-using System.Xml.Linq;
-using System.Xml.Schema;
-using System.Xml.Serialization;
 
-namespace ChillExe.Services
+namespace ChillExe.Services.Xml
 {
     public class AppXmlService : CommonXmlService<Apps>
     {
