@@ -24,7 +24,7 @@ namespace ChillExe.Tests.Services
             xmlService = new AppXmlService(customLogger.Object);
             xmlService.FilenameFullPath =
                 testFilenameFullPath;
-            customLogger.Setup(x => x.WriteLine(It.IsAny<string>(), LogLevel.ERROR));
+            customLogger.Setup(x => x.WriteLine(It.IsAny<string>(), It.IsAny<LogLevel>()));
         }
 
         [TearDown]

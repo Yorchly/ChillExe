@@ -17,6 +17,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Update="Configuration\Xml\configuration.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Configuration\Xml\configuration.xsd">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Services\Xml\Xsd\app.xsd">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
