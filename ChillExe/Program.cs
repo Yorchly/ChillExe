@@ -1,6 +1,9 @@
 using ChillExe.DAO;
+using ChillExe.Localization;
 using ChillExe.Logger;
+using ChillExe.Models;
 using ChillExe.Services;
+using ChillExe.Services.Xml;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -36,7 +39,10 @@ namespace ChillExe
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
                     services.AddSingleton<ICustomLogger, CustomLogger>()
-                            .AddSingleton<IAppService, AppXmlService>()
+                            .AddSingleton<IService<Apps>, AppXmlService>()
+                            .AddSingleton<IService<Configuration>, ConfigurationService>()
+                            .AddTransient<IService<Translations>, LocalizationService>()
+                            .AddSingleton<IStringLocalizer, StringLocalizer>()
                             .AddSingleton<Main>();
                 });
         }

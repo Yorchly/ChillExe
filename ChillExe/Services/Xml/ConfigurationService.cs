@@ -5,14 +5,14 @@ using System.IO;
 
 namespace ChillExe.Services.Xml
 {
-    public class AppXmlService : CommonXmlService<Apps>
+    public class ConfigurationService : CommonXmlService<Configuration>
     {
         private readonly string filenameFullPath =
-            Path.Join(AppContext.BaseDirectory, "apps.xml");
+            Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xml");
         private readonly string xsdFilenameFullPath =
-            Path.Join(AppContext.BaseDirectory, "Services\\Xml\\Xsd\\app.xsd");
+            Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xsd");
 
-        public AppXmlService(ICustomLogger customLogger) : base(customLogger)
+        public ConfigurationService(ICustomLogger customLogger) : base(customLogger)
         {
             FilenameFullPath = filenameFullPath;
             XsdFilenameFullPath = xsdFilenameFullPath;

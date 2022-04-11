@@ -7,12 +7,12 @@ namespace ChillExe.DAO
     public class AppDAO
     {
         private List<App> apps;
-        private readonly IAppService appService;
+        private readonly IService<Apps> appService;
 
-        public AppDAO(IAppService appService)
+        public AppDAO(IService<Apps> appService)
         {
             this.appService = appService;
-            apps = this.appService.Get();
+            apps = this.appService.Get().AppList;
         }
 
         public List<App> Get() => apps;
@@ -45,6 +45,6 @@ namespace ChillExe.DAO
             return true;
         } 
 
-        public bool Save() => appService.Save(apps);
+        public bool Save() => appService.Save(new Apps() { AppList = apps });
     }
 }
