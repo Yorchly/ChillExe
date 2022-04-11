@@ -7,32 +7,15 @@ namespace ChillExe.Services.Xml
 {
     public class ConfigurationService : CommonXmlService<Configuration>
     {
-        private string filenameFullPath =
+        private readonly string filenameFullPath =
             Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xml");
-        private string xsdFilenameFullPath =
+        private readonly string xsdFilenameFullPath =
             Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xsd");
 
-        public string FilenameFullPath
+        public ConfigurationService(ICustomLogger customLogger) : base(customLogger)
         {
-            get => filenameFullPath;
-            set
-            {
-                filenameFullPath = value;
-                SetXmlAndXsdFilenamePath(filenameFullPath, xsdFilenameFullPath);
-            }
+            FilenameFullPath = filenameFullPath;
+            XsdFilenameFullPath = xsdFilenameFullPath;
         }
-
-        public string XsdFilenameFullPath
-        {
-            get => xsdFilenameFullPath;
-            set
-            {
-                xsdFilenameFullPath = value;
-                SetXmlAndXsdFilenamePath(filenameFullPath, xsdFilenameFullPath);
-            }
-        }
-
-        public ConfigurationService(ICustomLogger customLogger) : base(customLogger) =>
-            SetXmlAndXsdFilenamePath(FilenameFullPath, XsdFilenameFullPath);
     }
 }

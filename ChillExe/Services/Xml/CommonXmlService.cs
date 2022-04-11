@@ -13,9 +13,22 @@ namespace ChillExe.Services.Xml
     public abstract class CommonXmlService<T> : IService<T>
     {
         private string filenameFullPath;
-        private string xsdFilename;
         private readonly ICustomLogger logger;
         private string filenameCopyFullPath;
+
+        public string FilenameFullPath 
+        { 
+            get => filenameFullPath;
+            set
+            {
+                filenameFullPath = value;
+                filenameCopyFullPath = Path.Combine(
+                    Path.GetDirectoryName(filenameFullPath),
+                    Path.GetFileNameWithoutExtension(filenameFullPath) + "-copy.xml"
+                );
+            }
+        }
+        public string XsdFilenameFullPath { get; set; }
 
         public CommonXmlService(ICustomLogger customLogger) =>
             logger = customLogger;
@@ -110,7 +123,7 @@ namespace ChillExe.Services.Xml
             try
             {
                 var schemas = new XmlSchemaSet();
-                schemas.Add("", xsdFilename);
+                schemas.Add("", XsdFilenameFullPath);
 
                 var document = XDocument.Load(filename);
 
@@ -133,16 +146,6 @@ namespace ChillExe.Services.Xml
             }
 
             return isValid;
-        }
-
-        protected void SetXmlAndXsdFilenamePath(string xmlFileFullPath, string xsdFileFullPath)
-        {
-            filenameFullPath = xmlFileFullPath;
-            filenameCopyFullPath = Path.Combine(
-                Path.GetDirectoryName(filenameFullPath),
-                Path.GetFileNameWithoutExtension(filenameFullPath) + "-copy.xml"
-            );
-            xsdFilename = xsdFileFullPath;
         }
     }
 }
