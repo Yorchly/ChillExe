@@ -1,4 +1,5 @@
 using ChillExe.DAO;
+using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
 using ChillExe.Services;
@@ -40,6 +41,8 @@ namespace ChillExe
                     services.AddSingleton<ICustomLogger, CustomLogger>()
                             .AddSingleton<IService<Apps>, AppXmlService>()
                             .AddSingleton<IService<Configuration>, ConfigurationService>()
+                            .AddTransient<IService<Translations>, LocalizationService>()
+                            .AddSingleton<IStringLocalizer, StringLocalizer>()
                             .AddSingleton<Main>();
                 });
         }
