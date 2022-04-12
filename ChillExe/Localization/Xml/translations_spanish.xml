@@ -1,1 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Translations>
+	<Translation>
+		<Id>Url</Id>
+		<Value>Url</Value>
+	</Translation>
+	<Translation>
+		<Id>Filename</Id>
+		<Value>Nombre del fichero</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdated</Id>
+		<Value>Última actualización</Value>
+	</Translation>
+	<Translation>
+		<Id>UrlTooltipText</Id>
+		<Value>Esta es la url de la que se descargará el programa a instalar.</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdatedTooltipText</Id>
+		<Value>Esta columna muestra la última vez que se modificó la información contenida en la fila.</Value>
+	</Translation>
+	<Translation>
+		<Id>LanguageDropdown</Id>
+		<Value>Idioma</Value>
+	</Translation>
+	<Translation>
+		<Id>EnglishDropdownMenuItem</Id>
+		<Value>Inglés</Value>
+	</Translation>
+	<Translation>
+		<Id>SpanishDropdownMenuItem</Id>
+		<Value>Español</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallButton</Id>
+		<Value>Descargar e instalar</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportButton</Id>
+		<Value>Importar lista</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportButton</Id>
+		<Value>Exportar lista</Value>
+	</Translation>
+	<Translation>
+		<Id>CleanButton</Id>
+		<Value>Limpiar lista</Value>
+	</Translation>
+</Translations>

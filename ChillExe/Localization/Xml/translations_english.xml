@@ -1,1 +1,51 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Translations>
+	<Translation>
+		<Id>Url</Id>
+		<Value>Url</Value>
+	</Translation>
+	<Translation>
+		<Id>Filename</Id>
+		<Value>Filename</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdated</Id>
+		<Value>Last updated</Value>
+	</Translation>
+	<Translation>
+		<Id>UrlTooltipText</Id>
+		<Value>This column shows the url of the program that will be installed.</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdatedTooltipText</Id>
+		<Value>This column shows the last time the information contained in the row was modified.</Value>
+	</Translation>
+	<Translation>
+		<Id>LanguageDropdown</Id>
+		<Value>Language</Value>
+	</Translation>
+	<Translation>
+		<Id>EnglishDropdownMenuItem</Id>
+		<Value>English</Value>
+	</Translation>
+	<Translation>
+		<Id>SpanishDropdownMenuItem</Id>
+		<Value>Spanish</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallButton</Id>
+		<Value>Download and Install</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportButton</Id>
+		<Value>Import list</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportButton</Id>
+		<Value>Export list</Value>
+	</Translation>
+	<Translation>
+		<Id>CleanButton</Id>
+		<Value>Clean list</Value>
+	</Translation>
+</Translations>
