@@ -17,5 +17,6 @@ namespace ChillExe.Models
     public class Configuration
     {
         public Language Language { get; set; } = Language.Spanish;
+        public bool IsLanguageMessageBoxShown { get; set; } = true;
     }
 }
