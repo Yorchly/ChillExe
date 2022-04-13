@@ -1,4 +1,3 @@
-using ChillExe.DAO;
 using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
