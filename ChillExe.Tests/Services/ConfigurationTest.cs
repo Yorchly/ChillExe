@@ -34,19 +34,23 @@ namespace ChillExe.Tests.Services
         }
         
         [Test]
-        public void Get_XmlIsValidAndLanguageIsSpanish_ReturnsConfigurationInstanceWithSpanishLanguage()
+        public void Get_XmlIsValid_ReturnsConfigurationInstance()
         {
-            SetValidXmlContentConfiguration((int)Language.Spanish);
+            SetValidXmlContentConfiguration((int)Language.Spanish, true);
 
             Configuration config = configService.Get();
 
             Assert.IsNotNull(config);
             Assert.AreEqual(config.Language, Language.Spanish);
+            Assert.IsTrue(config.IsLanguageMessageBoxShown);
         }
 
-        private void SetValidXmlContentConfiguration(int lang)
+        private void SetValidXmlContentConfiguration(int lang, bool isLanguageMessageBoxShown)
         {
-            string xmlContent = $"<Configuration><Language>{lang}</Language></Configuration>";
+            string xmlContent = $"<Configuration>" +
+                $"<Language>{lang}</Language>" +
+                $"<IsLanguageMessageBoxShown>{isLanguageMessageBoxShown.ToString().ToLower()}</IsLanguageMessageBoxShown>" +
+                $"</Configuration>";
             using var streamWriter = new StreamWriter(testFilenameFullPath);
 
             streamWriter.WriteLine(xmlContent);
@@ -55,7 +59,7 @@ namespace ChillExe.Tests.Services
         [Test]
         public void Get_XmlIsValidAndLanguageNotExists_ReturnsNull()
         {
-            SetValidXmlContentConfiguration(1000);
+            SetValidXmlContentConfiguration(1000, true);
 
             Configuration config = configService.Get();
 
@@ -85,6 +89,7 @@ namespace ChillExe.Tests.Services
         {
             Configuration config = GetValidConfiguration();
             config.Language = Language.English;
+            config.IsLanguageMessageBoxShown = false;
 
             bool response = configService.Save(config);
             config = configService.Get();
@@ -92,11 +97,12 @@ namespace ChillExe.Tests.Services
             Assert.IsTrue(response);
             Assert.IsNotNull(config);
             Assert.AreEqual(config.Language, Language.English);
+            Assert.IsFalse(config.IsLanguageMessageBoxShown);
         }
 
         private Configuration GetValidConfiguration()
         {
-            SetValidXmlContentConfiguration(0);
+            SetValidXmlContentConfiguration(0, true);
 
             return configService.Get();
         }

@@ -42,7 +42,7 @@ namespace ChillExe.Controls
             // dontShowAgainCheckbox
             // 
             this.dontShowAgainCheckbox.AutoSize = true;
-            this.dontShowAgainCheckbox.Location = new System.Drawing.Point(80, 117);
+            this.dontShowAgainCheckbox.Location = new System.Drawing.Point(241, 150);
             this.dontShowAgainCheckbox.Name = "dontShowAgainCheckbox";
             this.dontShowAgainCheckbox.Size = new System.Drawing.Size(143, 24);
             this.dontShowAgainCheckbox.TabIndex = 1;
@@ -52,7 +52,7 @@ namespace ChillExe.Controls
             // messageBoxText
             // 
             this.messageBoxText.AutoSize = true;
-            this.messageBoxText.Location = new System.Drawing.Point(80, 67);
+            this.messageBoxText.Location = new System.Drawing.Point(10, 80);
             this.messageBoxText.Name = "messageBoxText";
             this.messageBoxText.Size = new System.Drawing.Size(125, 20);
             this.messageBoxText.TabIndex = 2;
@@ -60,7 +60,7 @@ namespace ChillExe.Controls
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(99, 164);
+            this.okButton.Location = new System.Drawing.Point(260, 205);
             this.okButton.Name = "okButton";
             this.okButton.Size = new System.Drawing.Size(94, 29);
             this.okButton.TabIndex = 3;
@@ -77,7 +77,7 @@ namespace ChillExe.Controls
             this.messageBoxToolStrip.Location = new System.Drawing.Point(0, 0);
             this.messageBoxToolStrip.Name = "messageBoxToolStrip";
             this.messageBoxToolStrip.RenderMode = System.Windows.Forms.ToolStripRenderMode.Professional;
-            this.messageBoxToolStrip.Size = new System.Drawing.Size(296, 27);
+            this.messageBoxToolStrip.Size = new System.Drawing.Size(606, 27);
             this.messageBoxToolStrip.TabIndex = 4;
             this.messageBoxToolStrip.Text = "messageBoxToolstrip";
             // 
@@ -110,7 +110,7 @@ namespace ChillExe.Controls
             this.Controls.Add(this.messageBoxText);
             this.Controls.Add(this.dontShowAgainCheckbox);
             this.Name = "CheckboxMessageBox";
-            this.Size = new System.Drawing.Size(296, 223);
+            this.Size = new System.Drawing.Size(606, 255);
             this.messageBoxToolStrip.ResumeLayout(false);
             this.messageBoxToolStrip.PerformLayout();
             this.ResumeLayout(false);

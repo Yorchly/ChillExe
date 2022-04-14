@@ -8,19 +8,22 @@ namespace ChillExe.Controls
     {
         private IService<Configuration> configurationService;
 
+        public bool IsInitialized { get; set; } = false;
+
         public CheckboxMessageBox()
         {
             InitializeComponent();
         }
 
-        private void Init(
+        public void Init(
             IService<Configuration> config,
             string messageBoxtTitle,
             string messageBoxText,
             string dontShowAgainText)
         {
-            this.configurationService = config;
+            configurationService = config;
             SetTextInComponents(messageBoxtTitle, messageBoxText, dontShowAgainText);
+            IsInitialized = true;
         }
 
         private void SetTextInComponents(string messageBoxTitle, string messageBoxText, string dontShowAgainText)
@@ -48,7 +51,7 @@ namespace ChillExe.Controls
                 return;
 
             Configuration config = configurationService.Get();
-            config.IsLanguageMessageBoxShown = true;
+            config.IsLanguageMessageBoxShown = false;
             configurationService.Save(config);
         }
     }

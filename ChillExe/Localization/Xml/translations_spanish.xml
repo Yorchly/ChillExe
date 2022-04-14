@@ -48,4 +48,16 @@
 		<Id>CleanButton</Id>
 		<Value>Limpiar lista</Value>
 	</Translation>
+	<Translation>
+		<Id>CheckboxMessageBoxTitle</Id>
+		<Value>Información importante</Value>
+	</Translation>
+	<Translation>
+		<Id>CheckboxMessageBoxText</Id>
+		<Value>Los cambios en el idioma no serán aplicados hasta que no reinicies la aplicación</Value>
+	</Translation>
+	<Translation>
+		<Id>DontShowAgainText</Id>
+		<Value>No mostrar de nuevo</Value>
+	</Translation>
 </Translations>

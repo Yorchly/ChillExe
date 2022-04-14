@@ -1,7 +1,7 @@
 ﻿
 using ChillExe.Controls;
 
-namespace ChillExe
+namespace ChillExe.Forms
 {
     partial class Main
     {
@@ -43,6 +43,7 @@ namespace ChillExe
             this.importButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.cleanListButton = new System.Windows.Forms.Button();
+            this.checkboxMessageBox = new ChillExe.Controls.CheckboxMessageBox();
             ((System.ComponentModel.ISupportInitialize)(this.appsGridView)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -157,11 +158,21 @@ namespace ChillExe
             this.cleanListButton.UseVisualStyleBackColor = true;
             this.cleanListButton.Click += new System.EventHandler(this.cleanListButton_Click);
             // 
+            // checkboxMessageBox
+            // 
+            this.checkboxMessageBox.IsInitialized = false;
+            this.checkboxMessageBox.Location = new System.Drawing.Point(296, 153);
+            this.checkboxMessageBox.Name = "checkboxMessageBox";
+            this.checkboxMessageBox.Size = new System.Drawing.Size(606, 255);
+            this.checkboxMessageBox.TabIndex = 6;
+            this.checkboxMessageBox.Visible = false;
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1197, 688);
+            this.Controls.Add(this.checkboxMessageBox);
             this.Controls.Add(this.cleanListButton);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.importButton);
@@ -192,6 +203,8 @@ namespace ChillExe
         private System.Windows.Forms.Button cleanListButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn UrlColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdatedColumn;
+        private CheckboxMessageBox checkboxMessageBox1;
+        private CheckboxMessageBox checkboxMessageBox;
     }
 }
 
