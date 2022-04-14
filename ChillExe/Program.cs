@@ -42,6 +42,9 @@ namespace ChillExe
                             .AddSingleton<IService<Apps>, AppXmlService>()
                             .AddSingleton<IService<Configuration>, ConfigurationService>()
                             .AddTransient<IService<Translations>, LocalizationService>()
+                            .AddSingleton<IAppDAO, AppDAO>()
+                            .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
+                            .AddSingleton<ILocalizationDAO, LocalizationDAO>()
                             .AddSingleton<IStringLocalizer, StringLocalizer>()
                             .AddSingleton<Main>();
                 });
