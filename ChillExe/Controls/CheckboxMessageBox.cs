@@ -47,10 +47,11 @@ namespace ChillExe.Controls
 
         private void SetDontShowAgainStatusInConfiguration()
         {
-            if (!dontShowAgainCheckbox.Checked)
+            Configuration config = configurationService.Get();
+
+            if (!dontShowAgainCheckbox.Checked || !config.IsLanguageMessageBoxShown)
                 return;
 
-            Configuration config = configurationService.Get();
             config.IsLanguageMessageBoxShown = false;
             configurationService.Save(config);
         }
