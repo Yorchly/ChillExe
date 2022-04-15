@@ -1,4 +1,5 @@
-﻿using ChillExe.Localization;
+﻿using ChillExe.DAO;
+using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
 using ChillExe.Services;
@@ -12,19 +13,21 @@ namespace ChillExe.Forms
     {
         private IStringLocalizer stringLocalizer;
         private ICustomLogger customLogger;
-        private IService<Apps> xmlService;
-        private IService<Configuration> configurationService;
+        private IAppDAO appDAO;
+        private IConfigurationDAO configurationDAO;
+        private Configuration config;
 
         public Main(
             ICustomLogger logger, 
-            IService<Apps> xmlService,
-            IService<Configuration> configurationService,
+            IAppDAO appDAO,
+            IConfigurationDAO configurationDAO,
             IStringLocalizer stringLocalizer)
         {
             customLogger = logger;
-            this.xmlService = xmlService;
+            this.appDAO = appDAO;
             this.stringLocalizer = stringLocalizer;
-            this.configurationService = configurationService;
+            this.configurationDAO = configurationDAO;
+            config = this.configurationDAO.Get();
 
             InitializeComponent();
             GetTranslations();

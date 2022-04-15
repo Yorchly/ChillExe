@@ -21,14 +21,18 @@ namespace ChillExe.Forms
 
         private void englishDropdownMenuItem_Click(object sender, System.EventArgs e)
         {
-            if (!configurationService.Get().IsLanguageMessageBoxShown)
+            if (config.Language == Language.English)
                 return;
 
-            ShowLanguageMessageBox();
             ChangeLanguageInConfig(Language.English);
+            ShowLanguageMessageBox();
         }
+
         private void ShowLanguageMessageBox()
         {
+            if (!config.IsLanguageMessageBoxShown)
+                return; 
+
             InitCheckboxMessageBox();
             checkboxMessageBox.Visible = true;
         }
@@ -39,7 +43,7 @@ namespace ChillExe.Forms
                 return;
 
             checkboxMessageBox.Init(
-                configurationService,
+                configurationDAO,
                 stringLocalizer.GetTranslation("CheckboxMessageBoxTitle", "Important information"),
                 stringLocalizer.GetTranslation("CheckboxMessageBoxText", "Language changes will not be applied until you reboot the application"),
                 stringLocalizer.GetTranslation("DontShowAgainText", "Don't show again")
@@ -48,19 +52,18 @@ namespace ChillExe.Forms
 
         private void ChangeLanguageInConfig(Language language)
         {
-            Configuration config = configurationService.Get();
             config.Language = language;
 
-            configurationService.Save(config);
+            configurationDAO.Save();
         }
 
         private void spanishDropdownMenuItem_Click(object sender, System.EventArgs e)
         {
-            if (!configurationService.Get().IsLanguageMessageBoxShown)
+            if (config.Language == Language.Spanish)
                 return;
 
-            ShowLanguageMessageBox();
             ChangeLanguageInConfig(Language.Spanish);
+            ShowLanguageMessageBox();
         }
     }
 }

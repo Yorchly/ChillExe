@@ -1,4 +1,5 @@
-﻿using ChillExe.Models;
+﻿using ChillExe.DAO;
+using ChillExe.Models;
 using ChillExe.Services;
 using System.Windows.Forms;
 
@@ -6,7 +7,7 @@ namespace ChillExe.Controls
 {
     public partial class CheckboxMessageBox : UserControl
     {
-        private IService<Configuration> configurationService;
+        private IConfigurationDAO configurationDAO;
 
         public bool IsInitialized { get; set; } = false;
 
@@ -16,12 +17,12 @@ namespace ChillExe.Controls
         }
 
         public void Init(
-            IService<Configuration> config,
+            IConfigurationDAO configurationDAO,
             string messageBoxtTitle,
             string messageBoxText,
             string dontShowAgainText)
         {
-            configurationService = config;
+            this.configurationDAO = configurationDAO;
             SetTextInComponents(messageBoxtTitle, messageBoxText, dontShowAgainText);
             IsInitialized = true;
         }
@@ -47,13 +48,13 @@ namespace ChillExe.Controls
 
         private void SetDontShowAgainStatusInConfiguration()
         {
-            Configuration config = configurationService.Get();
+            Configuration config = configurationDAO.Get();
 
             if (!dontShowAgainCheckbox.Checked || !config.IsLanguageMessageBoxShown)
                 return;
 
             config.IsLanguageMessageBoxShown = false;
-            configurationService.Save(config);
+            configurationDAO.Save();
         }
     }
 }

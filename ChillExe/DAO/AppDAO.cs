@@ -12,7 +12,7 @@ namespace ChillExe.DAO
         public AppDAO(IService<Apps> appService)
         {
             this.appService = appService;
-            apps = this.appService.Get().AppList;
+            apps = this.appService.Get()?.AppList;
         }
 
         public List<App> Get() => apps;
