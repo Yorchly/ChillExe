@@ -6,17 +6,16 @@ namespace ChillExe.DAO
 {
     public class AppDAO : IAppDAO
     {
-        private List<App> apps;
+        public List<App> Apps { get; set; }
+
         private readonly IService<Apps> appService;
 
         public AppDAO(IService<Apps> appService)
         {
             this.appService = appService;
-            apps = this.appService.Get()?.AppList;
+            Apps = this.appService.Get()?.AppList;
         }
 
-        public List<App> Get() => apps;
-
-        public bool Save() => appService.Save(new Apps() { AppList = apps });
+        public bool Save() => appService.Save(new Apps() { AppList = Apps });
     }
 }

@@ -44,7 +44,7 @@ namespace ChillExe.Tests.DAO
         [Test]
         public void Get_ReturnsListOfApps()
         {
-            List<App> apps = dao.Get();
+            List<App> apps = dao.Apps;
 
             Assert.Greater(apps.Count, 0);
         }

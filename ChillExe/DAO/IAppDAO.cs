@@ -7,7 +7,7 @@ namespace ChillExe.DAO
 {
     public interface IAppDAO
     {
-        public List<App> Get();
+        public List<App> Apps { get; set; }
 
         public bool Save();
     }
