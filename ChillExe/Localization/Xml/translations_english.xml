@@ -60,4 +60,8 @@
 		<Id>DontShowAgainText</Id>
 		<Value>Don't show again</Value>
 	</Translation>
+	<Translation>
+		<Id>UrlNotValid</Id>
+		<Value>Url must contains http/https at the beginning and .exe/.msi at the end. E.g. https//test.com/App.exe</Value>
+	</Translation>
 </Translations>

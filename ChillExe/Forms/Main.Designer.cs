@@ -60,6 +60,10 @@ namespace ChillExe.Forms
             this.appsGridView.RowTemplate.Height = 29;
             this.appsGridView.Size = new System.Drawing.Size(905, 629);
             this.appsGridView.TabIndex = 0;
+            this.appsGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.appsGridView_CellEndEdit);
+            this.appsGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appsGridView_CellValidating);
+            this.appsGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.appsGridView_RowsRemoved);
+            this.appsGridView.Leave += new System.EventHandler(this.appsGridView_Leave);
             // 
             // UrlColumn
             // 

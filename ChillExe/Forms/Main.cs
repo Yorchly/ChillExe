@@ -11,11 +11,11 @@ namespace ChillExe.Forms
 {
     public partial class Main : Form
     {
-        private IStringLocalizer stringLocalizer;
-        private ICustomLogger customLogger;
-        private IAppDAO appDAO;
-        private IConfigurationDAO configurationDAO;
-        private Configuration config;
+        private readonly IStringLocalizer stringLocalizer;
+        private readonly ICustomLogger customLogger;
+        private readonly IAppDAO appDAO;
+        private readonly IConfigurationDAO configurationDAO;
+        private readonly Configuration config;
 
         public Main(
             ICustomLogger logger, 
@@ -31,6 +31,7 @@ namespace ChillExe.Forms
 
             InitializeComponent();
             GetTranslations();
+            LoadAppsInGridView();
         }
 
         private void downloadAndInstallButton_Click(object sender, System.EventArgs e)
