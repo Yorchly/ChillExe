@@ -33,25 +33,5 @@ namespace ChillExe.Forms
             GetTranslations();
             LoadAppsInGridView();
         }
-
-        private void downloadAndInstallButton_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void importButton_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void exportButton_Click(object sender, System.EventArgs e)
-        {
-
-        }
-
-        private void cleanListButton_Click(object sender, System.EventArgs e)
-        {
-
-        }
     }
 }
