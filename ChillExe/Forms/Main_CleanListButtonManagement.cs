@@ -15,7 +15,7 @@ namespace ChillExe.Forms
 
         private DialogResult ShowYesNoMessageBoxForm()
         {
-            Form yesNoMessageBoxForm = new YesNoMessageBoxForm(
+            var yesNoMessageBoxForm = new YesNoMessageBoxForm(
                 stringLocalizer.GetTranslation("ImportantInformation", "Important information"),
                 stringLocalizer.GetTranslation(
                     "YesNoMessageBoxText",

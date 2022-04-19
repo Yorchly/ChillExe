@@ -15,7 +15,6 @@ namespace ChillExe.Forms
         private readonly ICustomLogger customLogger;
         private readonly IAppDAO appDAO;
         private readonly IConfigurationDAO configurationDAO;
-        private readonly Configuration config;
 
         public Main(
             ICustomLogger logger, 
@@ -27,7 +26,6 @@ namespace ChillExe.Forms
             this.appDAO = appDAO;
             this.stringLocalizer = stringLocalizer;
             this.configurationDAO = configurationDAO;
-            config = this.configurationDAO.Get();
 
             InitializeComponent();
             GetTranslations();

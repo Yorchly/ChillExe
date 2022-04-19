@@ -32,9 +32,9 @@ namespace ChillExe.Tests.DAO
         }
 
         [Test]
-        public void Get_ReturnsListOfApps()
+        public void GetConfigurationFromDAO()
         {
-            Configuration config = dao.Get();
+            Configuration config = dao.Configuration;
 
             Assert.IsNotNull(config);
         }

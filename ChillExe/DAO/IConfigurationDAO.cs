@@ -7,8 +7,7 @@ namespace ChillExe.DAO
 {
     public interface IConfigurationDAO
     {
-        public Configuration Get();
-
+        public Configuration Configuration { get; set; }
         public bool Save();
     }
 }

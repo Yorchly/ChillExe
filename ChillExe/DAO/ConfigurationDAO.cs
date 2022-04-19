@@ -8,16 +8,16 @@ namespace ChillExe.DAO
 {
     public class ConfigurationDAO : IConfigurationDAO
     {
-        private readonly Configuration config;
+        public Configuration Configuration { get; set; }
+
         private readonly IService<Configuration> configService;
 
         public ConfigurationDAO(IService<Configuration> configService)
         {
             this.configService = configService;
-            config = this.configService.Get();
+            Configuration = this.configService.Get();
         }
 
-        public Configuration Get() => config;
-        public bool Save() => configService.Save(config);
+        public bool Save() => configService.Save(Configuration);
     }
 }

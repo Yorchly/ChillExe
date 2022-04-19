@@ -49,10 +49,6 @@
 		<Value>Clean list</Value>
 	</Translation>
 	<Translation>
-		<Id>CheckboxMessageBoxTitle</Id>
-		<Value>Important information</Value>
-	</Translation>
-	<Translation>
 		<Id>CheckboxMessageBoxText</Id>
 		<Value>Language changes will not be applied until you reboot the application</Value>
 	</Translation>

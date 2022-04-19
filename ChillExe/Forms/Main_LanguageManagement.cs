@@ -1,4 +1,5 @@
-﻿using ChillExe.Models;
+﻿using ChillExe.Forms.MessageBox;
+using ChillExe.Models;
 
 namespace ChillExe.Forms
 {
@@ -21,7 +22,7 @@ namespace ChillExe.Forms
 
         private void englishDropdownMenuItem_Click(object sender, System.EventArgs e)
         {
-            if (config.Language == Language.English)
+            if (configurationDAO.Configuration.Language == Language.English)
                 return;
 
             ChangeLanguageInConfig(Language.English);
@@ -30,36 +31,42 @@ namespace ChillExe.Forms
 
         private void ChangeLanguageInConfig(Language language)
         {
-            config.Language = language;
+            configurationDAO.Configuration.Language = language;
 
             configurationDAO.Save();
         }
 
         private void ShowLanguageMessageBox()
         {
-            if (!config.IsLanguageMessageBoxShown)
-                return; 
-
-            InitCheckboxMessageBox();
-            checkboxMessageBox.Visible = true;
-        }
-
-        private void InitCheckboxMessageBox()
-        {
-            if (checkboxMessageBox.IsInitialized)
+            if (!configurationDAO.Configuration.IsLanguageMessageBoxShown)
                 return;
 
-            checkboxMessageBox.Init(
-                configurationDAO,
-                stringLocalizer.GetTranslation("CheckboxMessageBoxTitle", "Important information"),
-                stringLocalizer.GetTranslation("CheckboxMessageBoxText", "Language changes will not be applied until you reboot the application"),
-                stringLocalizer.GetTranslation("DontShowAgainText", "Don't show again")
+            var checkboxMessageBoxForm = new CheckboxMessageBoxForm(
+                stringLocalizer,
+                stringLocalizer.GetTranslation("ImportantInformation", "Important information"),
+                stringLocalizer.GetTranslation("CheckboxMessageBoxText", "Language changes will not be applied until you reboot the application")
             );
+
+            checkboxMessageBoxForm.ShowDialog();
+            SetIfLanguageCheckboxMessageFormWillBeShownAgain(
+                checkboxMessageBoxForm.notShowAgainCheckbox.Checked
+            );
+        }
+
+        private void SetIfLanguageCheckboxMessageFormWillBeShownAgain(bool dontShow)
+        {
+            if (!configurationDAO.Configuration.IsLanguageMessageBoxShown)
+                return;
+            else if(dontShow)
+            {
+                configurationDAO.Configuration.IsLanguageMessageBoxShown = false;
+                configurationDAO.Save();
+            }
         }
 
         private void spanishDropdownMenuItem_Click(object sender, System.EventArgs e)
         {
-            if (config.Language == Language.Spanish)
+            if (configurationDAO.Configuration.Language == Language.Spanish)
                 return;
 
             ChangeLanguageInConfig(Language.Spanish);
