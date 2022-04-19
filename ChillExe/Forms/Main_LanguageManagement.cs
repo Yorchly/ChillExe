@@ -55,9 +55,7 @@ namespace ChillExe.Forms
 
         private void SetIfLanguageCheckboxMessageFormWillBeShownAgain(bool dontShow)
         {
-            if (!configurationDAO.Configuration.IsLanguageMessageBoxShown)
-                return;
-            else if(dontShow)
+            if(dontShow)
             {
                 configurationDAO.Configuration.IsLanguageMessageBoxShown = false;
                 configurationDAO.Save();
