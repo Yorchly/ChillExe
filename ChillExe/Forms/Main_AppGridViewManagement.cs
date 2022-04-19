@@ -94,7 +94,7 @@ namespace ChillExe.Forms
 
         private void appsGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            if (appsGridView.Rows[e.RowIndex].Tag == null)
+            if (appsGridView.Rows.Count == 0 || appsGridView.Rows[e.RowIndex].Tag == null)
                 return;
 
             var app = (App)appsGridView.Rows[e.RowIndex].Tag;

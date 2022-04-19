@@ -64,4 +64,20 @@
 		<Id>UrlNotValid</Id>
 		<Value>La url debe contener http/https en el principio y .exe/msi al final de la misma. Por ej: https//test.com/App.exe</Value>
 	</Translation>
+	<Translation>
+		<Id>YesNoMessageBoxText</Id>
+		<Value>¿Estás seguro de querer continuar? Vas a borrar todos los elementos en la lista</Value>
+	</Translation>
+	<Translation>
+		<Id>YesButton</Id>
+		<Value>Si</Value>
+	</Translation>
+	<Translation>
+		<Id>NoButton</Id>
+		<Value>No</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportantInformation</Id>
+		<Value>Información importante</Value>
+	</Translation>
 </Translations>
