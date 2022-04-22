@@ -42,7 +42,7 @@ namespace ChillExe
                     services.AddSingleton<ICustomLogger, CustomLogger>()
                             .AddSingleton<IService<Apps>, AppXmlService>()
                             .AddSingleton<IService<Configuration>, ConfigurationService>()
-                            .AddTransient<IService<Translations>, LocalizationService>()
+                            .AddSingleton<IService<Translations>, LocalizationService>()
                             .AddSingleton<IAppDAO, AppDAO>()
                             .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
                             .AddSingleton<ILocalizationDAO, LocalizationDAO>()
