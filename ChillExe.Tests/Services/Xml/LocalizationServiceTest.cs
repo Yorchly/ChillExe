@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Text;
 
-namespace ChillExe.Tests.Services
+namespace ChillExe.Tests.Services.Xml
 {
     public class LocalizationServiceTest
     {

@@ -40,7 +40,7 @@ namespace ChillExe
             return Host.CreateDefaultBuilder()
                 .ConfigureServices((context, services) => {
                     services.AddSingleton<ICustomLogger, CustomLogger>()
-                            .AddSingleton<IService<Apps>, AppXmlService>()
+                            .AddSingleton<IService<Apps>, AppService>()
                             .AddSingleton<IService<Configuration>, ConfigurationService>()
                             .AddSingleton<IService<Translations>, LocalizationService>()
                             .AddSingleton<IAppDAO, AppDAO>()

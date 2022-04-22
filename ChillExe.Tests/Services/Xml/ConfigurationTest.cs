@@ -6,7 +6,7 @@ using NUnit.Framework;
 using System;
 using System.IO;
 
-namespace ChillExe.Tests.Services
+namespace ChillExe.Tests.Services.Xml
 {
     public class ConfigurationTest
     {

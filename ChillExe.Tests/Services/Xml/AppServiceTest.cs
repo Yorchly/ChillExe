@@ -7,21 +7,21 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 
-namespace ChillExe.Tests.Services
+namespace ChillExe.Tests.Services.Xml
 {
-    public class AppXmlServiceTest
+    public class AppServiceTest
     {
         private static readonly string testFilenameFullPath =
             Path.Combine(AppContext.BaseDirectory, "test_app.xml");
         private static readonly string testCopyFilenameFullPath =
             Path.Combine(AppContext.BaseDirectory, "test_copy_app.xml");
         private readonly Mock<ICustomLogger> customLogger = new Mock<ICustomLogger>();
-        private AppXmlService xmlService;
+        private AppService xmlService;
 
         [SetUp]
         public void Setup()
         {
-            xmlService = new AppXmlService(customLogger.Object);
+            xmlService = new AppService(customLogger.Object);
             xmlService.FilenameFullPath =
                 testFilenameFullPath;
             customLogger.Setup(x => x.WriteLine(It.IsAny<string>(), It.IsAny<LogLevel>()));
