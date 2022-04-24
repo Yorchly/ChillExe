@@ -3,6 +3,7 @@ using ChillExe.Forms;
 using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
+using ChillExe.Models.Xml;
 using ChillExe.Services;
 using ChillExe.Services.Xml;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +48,9 @@ namespace ChillExe
                             .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
                             .AddSingleton<ILocalizationDAO, LocalizationDAO>()
                             .AddSingleton<IStringLocalizer, StringLocalizer>()
+                            .AddSingleton<IXmlFilePath, AppXmlFilePath>()
+                            .AddSingleton<IXmlFilePath, ConfigurationXmlFilePath>()
+                            .AddSingleton<IXmlFilePath, LocalizationXmlFilePath>()
                             .AddSingleton<Main>();
                 });
         }

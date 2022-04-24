@@ -1,21 +1,14 @@
 ﻿using ChillExe.Logger;
 using ChillExe.Models;
-using System;
-using System.IO;
+using ChillExe.Models.Xml;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace ChillExe.Services.Xml
 {
     public class ConfigurationService : CommonXmlService<Configuration>
     {
-        private readonly string filenameFullPath =
-            Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xml");
-        private readonly string xsdFilenameFullPath =
-            Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xsd");
-
-        public ConfigurationService(ICustomLogger customLogger) : base(customLogger)
-        {
-            FilenameFullPath = filenameFullPath;
-            XsdFilenameFullPath = xsdFilenameFullPath;
-        }
+        public ConfigurationService(ICustomLogger customLogger, List<IXmlFilePath> xmlFilePaths) : 
+            base(customLogger, xmlFilePaths.OfType<ConfigurationXmlFilePath>().First()) { }
     }
 }
