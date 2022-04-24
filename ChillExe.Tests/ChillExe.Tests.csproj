@@ -18,8 +18,4 @@
     <ProjectReference Include="..\ChillExe\ChillExe.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Services\Xml\" />
-  </ItemGroup>
-
 </Project>

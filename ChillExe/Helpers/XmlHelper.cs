@@ -1,7 +1,6 @@
 ﻿using ChillExe.Logger;
 using ChillExe.Models.Xml;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Xml.Linq;
 using System.Xml.Schema;
@@ -9,7 +8,7 @@ using System.Xml.Serialization;
 
 namespace ChillExe.Helpers
 {
-    public class XmlHelper<T>
+    public class XmlHelper<T> : IXmlHelper<T>
     {
         private ICustomLogger logger;
         private readonly string filenameFullPath;

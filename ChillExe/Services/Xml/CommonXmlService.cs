@@ -9,13 +9,11 @@ namespace ChillExe.Services.Xml
 {
     public abstract class CommonXmlService<T> : IService<T>
     {
-        private readonly ICustomLogger logger;
-        private readonly XmlHelper<T> xmlHelper;
+        private readonly IXmlHelper<T> xmlHelper;
 
-        public CommonXmlService(ICustomLogger customLogger, IXmlFilePath xmlFilePath)
+        public CommonXmlService(IXmlHelper<T> xmlHelper)
         {
-            logger = customLogger;
-            xmlHelper = new XmlHelper<T>(logger, xmlFilePath);
+            this.xmlHelper = xmlHelper;
         }
 
         public virtual T Get() => xmlHelper.Get();

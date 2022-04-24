@@ -1,5 +1,6 @@
 using ChillExe.DAO;
 using ChillExe.Forms;
+using ChillExe.Helpers;
 using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
@@ -48,9 +49,9 @@ namespace ChillExe
                             .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
                             .AddSingleton<ILocalizationDAO, LocalizationDAO>()
                             .AddSingleton<IStringLocalizer, StringLocalizer>()
-                            .AddSingleton<IXmlFilePath, AppXmlFilePath>()
-                            .AddSingleton<IXmlFilePath, ConfigurationXmlFilePath>()
-                            .AddSingleton<IXmlFilePath, LocalizationXmlFilePath>()
+                            .AddSingleton<IXmlHelper<Apps>>(xmlHelper => new XmlHelper<Apps>(ServiceProvider.GetRequiredService<ICustomLogger>(), new AppXmlFilePath()))
+                            .AddSingleton<IXmlHelper<Configuration>>(xmlHelper => new XmlHelper<Configuration>(ServiceProvider.GetRequiredService<ICustomLogger>(), new ConfigurationXmlFilePath()))
+                            .AddSingleton<IXmlHelper<Translations>>(xmlHelper => new XmlHelper<Translations>(ServiceProvider.GetRequiredService<ICustomLogger>(), new LocalizationXmlFilePath(ServiceProvider.GetRequiredService<IConfigurationDAO>())))
                             .AddSingleton<Main>();
                 });
         }
