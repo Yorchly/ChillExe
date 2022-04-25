@@ -1,5 +1,6 @@
 ﻿using ChillExe.Logger;
 using ChillExe.Models.Xml;
+using ChillExe.Utils;
 using System;
 using System.IO;
 using System.Xml.Linq;
@@ -10,24 +11,33 @@ namespace ChillExe.Helpers
 {
     public class XmlHelper<T> : IXmlHelper<T>
     {
-        private ICustomLogger logger;
-        private readonly string filenameFullPath;
-        private readonly string filenameCopyFullPath;
-        private readonly string xsdFilenameFullPath;
+        public IXmlFilePath XmlFilePath 
+        { 
+            get => xmlFilePath;
+            set
+            {
+                xmlFilePath = value;
+                filenameCopyFullPath = Path.Combine(
+                    Path.GetDirectoryName(xmlFilePath.FilenameFullPath),
+                    Path.GetFileNameWithoutExtension(xmlFilePath.FilenameFullPath) + "-copy.xml"
+                );
+            }
+        }
 
-        public XmlHelper(ICustomLogger logger, IXmlFilePath xmlFilePath)
+        private ICustomLogger logger;
+        private IXmlFilePath xmlFilePath;
+        private IXmlUtils xmlUtils;
+        private string filenameCopyFullPath;
+
+        public XmlHelper(ICustomLogger logger, IXmlFilePath xmlFilePath, IXmlUtils xmlUtils)
         {
             this.logger = logger;
+            this.xmlUtils = xmlUtils;
 
             CheckXmlFilename(xmlFilePath.FilenameFullPath);
-            filenameFullPath = xmlFilePath.FilenameFullPath;
-            filenameCopyFullPath = Path.Combine(
-                Path.GetDirectoryName(filenameFullPath),
-                Path.GetFileNameWithoutExtension(filenameFullPath) + "-copy.xml"
-            );
-            
             CheckXsdFilename(xmlFilePath.XsdFilenameFullPath);
-            xsdFilenameFullPath = xmlFilePath.XsdFilenameFullPath;
+
+            XmlFilePath = xmlFilePath;
         }
 
         private void CheckXmlFilename(string filename)
@@ -62,12 +72,12 @@ namespace ChillExe.Helpers
 
         public T Get()
         {
-            CheckAndCreateXmlFile(filenameFullPath);
+            CheckAndCreateXmlFile(XmlFilePath.FilenameFullPath);
 
-            if (!IsXmlValid(filenameFullPath))
+            if (!xmlUtils.IsXmlValid(XmlFilePath.FilenameFullPath, XmlFilePath.XsdFilenameFullPath))
                 return default;
 
-            FileStream fileStream = new FileStream(filenameFullPath, FileMode.Open);
+            FileStream fileStream = new FileStream(XmlFilePath.FilenameFullPath, FileMode.Open);
             try
             {
                 var serializer = new XmlSerializer(typeof(T));
@@ -107,42 +117,10 @@ namespace ChillExe.Helpers
             }
         }
 
-        private bool IsXmlValid(string filename)
-        {
-            bool isValid = true;
-
-            try
-            {
-                var schemas = new XmlSchemaSet();
-                schemas.Add("", xsdFilenameFullPath);
-
-                var document = XDocument.Load(filename);
-
-                document.Validate(
-                    schemas,
-                    (ValidationEventHandler)((o, validationEventArgs) =>
-                    {
-                        logger.WriteLine(
-                            $"Error in XmlHelper.IsXmlValid, validating xml against xsd -> {validationEventArgs.Message}",
-                            LogLevel.ERROR
-                        );
-                        isValid = false;
-                    })
-                );
-            }
-            catch (Exception ex)
-            {
-                logger.WriteLine($"Error in XmlHelper.IsXmlValid -> {ex.Message}", LogLevel.ERROR);
-                isValid = false;
-            }
-
-            return isValid;
-        }
-
         public bool Write(T element)
         {
             CheckAndCreateXmlFile(filenameCopyFullPath);
-            CheckAndCreateXmlFile(filenameFullPath);
+            CheckAndCreateXmlFile(XmlFilePath.FilenameFullPath);
 
             var writer = new StreamWriter(filenameCopyFullPath);
             bool isSaved = false;
@@ -154,9 +132,9 @@ namespace ChillExe.Helpers
 
                 writer.Close();
 
-                if (IsXmlValid(filenameCopyFullPath))
+                if (xmlUtils.IsXmlValid(filenameCopyFullPath, XmlFilePath.XsdFilenameFullPath))
                 {
-                    File.Copy(filenameCopyFullPath, filenameFullPath, overwrite: true);
+                    File.Copy(filenameCopyFullPath, XmlFilePath.FilenameFullPath, overwrite: true);
                     isSaved = true;
                 }
 

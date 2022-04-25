@@ -7,6 +7,7 @@ using ChillExe.Models;
 using ChillExe.Models.Xml;
 using ChillExe.Services;
 using ChillExe.Services.Xml;
+using ChillExe.Utils;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -49,9 +50,10 @@ namespace ChillExe
                             .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
                             .AddSingleton<ILocalizationDAO, LocalizationDAO>()
                             .AddSingleton<IStringLocalizer, StringLocalizer>()
-                            .AddSingleton<IXmlHelper<Apps>>(xmlHelper => new XmlHelper<Apps>(ServiceProvider.GetRequiredService<ICustomLogger>(), new AppXmlFilePath()))
-                            .AddSingleton<IXmlHelper<Configuration>>(xmlHelper => new XmlHelper<Configuration>(ServiceProvider.GetRequiredService<ICustomLogger>(), new ConfigurationXmlFilePath()))
-                            .AddSingleton<IXmlHelper<Translations>>(xmlHelper => new XmlHelper<Translations>(ServiceProvider.GetRequiredService<ICustomLogger>(), new LocalizationXmlFilePath(ServiceProvider.GetRequiredService<IConfigurationDAO>())))
+                            .AddSingleton<IXmlHelper<Apps>>(xmlHelper => new XmlHelper<Apps>(ServiceProvider.GetRequiredService<ICustomLogger>(), new AppXmlFilePath(), ServiceProvider.GetRequiredService<IXmlUtils>()))
+                            .AddSingleton<IXmlHelper<Configuration>>(xmlHelper => new XmlHelper<Configuration>(ServiceProvider.GetRequiredService<ICustomLogger>(), new ConfigurationXmlFilePath(), ServiceProvider.GetRequiredService<IXmlUtils>()))
+                            .AddSingleton<IXmlHelper<Translations>>(xmlHelper => new XmlHelper<Translations>(ServiceProvider.GetRequiredService<ICustomLogger>(), new LocalizationXmlFilePath(ServiceProvider.GetRequiredService<IConfigurationDAO>()), ServiceProvider.GetRequiredService<IXmlUtils>()))
+                            .AddSingleton<IXmlUtils, XmlUtils>()
                             .AddSingleton<Main>();
                 });
         }
