@@ -74,6 +74,26 @@
 	</Translation>
 	<Translation>
 		<Id>ImportantInformation</Id>
-		<Value>Important information</Value>
+		<Value>Important information.</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportFileDialog</Id>
+		<Value>Choose document you want to import.</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportFileDialog</Id>
+		<Value>Choose directory where you want to save the list of apps.</Value>
+	</Translation>
+	<Translation>
+		<Id>NotValidFileImported</Id>
+		<Value>Imported file is not valid.</Value>
+	</Translation>
+	<Translation>
+		<Id>InvalidImportedFileName</Id>
+		<Value>The imported filename is not valid. The name must be {0}.</Value>
+	</Translation>
+	<Translation>
+		<Id>FileImportedSuccessfully</Id>
+		<Value>The file has been imported successfully.</Value>
 	</Translation>
 </Translations>

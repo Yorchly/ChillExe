@@ -10,5 +10,10 @@ namespace ChillExe.DAO
         public List<App> Apps { get; set; }
 
         public bool Save();
+
+        /// <summary>
+        /// Used in order to refresh values in list of apps in case service is updated.
+        /// </summary>
+        public void Refresh();
     }
 }

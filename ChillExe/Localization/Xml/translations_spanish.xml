@@ -74,6 +74,26 @@
 	</Translation>
 	<Translation>
 		<Id>ImportantInformation</Id>
-		<Value>Información importante</Value>
+		<Value>Información importante.</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportFileDialog</Id>
+		<Value>Selecciona el documento que quieres importar.</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportFileDialog</Id>
+		<Value>Selecciona el directorio donde quieres guardar la lista de apps.</Value>
+	</Translation>
+	<Translation>
+		<Id>NotValidFileImported</Id>
+		<Value>El fichero importado no es válido.</Value>
+	</Translation>
+	<Translation>
+		<Id>InvalidImportedFileName</Id>
+		<Value>El nombre del fichero importado no es válido. El nombre debe ser {0}.</Value>
+	</Translation>
+	<Translation>
+		<Id>FileImportedSuccessfully</Id>
+		<Value>El fichero ha sido importado correctamente.</Value>
 	</Translation>
 </Translations>

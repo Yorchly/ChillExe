@@ -17,5 +17,8 @@ namespace ChillExe.DAO
         }
 
         public bool Save() => appService.Save(new Apps() { AppList = Apps });
+
+        public void Refresh() =>
+            Apps = appService.Get()?.AppList;
     }
 }

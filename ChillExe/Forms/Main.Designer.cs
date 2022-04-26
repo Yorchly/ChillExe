@@ -43,6 +43,8 @@ namespace ChillExe.Forms
             this.importButton = new System.Windows.Forms.Button();
             this.exportButton = new System.Windows.Forms.Button();
             this.cleanListButton = new System.Windows.Forms.Button();
+            this.importFileDialog = new System.Windows.Forms.OpenFileDialog();
+            this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.appsGridView)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -161,6 +163,18 @@ namespace ChillExe.Forms
             this.cleanListButton.UseVisualStyleBackColor = true;
             this.cleanListButton.Click += new System.EventHandler(this.CleanListButton_Click);
             // 
+            // importFileDialog
+            // 
+            this.importFileDialog.DefaultExt = "xml";
+            this.importFileDialog.InitialDirectory = "c:\\\\";
+            this.importFileDialog.Title = "Choose document you want to import";
+            // 
+            // exportFileDialog
+            // 
+            this.exportFileDialog.DefaultExt = "xml";
+            this.exportFileDialog.InitialDirectory = "c:\\\\";
+            this.exportFileDialog.Title = "Choose directory where you want to save the list of apps";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
@@ -197,6 +211,8 @@ namespace ChillExe.Forms
         private System.Windows.Forms.Button cleanListButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn UrlColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdatedColumn;
+        private System.Windows.Forms.OpenFileDialog importFileDialog;
+        private System.Windows.Forms.SaveFileDialog exportFileDialog;
     }
 }
 
