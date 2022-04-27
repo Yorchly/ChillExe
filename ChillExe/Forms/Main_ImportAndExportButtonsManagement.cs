@@ -100,7 +100,7 @@ namespace ChillExe.Forms
             File.Copy(appXmlHelper.XmlFilePath.FilenameFullPath, exportFileDialog.FileName, true);
             ShowIconMessageBoxForm(
                 stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
-                stringLocalizer.GetTranslation("FileImportedSuccessfully", "File imported successfully"),
+                stringLocalizer.GetTranslation("FileExportedSuccessfully", "The file has been exported successfully."),
                 MessageBox.MessageBoxIcon.Success
             );
         }
