@@ -96,4 +96,8 @@
 		<Id>FileImportedSuccessfully</Id>
 		<Value>The file has been imported successfully.</Value>
 	</Translation>
+	<Translation>
+		<Id>FileExportedSuccessfully</Id>
+		<Value>The file has been exported successfully.</Value>
+	</Translation>
 </Translations>

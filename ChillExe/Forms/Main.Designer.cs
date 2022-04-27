@@ -172,6 +172,8 @@ namespace ChillExe.Forms
             // exportFileDialog
             // 
             this.exportFileDialog.DefaultExt = "xml";
+            this.exportFileDialog.FileName = "apps.xml";
+            this.exportFileDialog.Filter = "xml|";
             this.exportFileDialog.InitialDirectory = "c:\\\\";
             this.exportFileDialog.Title = "Choose directory where you want to save the list of apps";
             // 

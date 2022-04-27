@@ -10,9 +10,10 @@ namespace ChillExe.Forms
         private bool openFileDialogInitialized = false;
         private bool saveFileDialogInitialized = false;
 
+        #region Import
         private void importButton_Click(object sender, System.EventArgs e)
         {
-            SetInitialConfigForOpenFileDialog();
+            SetTranslationsForImportFileDialog();
 
             if (importFileDialog.ShowDialog() != DialogResult.OK)
                 return;
@@ -22,7 +23,7 @@ namespace ChillExe.Forms
                 ShowIconMessageBoxForm(
                     stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                     string.Format(
-                        stringLocalizer.GetTranslation("InvalidImportedFileName", "Filename is not valid."),
+                        stringLocalizer.GetTranslation("InvalidImportedFileName", "Filename is not valid. Name must be {0}."),
                         Path.GetFileName(appXmlHelper.XmlFilePath.FilenameFullPath)
                     ),
                     MessageBox.MessageBoxIcon.Error
@@ -51,7 +52,7 @@ namespace ChillExe.Forms
             );
         }
 
-        private void SetInitialConfigForOpenFileDialog()
+        private void SetTranslationsForImportFileDialog()
         {
             if (openFileDialogInitialized)
                 return;
@@ -84,9 +85,39 @@ namespace ChillExe.Forms
             LoadAppsInGridView();
         }
 
+        #endregion
+
+        #region Export
+
         private void exportButton_Click(object sender, System.EventArgs e)
         {
+            SetTranslationsForExportFileDialog();
+            exportFileDialog.FileName = Path.GetFileName(appXmlHelper.XmlFilePath.FilenameFullPath);
 
+            if (exportFileDialog.ShowDialog() != DialogResult.OK)
+                return;
+            
+            File.Copy(appXmlHelper.XmlFilePath.FilenameFullPath, exportFileDialog.FileName, true);
+            ShowIconMessageBoxForm(
+                stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
+                stringLocalizer.GetTranslation("FileImportedSuccessfully", "File imported successfully"),
+                MessageBox.MessageBoxIcon.Success
+            );
         }
+
+        private void SetTranslationsForExportFileDialog()
+        {
+            if (saveFileDialogInitialized)
+                return;
+
+            exportFileDialog.Title =
+                stringLocalizer.GetTranslation(
+                    "ExportFileDialog", "Choose directory where you want to save the list of apps."
+                );
+
+            saveFileDialogInitialized = true;
+        }
+
+        #endregion
     }
 }
