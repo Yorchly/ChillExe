@@ -74,6 +74,7 @@ namespace ChillExe.Forms.MessageBox
             this.Controls.Add(this.notShowAgainCheckbox);
             this.Controls.Add(this.messageBoxText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.MaximizeBox = false;
             this.Name = "CheckboxMessageBoxForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Important information";

@@ -188,8 +188,9 @@ namespace ChillExe.Forms
             this.Controls.Add(this.downloadAndInstallButton);
             this.Controls.Add(this.toolStrip1);
             this.Controls.Add(this.appsGridView);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "Main";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "ChillExe";
