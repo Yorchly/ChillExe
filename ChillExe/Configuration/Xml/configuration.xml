@@ -2,4 +2,13 @@
 <Configuration>
 	<Language>0</Language>
 	<IsLanguageMessageBoxShown>true</IsLanguageMessageBoxShown>
+	<XmlFilePaths>
+		<XmlFilePath>
+			<Name>App</Name>
+			<Filename>apps.xml</Filename>
+			<IsXmlInAppContextBaseDirectory>true</IsXmlInAppContextBaseDirectory>
+			<XsdFilename>Services\Xml\Xsd\app.xsd</XsdFilename>
+			<IsXsdInAppContextBaseDirectory>true</IsXsdInAppContextBaseDirectory>
+		</XmlFilePath>
+	</XmlFilePaths>
 </Configuration>

@@ -20,7 +20,7 @@ namespace ChillExe.Forms
 
             if (!IsImportedFilenameCorrect(importFileDialog.FileName))
             {
-                ShowIconMessageBoxForm(
+                messageBoxHelper.ShowIconMessageBoxForm(
                     stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                     string.Format(
                         stringLocalizer.GetTranslation("InvalidImportedFileName", "Filename is not valid. Name must be {0}."),
@@ -34,7 +34,7 @@ namespace ChillExe.Forms
 
             if (!IsImportedFilenameContentValid(importFileDialog.FileName))
             {
-                ShowIconMessageBoxForm(
+                messageBoxHelper.ShowIconMessageBoxForm(
                     stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                     stringLocalizer.GetTranslation("NotValidFileImported", "File imported is not valid."),
                     MessageBox.MessageBoxIcon.Error
@@ -45,7 +45,7 @@ namespace ChillExe.Forms
             File.Copy(importFileDialog.FileName, appXmlHelper.XmlFilePath.FilenameFullPath, true);
             LoadAppsFromImportedFile();
 
-            ShowIconMessageBoxForm(
+           messageBoxHelper. ShowIconMessageBoxForm(
                 stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                 stringLocalizer.GetTranslation("FileImportedSuccessfully", "File imported successfully"),
                 MessageBox.MessageBoxIcon.Success
@@ -64,16 +64,6 @@ namespace ChillExe.Forms
 
         private bool IsImportedFilenameCorrect(string fileName) =>
             Path.GetFileName(fileName) == Path.GetFileName(appXmlHelper.XmlFilePath.FilenameFullPath);
-
-        private void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBox.MessageBoxIcon icon)
-        {
-            var iconMessageBox = new IconMessageBoxForm(
-                messageBoxTitle, messageBoxText, icon
-            );
-
-            iconMessageBox.ShowDialog();
-            iconMessageBox.Dispose();
-        }
 
         private bool IsImportedFilenameContentValid(string fileName) =>
             xmlUtils.IsXmlValid(fileName, appXmlHelper.XmlFilePath.XsdFilenameFullPath);
@@ -98,7 +88,7 @@ namespace ChillExe.Forms
                 return;
             
             File.Copy(appXmlHelper.XmlFilePath.FilenameFullPath, exportFileDialog.FileName, true);
-            ShowIconMessageBoxForm(
+            messageBoxHelper.ShowIconMessageBoxForm(
                 stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                 stringLocalizer.GetTranslation("FileExportedSuccessfully", "The file has been exported successfully."),
                 MessageBox.MessageBoxIcon.Success

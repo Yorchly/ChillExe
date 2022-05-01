@@ -19,6 +19,7 @@ namespace ChillExe.Forms
         private readonly IConfigurationDAO configurationDAO;
         private readonly IXmlHelper<Apps> appXmlHelper;
         private readonly IXmlUtils xmlUtils;
+        private readonly IMessageBoxHelper messageBoxHelper;
 
         public Main(
             ICustomLogger logger, 
@@ -26,7 +27,8 @@ namespace ChillExe.Forms
             IConfigurationDAO configurationDAO,
             IStringLocalizer stringLocalizer,
             IXmlHelper<Apps> appXmlHelper,
-            IXmlUtils xmlUtils)
+            IXmlUtils xmlUtils,
+            IMessageBoxHelper messageBoxHelper)
         {
             customLogger = logger;
             this.appDAO = appDAO;
@@ -34,6 +36,7 @@ namespace ChillExe.Forms
             this.configurationDAO = configurationDAO;
             this.appXmlHelper = appXmlHelper;
             this.xmlUtils = xmlUtils;
+            this.messageBoxHelper = messageBoxHelper;
 
             InitializeComponent();
             GetTranslations();
