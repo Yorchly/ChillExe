@@ -9,10 +9,10 @@ namespace ChillExe.Models.Xml
 {
     public class AppXmlFile : IXmlFile
     {
-        public string FilenameFullPath { get; set; } =
+        public string FilenameFullPath { get; } =
             Path.Join(AppContext.BaseDirectory, "apps.xml");
 
-        public string XsdFilenameFullPath { get; set; } =
+        public string XsdFilenameFullPath { get; } =
             Path.Join(AppContext.BaseDirectory, "Services\\Xml\\Xsd\\app.xsd");
     }
 }

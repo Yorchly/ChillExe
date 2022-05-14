@@ -14,19 +14,11 @@ namespace ChillExe.Helpers
         public IXmlFile XmlFilePath 
         { 
             get => xmlFilePath;
-            set
-            {
-                xmlFilePath = value;
-                filenameCopyFullPath = Path.Combine(
-                    Path.GetDirectoryName(xmlFilePath.FilenameFullPath),
-                    Path.GetFileNameWithoutExtension(xmlFilePath.FilenameFullPath) + "-copy.xml"
-                );
-            }
         }
 
-        private ICustomLogger logger;
-        private IXmlFile xmlFilePath;
-        private IXmlUtils xmlUtils;
+        private readonly ICustomLogger logger;
+        private readonly IXmlFile xmlFilePath;
+        private readonly IXmlUtils xmlUtils;
         private string filenameCopyFullPath;
 
         public XmlHelper(ICustomLogger logger, IXmlFile xmlFilePath, IXmlUtils xmlUtils)
@@ -37,7 +29,8 @@ namespace ChillExe.Helpers
             CheckXmlFilename(xmlFilePath.FilenameFullPath);
             CheckXsdFilename(xmlFilePath.XsdFilenameFullPath);
 
-            XmlFilePath = xmlFilePath;
+            this.xmlFilePath = xmlFilePath;
+            SetCopyFilename();
         }
 
         private void CheckXmlFilename(string filename)
@@ -68,6 +61,14 @@ namespace ChillExe.Helpers
                 logger.WriteLine(errorWithXsd, LogLevel.ERROR);
                 throw new FileNotFoundException(errorWithXsd);
             }
+        }
+
+        private void SetCopyFilename()
+        {
+            filenameCopyFullPath = Path.Combine(
+                Path.GetDirectoryName(this.xmlFilePath.FilenameFullPath),
+                Path.GetFileNameWithoutExtension(xmlFilePath.FilenameFullPath) + "-copy.xml"
+            );
         }
 
         public T Get()

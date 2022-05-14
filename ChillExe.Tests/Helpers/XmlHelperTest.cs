@@ -13,13 +13,36 @@ using System.Threading.Tasks;
 
 namespace ChillExe.Tests.Helpers
 {
-    public class TestXmlFilePath : IXmlFile
+    public class TestXmlFile : IXmlFile
     {
-        public string FilenameFullPath { get; set; } =
+        public string FilenameFullPath { get; } =
             Path.Combine(AppContext.BaseDirectory, "test.xml");
 
-        public string XsdFilenameFullPath { get; set; } =
+        public string XsdFilenameFullPath { get; } =
             Path.Combine(AppContext.BaseDirectory, "test.xsd");
+    }
+
+    public class TestXmlFileWrongFilenames : IXmlFile
+    {
+        public string FilenameFullPath { get; } =
+            Path.Combine(AppContext.BaseDirectory, "wrong.xml");
+
+        public string XsdFilenameFullPath { get; } =
+            Path.Combine(AppContext.BaseDirectory, "wrong.xsd");
+    }
+
+    public class TestXmlFileNullFilenames : IXmlFile
+    {
+        public string FilenameFullPath { get; } = null;
+
+        public string XsdFilenameFullPath { get; } = null;
+    }
+
+    public class TestXmlFileEmptyFilenames : IXmlFile
+    {
+        public string FilenameFullPath { get; } = "";
+
+        public string XsdFilenameFullPath { get; } = "";
     }
 
     public class Test
@@ -34,7 +57,10 @@ namespace ChillExe.Tests.Helpers
             new Mock<ICustomLogger>();
         private readonly Mock<IXmlUtils> xmlUtilsMock =
             new Mock<IXmlUtils>();
-        private IXmlFile testXmlFilePath;
+        private TestXmlFile testXmlFile;
+        private TestXmlFileNullFilenames testXmlFileNull;
+        private TestXmlFileWrongFilenames testXmlFileWrong;
+        private TestXmlFileEmptyFilenames testXmlFileEmpty;
         private XmlHelper<Test> xmlHelper;
 
         public XmlHelperTest()
@@ -47,67 +73,43 @@ namespace ChillExe.Tests.Helpers
         [SetUp]
         public void SetUp()
         {
-            testXmlFilePath = new TestXmlFilePath();
+            testXmlFile = new TestXmlFile();
+            testXmlFileNull = new TestXmlFileNullFilenames();
+            testXmlFileWrong = new TestXmlFileWrongFilenames();
+            testXmlFileEmpty = new TestXmlFileEmptyFilenames();
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (File.Exists(testXmlFilePath.FilenameFullPath))
-                File.Delete(testXmlFilePath.FilenameFullPath);
+            if (File.Exists(testXmlFile.FilenameFullPath))
+                File.Delete(testXmlFile.FilenameFullPath);
 
-            if (File.Exists(testXmlFilePath.XsdFilenameFullPath))
-                File.Delete(testXmlFilePath.XsdFilenameFullPath);
+            if (File.Exists(testXmlFile.XsdFilenameFullPath))
+                File.Delete(testXmlFile.XsdFilenameFullPath);
         }   
 
         [Test]
         public void XsdFilenameDoesntExists_ThrowsFileNotFoundException()
         {
-            testXmlFilePath.XsdFilenameFullPath =
-                Path.Combine(AppContext.BaseDirectory, "wrong.xsd");
-
             Assert.Throws<FileNotFoundException>(
-                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object)
+                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFileWrong, xmlUtilsMock.Object)
             );
         }
 
         [Test]
         public void XsdFilenameIsNull_ThrowsArgumentException()
         {
-            testXmlFilePath.XsdFilenameFullPath = null;
-
             Assert.Throws<ArgumentException>(
-                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object)
+                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFileNull, xmlUtilsMock.Object)
             );
         }
 
         [Test]
         public void XsdFilenameIsEmpty_ThrowsArgumentException()
         {
-            testXmlFilePath.XsdFilenameFullPath = "";
-
             Assert.Throws<ArgumentException>(
-                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object)
-            );
-        }
-
-        [Test]
-        public void XmlFilenameIsEmpty_ThrowsArgumentException()
-        {
-            testXmlFilePath.FilenameFullPath = "";
-
-            Assert.Throws<ArgumentException>(
-                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object)
-            );
-        }
-
-        [Test]
-        public void XmlFilenameIsNull_ThrowsArgumentException()
-        {
-            testXmlFilePath.FilenameFullPath = null;
-
-            Assert.Throws<ArgumentException>(
-                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object)
+                () => xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFileEmpty, xmlUtilsMock.Object)
             );
         }
 
@@ -118,7 +120,7 @@ namespace ChillExe.Tests.Helpers
             xmlUtilsMock.Setup(
                 xmlUtils => xmlUtils.IsXmlValid(It.IsAny<string>(), It.IsAny<string>())
             ).Returns(false);
-            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object);
+            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFile, xmlUtilsMock.Object);
 
             Test test = xmlHelper.Get();
 
@@ -138,7 +140,7 @@ namespace ChillExe.Tests.Helpers
                 @"</xs:element>" +
                 @"</xs:schema>";
 
-            using var writer = new StreamWriter(testXmlFilePath.XsdFilenameFullPath);
+            using var writer = new StreamWriter(testXmlFile.XsdFilenameFullPath);
 
             writer.WriteLine(xsdContent);
         }
@@ -151,7 +153,7 @@ namespace ChillExe.Tests.Helpers
             xmlUtilsMock.Setup(
                 xmlUtils => xmlUtils.IsXmlValid(It.IsAny<string>(), It.IsAny<string>())
             ).Returns(true);
-            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object);
+            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFile, xmlUtilsMock.Object);
 
             Test test = xmlHelper.Get();
 
@@ -168,7 +170,7 @@ namespace ChillExe.Tests.Helpers
                 "<TestString>Test</TestString>" +
                 "</Test>";
 
-            using var writer = new StreamWriter(testXmlFilePath.FilenameFullPath);
+            using var writer = new StreamWriter(testXmlFile.FilenameFullPath);
 
             writer.WriteLine(xmlContent);
         }
@@ -180,7 +182,7 @@ namespace ChillExe.Tests.Helpers
             xmlUtilsMock.Setup(
                 xmlUtils => xmlUtils.IsXmlValid(It.IsAny<string>(), It.IsAny<string>())
             ).Returns(true);
-            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object);
+            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFile, xmlUtilsMock.Object);
             Test test = new Test() { TestInt = 1, TestString = "Test" };
 
             bool response = xmlHelper.Write(test);
@@ -195,7 +197,7 @@ namespace ChillExe.Tests.Helpers
             xmlUtilsMock.Setup(
                 xmlUtils => xmlUtils.IsXmlValid(It.IsAny<string>(), It.IsAny<string>())
             ).Returns(false);
-            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFilePath, xmlUtilsMock.Object);
+            xmlHelper = new XmlHelper<Test>(loggerMock.Object, testXmlFile, xmlUtilsMock.Object);
             Test test = null;
 
             bool response = xmlHelper.Write(test);

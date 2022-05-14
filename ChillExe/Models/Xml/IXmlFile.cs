@@ -8,7 +8,7 @@ namespace ChillExe.Models.Xml
 {
     public interface IXmlFile
     {
-        public string FilenameFullPath { get; set; }
-        public string XsdFilenameFullPath { get; set; }
+        public string FilenameFullPath { get; }
+        public string XsdFilenameFullPath { get; }
     }
 }

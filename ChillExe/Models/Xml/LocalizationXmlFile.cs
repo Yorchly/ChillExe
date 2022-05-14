@@ -6,9 +6,9 @@ namespace ChillExe.Models.Xml
 {
     public class LocalizationXmlFile : IXmlFile
     {
-        public string FilenameFullPath { get; set; }
+        public string FilenameFullPath { get; private set; }
 
-        public string XsdFilenameFullPath { get; set; } =
+        public string XsdFilenameFullPath { get; } =
             Path.Join(AppContext.BaseDirectory, "Localization\\Xml\\translations.xsd");
 
         private IConfigurationDAO configurationDAO;
