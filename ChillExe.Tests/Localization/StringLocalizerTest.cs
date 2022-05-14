@@ -63,7 +63,7 @@ namespace ChillExe.Tests.Localization
         {
             string translation;
 
-            Assert.Throws<System.NullReferenceException>(
+            Assert.Throws<System.ArgumentNullException>(
                 () => translation = stringLocalizer.GetTranslation("testTranslationId3", "Default message", null)
             );
         }
@@ -77,6 +77,17 @@ namespace ChillExe.Tests.Localization
                 stringLocalizer.GetTranslation("wrongId", defaultTranslation, "argument 1", "argument 2");
 
             Assert.AreEqual(string.Format(defaultTranslation, "argument 1", "argument 2"), translation);
+        }
+
+        [Test]
+        public void GetTranslationWithArgs_WrongIdButCorrectArgsAndDefaultTranslationDoesNotAdmitArgs_ReturnsDefaultValueWithoutArgs()
+        {
+            string defaultTranslation = "This is a default translation";
+
+            string translation =
+                stringLocalizer.GetTranslation("wrongId", defaultTranslation, "argument 1", "argument 2");
+
+            Assert.AreEqual(defaultTranslation, translation);
         }
     }
 }
