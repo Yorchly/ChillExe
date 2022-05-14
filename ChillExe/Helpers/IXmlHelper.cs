@@ -9,7 +9,7 @@ namespace ChillExe.Helpers
 {
     public interface IXmlHelper<T>
     {
-        public IXmlFilePath XmlFilePath { get; set; }
+        public IXmlFile XmlFilePath { get; set; }
 
         public T Get();
 

@@ -28,5 +28,8 @@ namespace ChillExe.Localization
 
         public string GetTranslation(string id, string defaultValue = "") =>
             translations.ContainsKey(id) ? translations[id] : defaultValue;
+
+        public string GetTranslation(string id, string defaultValue = "", params string[] args) =>
+            translations.ContainsKey(id) ? string.Format(translations[id], args) : string.Format(defaultValue, args);
     }
 }

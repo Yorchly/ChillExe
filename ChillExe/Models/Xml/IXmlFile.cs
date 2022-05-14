@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ChillExe.Models.Xml
 {
-    public interface IXmlFilePath
+    public interface IXmlFile
     {
         public string FilenameFullPath { get; set; }
         public string XsdFilenameFullPath { get; set; }

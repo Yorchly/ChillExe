@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace ChillExe.Tests.Helpers
 {
-    public class TestXmlFilePath : IXmlFilePath
+    public class TestXmlFilePath : IXmlFile
     {
         public string FilenameFullPath { get; set; } =
             Path.Combine(AppContext.BaseDirectory, "test.xml");
@@ -34,7 +34,7 @@ namespace ChillExe.Tests.Helpers
             new Mock<ICustomLogger>();
         private readonly Mock<IXmlUtils> xmlUtilsMock =
             new Mock<IXmlUtils>();
-        private IXmlFilePath testXmlFilePath;
+        private IXmlFile testXmlFilePath;
         private XmlHelper<Test> xmlHelper;
 
         public XmlHelperTest()

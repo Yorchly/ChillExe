@@ -7,5 +7,7 @@ namespace ChillExe.Localization
     public interface IStringLocalizer
     {
         public string GetTranslation(string id, string defaultValue = "");
+
+        public string GetTranslation(string id, string defaultValue = "", params string[] args);
     }
 }

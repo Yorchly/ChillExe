@@ -4,7 +4,7 @@ using System.IO;
 
 namespace ChillExe.Models.Xml
 {
-    public class LocalizationXmlFilePath : IXmlFilePath
+    public class LocalizationXmlFile : IXmlFile
     {
         public string FilenameFullPath { get; set; }
 
@@ -13,7 +13,7 @@ namespace ChillExe.Models.Xml
 
         private IConfigurationDAO configurationDAO;
 
-        public LocalizationXmlFilePath(IConfigurationDAO configurationDAO)
+        public LocalizationXmlFile(IConfigurationDAO configurationDAO)
         {
             this.configurationDAO = configurationDAO;
             FilenameFullPath = GetTranslationsFilenameFullPathByLanguage();

@@ -3,7 +3,7 @@ using System.IO;
 
 namespace ChillExe.Models.Xml
 {
-    public class ConfigurationXmlFilePath : IXmlFilePath
+    public class ConfigurationXmlFile : IXmlFile
     {
         public string FilenameFullPath { get; set; } =
             Path.Join(AppContext.BaseDirectory, "Configuration\\Xml\\configuration.xml");

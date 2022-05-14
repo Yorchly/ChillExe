@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ChillExe.Models.Xml
 {
-    public class AppXmlFilePath : IXmlFilePath
+    public class AppXmlFile : IXmlFile
     {
         public string FilenameFullPath { get; set; } =
             Path.Join(AppContext.BaseDirectory, "apps.xml");

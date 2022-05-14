@@ -11,7 +11,7 @@ namespace ChillExe.Helpers
 {
     public class XmlHelper<T> : IXmlHelper<T>
     {
-        public IXmlFilePath XmlFilePath 
+        public IXmlFile XmlFilePath 
         { 
             get => xmlFilePath;
             set
@@ -25,11 +25,11 @@ namespace ChillExe.Helpers
         }
 
         private ICustomLogger logger;
-        private IXmlFilePath xmlFilePath;
+        private IXmlFile xmlFilePath;
         private IXmlUtils xmlUtils;
         private string filenameCopyFullPath;
 
-        public XmlHelper(ICustomLogger logger, IXmlFilePath xmlFilePath, IXmlUtils xmlUtils)
+        public XmlHelper(ICustomLogger logger, IXmlFile xmlFilePath, IXmlUtils xmlUtils)
         {
             this.logger = logger;
             this.xmlUtils = xmlUtils;

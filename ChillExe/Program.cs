@@ -50,9 +50,9 @@ namespace ChillExe
                             .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
                             .AddSingleton<ILocalizationDAO, LocalizationDAO>()
                             .AddSingleton<IStringLocalizer, StringLocalizer>()
-                            .AddSingleton<IXmlHelper<Apps>>(xmlHelper => new XmlHelper<Apps>(ServiceProvider.GetRequiredService<ICustomLogger>(), new AppXmlFilePath(), ServiceProvider.GetRequiredService<IXmlUtils>()))
-                            .AddSingleton<IXmlHelper<Configuration>>(xmlHelper => new XmlHelper<Configuration>(ServiceProvider.GetRequiredService<ICustomLogger>(), new ConfigurationXmlFilePath(), ServiceProvider.GetRequiredService<IXmlUtils>()))
-                            .AddSingleton<IXmlHelper<Translations>>(xmlHelper => new XmlHelper<Translations>(ServiceProvider.GetRequiredService<ICustomLogger>(), new LocalizationXmlFilePath(ServiceProvider.GetRequiredService<IConfigurationDAO>()), ServiceProvider.GetRequiredService<IXmlUtils>()))
+                            .AddSingleton<IXmlHelper<Apps>>(xmlHelper => new XmlHelper<Apps>(ServiceProvider.GetRequiredService<ICustomLogger>(), new AppXmlFile(), ServiceProvider.GetRequiredService<IXmlUtils>()))
+                            .AddSingleton<IXmlHelper<Configuration>>(xmlHelper => new XmlHelper<Configuration>(ServiceProvider.GetRequiredService<ICustomLogger>(), new ConfigurationXmlFile(), ServiceProvider.GetRequiredService<IXmlUtils>()))
+                            .AddSingleton<IXmlHelper<Translations>>(xmlHelper => new XmlHelper<Translations>(ServiceProvider.GetRequiredService<ICustomLogger>(), new LocalizationXmlFile(ServiceProvider.GetRequiredService<IConfigurationDAO>()), ServiceProvider.GetRequiredService<IXmlUtils>()))
                             .AddSingleton<IXmlUtils, XmlUtils>()
                             .AddSingleton<IMessageBoxHelper, MessageBoxHelper>()
                             .AddSingleton<Main>();
