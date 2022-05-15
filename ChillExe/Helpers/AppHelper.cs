@@ -14,7 +14,7 @@ namespace ChillExe.Helpers
         }
 
         public List<App> GetApps() =>
-            appService.Get().AppList;
+            appService.Get()?.AppList;
 
         public bool SaveApps(List<App> apps) =>
             appService.Save(new Apps { AppList = apps });
