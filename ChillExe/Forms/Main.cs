@@ -17,6 +17,7 @@ namespace ChillExe.Forms
         private readonly IMessageBoxHelper messageBoxHelper;
         private readonly IAppHelper appHelper;
         private readonly IConfigurationHelper configurationHelper;
+        private readonly IXmlFileHelper xmlFileHelper;
         private readonly Configuration configuration;
         private List<App> apps;
 
@@ -27,7 +28,8 @@ namespace ChillExe.Forms
             IXmlUtils xmlUtils,
             IMessageBoxHelper messageBoxHelper,
             IAppHelper appHelper,
-            IConfigurationHelper configHelper)
+            IConfigurationHelper configHelper,
+            IXmlFileHelper xmlFileHelper)
         {
             customLogger = logger;
             this.stringLocalizer = stringLocalizer;
@@ -36,6 +38,7 @@ namespace ChillExe.Forms
             this.messageBoxHelper = messageBoxHelper;
             this.appHelper = appHelper;
             this.configurationHelper = configHelper;
+            this.xmlFileHelper = xmlFileHelper;
             apps = appHelper.GetApps() ?? new List<App>();
             configuration = configHelper.GetConfiguration();
 

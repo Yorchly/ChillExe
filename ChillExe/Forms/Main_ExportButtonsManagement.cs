@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using ChillExe.Models.Xml;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ChillExe.Forms
@@ -10,12 +11,14 @@ namespace ChillExe.Forms
         private void exportButton_Click(object sender, System.EventArgs e)
         {
             SetTranslationsForExportFileDialog();
-            exportFileDialog.FileName = Path.GetFileName(appXmlHelper.XmlFilePath.FilenameFullPath);
+
+            string appFilename = xmlFileHelper.GetXmlFilePath(XmlFileType.App);
+            exportFileDialog.FileName = Path.GetFileName(appFilename);
 
             if (exportFileDialog.ShowDialog() != DialogResult.OK)
                 return;
             
-            File.Copy(appXmlHelper.XmlFilePath.FilenameFullPath, exportFileDialog.FileName, true);
+            File.Copy(appFilename, exportFileDialog.FileName, true);
             messageBoxHelper.ShowIconMessageBoxForm(
                 stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                 stringLocalizer.GetTranslation("FileExportedSuccessfully", "The file has been exported successfully."),

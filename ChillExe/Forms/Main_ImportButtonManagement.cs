@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using ChillExe.Models.Xml;
+using System.IO;
 using System.Windows.Forms;
 
 namespace ChillExe.Forms
@@ -11,6 +12,8 @@ namespace ChillExe.Forms
         {
             SetTranslationsForImportFileDialog();
 
+            string appFilename = xmlFileHelper.GetXmlFilePath(XmlFileType.App);
+
             if (importFileDialog.ShowDialog() != DialogResult.OK)
                 return;
 
@@ -21,7 +24,7 @@ namespace ChillExe.Forms
                     stringLocalizer.GetTranslation(
                         "InvalidImportedFileName", 
                         "Filename is not valid. Name must be {0}.", 
-                        Path.GetFileName(appXmlHelper.XmlFilePath.FilenameFullPath)
+                        Path.GetFileName(appFilename)
                     ),
                     MessageBox.MessageBoxIcon.Error
                 );
@@ -39,7 +42,7 @@ namespace ChillExe.Forms
                 return;
             }
 
-            File.Copy(importFileDialog.FileName, appXmlHelper.XmlFilePath.FilenameFullPath, true);
+            File.Copy(importFileDialog.FileName, appFilename, true);
             LoadAppsFromImportedFile();
 
             messageBoxHelper.ShowIconMessageBoxForm(
@@ -60,10 +63,10 @@ namespace ChillExe.Forms
         }
 
         private bool IsImportedFilenameCorrect(string fileName) =>
-            Path.GetFileName(fileName) == Path.GetFileName(appXmlHelper.XmlFilePath.FilenameFullPath);
+            Path.GetFileName(fileName) == Path.GetFileName(xmlFileHelper.GetXmlFilePath(XmlFileType.App));
 
         private bool IsImportedFilenameContentValid(string fileName) =>
-            xmlUtils.IsXmlValid(fileName, appXmlHelper.XmlFilePath.XsdFilenameFullPath);
+            xmlUtils.IsXmlValid(fileName, xmlFileHelper.GetXsdFilePath(XmlFileType.App));
 
         private void LoadAppsFromImportedFile()
         {
