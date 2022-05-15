@@ -16,6 +16,6 @@ namespace ChillExe.Helpers
             this.localizationService = localizationService;
 
         public List<Translation> GetTranslations() =>
-            localizationService.Get().TranslationList;
+            localizationService.Get()?.TranslationList;
     }
 }
