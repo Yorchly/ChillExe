@@ -34,11 +34,11 @@ namespace ChillExe.Forms
 
         private void CleanApps()
         {
-            if (appDAO.Apps.Count == 0)
+            if (apps.Count == 0)
                 return;
 
             appsGridView.Rows.Clear();
-            appDAO.Apps.Clear();
+            apps.Clear();
         }
     }
 }

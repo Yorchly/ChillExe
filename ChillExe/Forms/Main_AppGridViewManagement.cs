@@ -17,10 +17,7 @@ namespace ChillExe.Forms
 
         public void LoadAppsInGridView()
         {
-            if (appDAO.Apps == null)
-                appDAO.Apps = new List<App>();
-
-            foreach (App app in appDAO.Apps)
+            foreach (App app in apps)
             {
                 int rowIndex = appsGridView.Rows.Add(app.Url, app.LastUpdate);
                 appsGridView.Rows[rowIndex].Tag = app;
@@ -42,7 +39,7 @@ namespace ChillExe.Forms
                 App app = GetAppFromRow(currentRow);
 
                 currentRow.Tag = app;
-                appDAO.Apps.Add(app);
+                apps.Add(app);
             }
             else
             {
@@ -90,7 +87,7 @@ namespace ChillExe.Forms
         }
 
         private void appsGridView_Leave(object sender, EventArgs e) =>
-            appDAO.Save();
+            appHelper.SaveApps(apps);
 
         private void appsGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -99,7 +96,7 @@ namespace ChillExe.Forms
 
             var app = (App)appsGridView.Rows[e.RowIndex].Tag;
 
-            appDAO.Apps.Remove(app);
+            apps.Remove(app);
         }
     }
 }

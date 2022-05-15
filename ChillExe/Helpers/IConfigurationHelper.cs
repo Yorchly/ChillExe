@@ -10,5 +10,7 @@ namespace ChillExe.Helpers
     public interface IConfigurationHelper
     {
         public Language GetCurrentLanguage();
+        public Configuration GetConfiguration();
+        public bool SaveConfiguration(Configuration configuration);
     }
 }

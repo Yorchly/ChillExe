@@ -1,7 +1,6 @@
-﻿using ChillExe.DAO;
+﻿using ChillExe.Helpers;
 using ChillExe.Localization;
 using ChillExe.Models;
-using ChillExe.Services;
 using Moq;
 using NUnit.Framework;
 using System.Collections.Generic;
@@ -10,8 +9,8 @@ namespace ChillExe.Tests.Localization
 {
     public class StringLocalizerTest
     {
-        private readonly Mock<ILocalizationDAO> localizationDAO =
-            new Mock<ILocalizationDAO>();
+        private readonly Mock<ILocalizationHelper> localizationHelper =
+            new Mock<ILocalizationHelper>();
         private List<Translation> translations;
         private IStringLocalizer stringLocalizer;
 
@@ -25,10 +24,10 @@ namespace ChillExe.Tests.Localization
                 new Translation { Id = "testTranslationId3", Value = "This is a test string with arguments {0} and {1}" }
             };
 
-            localizationDAO.Setup(
-                localization => localization.Get()
+            localizationHelper.Setup(
+                localization => localization.GetTranslations()
             ).Returns(translations);
-            stringLocalizer = new StringLocalizer(localizationDAO.Object);
+            stringLocalizer = new StringLocalizer(localizationHelper.Object);
         }
 
         [Test]

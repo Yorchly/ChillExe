@@ -22,7 +22,7 @@ namespace ChillExe.Forms
 
         private void englishDropdownMenuItem_Click(object sender, System.EventArgs e)
         {
-            if (configurationDAO.Configuration.Language == Language.English)
+            if (configuration.Language == Language.English)
                 return;
 
             ChangeLanguageInConfig(Language.English);
@@ -31,14 +31,14 @@ namespace ChillExe.Forms
 
         private void ChangeLanguageInConfig(Language language)
         {
-            configurationDAO.Configuration.Language = language;
+            configuration.Language = language;
 
-            configurationDAO.Save();
+            configurationHelper.SaveConfiguration(configuration);
         }
 
         private void ShowLanguageMessageBox()
         {
-            if (!configurationDAO.Configuration.IsLanguageMessageBoxShown)
+            if (!configuration.IsLanguageMessageBoxShown)
                 return;
 
             var checkboxMessageBoxForm = new CheckboxMessageBoxForm(
@@ -57,14 +57,14 @@ namespace ChillExe.Forms
         {
             if(dontShow)
             {
-                configurationDAO.Configuration.IsLanguageMessageBoxShown = false;
-                configurationDAO.Save();
+                configuration.IsLanguageMessageBoxShown = false;
+                configurationHelper.SaveConfiguration(configuration);
             }
         }
 
         private void spanishDropdownMenuItem_Click(object sender, System.EventArgs e)
         {
-            if (configurationDAO.Configuration.Language == Language.Spanish)
+            if (configuration.Language == Language.Spanish)
                 return;
 
             ChangeLanguageInConfig(Language.Spanish);

@@ -68,7 +68,7 @@ namespace ChillExe.Forms
         private void LoadAppsFromImportedFile()
         {
             CleanApps();
-            appDAO.Refresh();
+            apps = appHelper.GetApps();
             LoadAppsInGridView();
         }
     }

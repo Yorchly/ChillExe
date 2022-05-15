@@ -1,6 +1,5 @@
-﻿using ChillExe.DAO;
+﻿using ChillExe.Helpers;
 using ChillExe.Models;
-using ChillExe.Services;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -8,23 +7,15 @@ namespace ChillExe.Localization
 {
     public class StringLocalizer : IStringLocalizer
     {
-        private readonly ILocalizationDAO localizationDAO;
         private Dictionary<string, string> translations;
 
-        public StringLocalizer(ILocalizationDAO localizationDAO)
-        {
-            this.localizationDAO = localizationDAO;
-            TransformListOfTranslationsIntoDictionary();
-        }
+        public StringLocalizer(ILocalizationHelper localizationHelper) =>
+            TransformListOfTranslationsIntoDictionary(localizationHelper.GetTranslations());
 
-        private void TransformListOfTranslationsIntoDictionary()
-        {
-            List<Translation> translationsList = localizationDAO.Get();
-
-            translations = translationsList.ToDictionary(
+        private void TransformListOfTranslationsIntoDictionary(List<Translation> translationList) =>
+            translations = translationList.ToDictionary(
                 translation => translation.Id, translation => translation.Value
             );
-        }
 
         public string GetTranslation(string id, string defaultValue = "") =>
             translations.ContainsKey(id) ? translations[id] : defaultValue;

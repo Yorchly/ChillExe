@@ -11,14 +11,18 @@ namespace ChillExe.Helpers
     public class ConfigurationHelper : IConfigurationHelper
     {
         private readonly IService<Configuration> configService;
-        private readonly Configuration config;
 
         public ConfigurationHelper(IService<Configuration> configService)
         {
             this.configService = configService;
-            config = this.configService.Get();
         }
 
-        public Language GetCurrentLanguage() => config.Language;
+        public Language GetCurrentLanguage() => configService.Get().Language;
+
+        public Configuration GetConfiguration() =>
+            configService.Get();
+
+        public bool SaveConfiguration(Configuration config) =>
+            configService.Save(config);
     }
 }

@@ -1,5 +1,4 @@
-﻿using ChillExe.DAO;
-using ChillExe.Helpers;
+﻿using ChillExe.Helpers;
 using ChillExe.Models.Xml;
 using System;
 

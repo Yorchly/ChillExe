@@ -1,4 +1,3 @@
-using ChillExe.DAO;
 using ChillExe.Factory;
 using ChillExe.Forms;
 using ChillExe.Helpers;
@@ -45,9 +44,6 @@ namespace ChillExe
                             .AddSingleton<IService<Apps>, AppService>()
                             .AddSingleton<IService<Configuration>, ConfigurationService>()
                             .AddSingleton<IService<Translations>, LocalizationService>()
-                            .AddSingleton<IAppDAO, AppDAO>()
-                            .AddSingleton<IConfigurationDAO, ConfigurationDAO>()
-                            .AddSingleton<ILocalizationDAO, LocalizationDAO>()
                             .AddSingleton<IStringLocalizer, StringLocalizer>()
                             .AddSingleton(GetXmlHelper<Apps>)
                             .AddSingleton(GetXmlHelper<Translations>)
@@ -57,6 +53,8 @@ namespace ChillExe
                             .AddSingleton<IMessageBoxHelper, MessageBoxHelper>()
                             .AddSingleton<IConfigurationHelper, ConfigurationHelper>()
                             .AddSingleton<IXmlFileHelper, XmlFileHelper>()
+                            .AddSingleton<ILocalizationHelper, LocalizationHelper>()
+                            .AddSingleton<IAppHelper, AppHelper>()
                             .AddSingleton<Main>();
                 });
         }

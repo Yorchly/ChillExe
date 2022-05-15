@@ -1,11 +1,8 @@
-﻿using ChillExe.DAO;
-using ChillExe.Helpers;
+﻿using ChillExe.Helpers;
 using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
-using ChillExe.Services;
 using ChillExe.Utils;
-using System;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -15,28 +12,32 @@ namespace ChillExe.Forms
     {
         private readonly IStringLocalizer stringLocalizer;
         private readonly ICustomLogger customLogger;
-        private readonly IAppDAO appDAO;
-        private readonly IConfigurationDAO configurationDAO;
         private readonly IXmlHelper<Apps> appXmlHelper;
         private readonly IXmlUtils xmlUtils;
         private readonly IMessageBoxHelper messageBoxHelper;
+        private readonly IAppHelper appHelper;
+        private readonly IConfigurationHelper configurationHelper;
+        private readonly Configuration configuration;
+        private List<App> apps;
 
         public Main(
             ICustomLogger logger, 
-            IAppDAO appDAO,
-            IConfigurationDAO configurationDAO,
             IStringLocalizer stringLocalizer,
             IXmlHelper<Apps> appXmlHelper,
             IXmlUtils xmlUtils,
-            IMessageBoxHelper messageBoxHelper)
+            IMessageBoxHelper messageBoxHelper,
+            IAppHelper appHelper,
+            IConfigurationHelper configHelper)
         {
             customLogger = logger;
-            this.appDAO = appDAO;
             this.stringLocalizer = stringLocalizer;
-            this.configurationDAO = configurationDAO;
             this.appXmlHelper = appXmlHelper;
             this.xmlUtils = xmlUtils;
             this.messageBoxHelper = messageBoxHelper;
+            this.appHelper = appHelper;
+            this.configurationHelper = configHelper;
+            apps = appHelper.GetApps() ?? new List<App>();
+            configuration = configHelper.GetConfiguration();
 
             InitializeComponent();
             GetTranslations();
