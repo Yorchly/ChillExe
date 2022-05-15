@@ -11,22 +11,13 @@ namespace ChillExe.Models.Xml
         public string XsdFilenameFullPath { get; } =
             Path.Join(AppContext.BaseDirectory, "Localization\\Xml\\translations.xsd");
 
-        private IConfigurationDAO configurationDAO;
+        public LocalizationXmlFile(Language language) =>
+            FilenameFullPath = GetTranslationsFilenameFullPathByLanguage(language);
 
-        public LocalizationXmlFile(IConfigurationDAO configurationDAO)
-        {
-            this.configurationDAO = configurationDAO;
-            FilenameFullPath = GetTranslationsFilenameFullPathByLanguage();
-        }
-
-        private string GetTranslationsFilenameFullPathByLanguage()
-        {
-            Language language = configurationDAO.Configuration.Language;
-
-            return Path.Join(
+        private static string GetTranslationsFilenameFullPathByLanguage(Language language) =>
+            Path.Join(
                 AppContext.BaseDirectory,
                 $"Localization\\Xml\\translations_{language.ToString().ToLower()}.xml"
             );
-        }
     }
 }
