@@ -50,11 +50,11 @@ namespace ChillExe.Downloader
                         FileMode.CreateNew
                     );
                     await response.Content.CopyToAsync(fileStream);
-                }
-                else
-                    return false;
 
-                return true;
+                    return true;
+                }
+                
+                return false;
             }
             catch (Exception ex)
             {
