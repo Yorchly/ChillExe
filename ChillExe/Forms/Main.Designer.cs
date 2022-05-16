@@ -1,6 +1,4 @@
 ﻿
-using ChillExe.Controls;
-
 namespace ChillExe.Forms
 {
     partial class Main
