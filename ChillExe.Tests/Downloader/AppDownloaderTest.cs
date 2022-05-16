@@ -123,24 +123,35 @@ namespace ChillExe.Tests.Downloader
         }
 
         [Test]
-        public void Download_ThrowsAnException_ReturnsEmptyDownloadedAppsPath()
+        public void Download_OneOfTheAppThrowsAnException_ReturnsDownloadedAppsPathWithoutTheOneWhichTriggersAnException()
         {
-            var apps = new List<App>
-            {
+            List<App> apps = GetApps();
+            apps.Add(
                 new App
                 {
                     Filename = "wrongFile.txt",
                     LastUpdate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
                     Url = "https://wrong-url.com/wrongFile.txt"
                 }
-            };
+            );
+            var badHttpResponseMessage =
+                new HttpResponseMessage(HttpStatusCode.BadRequest);
+            var okHttpResponseMessage =
+                GetOkHttpResponseMessage();
             httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(It.IsAny<string>())
+                httpClientWrapper => httpClientWrapper.GetAsync(apps[0].Url)
+            ).ReturnsAsync(okHttpResponseMessage);
+            httpClientWrapperMock.Setup(
+                httpClientWrapper => httpClientWrapper.GetAsync(apps[1].Url)
+            ).ReturnsAsync(okHttpResponseMessage);
+            httpClientWrapperMock.Setup(
+                httpClientWrapper => httpClientWrapper.GetAsync(apps[2].Url)
             ).ThrowsAsync(new Exception());
 
             downloadedAppsPath = appDownloader.Download(apps);
 
-            Assert.AreEqual(downloadedAppsPath.Count, 0);
+            Assert.AreEqual(downloadedAppsPath.Count, 2);
+            CheckIfDownloadedAppsExists();
         }
     }
 }
