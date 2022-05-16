@@ -1,3 +1,4 @@
+using ChillExe.Downloader;
 using ChillExe.Factory;
 using ChillExe.Forms;
 using ChillExe.Helpers;
@@ -8,6 +9,7 @@ using ChillExe.Models.Xml;
 using ChillExe.Services;
 using ChillExe.Services.Xml;
 using ChillExe.Utils;
+using ChillExe.Wrappers;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using System;
@@ -55,6 +57,8 @@ namespace ChillExe
                             .AddSingleton<IXmlFileHelper, XmlFileHelper>()
                             .AddSingleton<ILocalizationHelper, LocalizationHelper>()
                             .AddSingleton<IAppHelper, AppHelper>()
+                            .AddSingleton<IAppDownloader, AppDownloader>()
+                            .AddSingleton<IHttpClientWrapper, HttpClientWrapper>()
                             .AddSingleton<Main>();
                 });
         }
