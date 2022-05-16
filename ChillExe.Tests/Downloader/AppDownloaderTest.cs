@@ -134,8 +134,6 @@ namespace ChillExe.Tests.Downloader
                     Url = "https://wrong-url.com/wrongFile.txt"
                 }
             );
-            var badHttpResponseMessage =
-                new HttpResponseMessage(HttpStatusCode.BadRequest);
             var okHttpResponseMessage =
                 GetOkHttpResponseMessage();
             httpClientWrapperMock.Setup(
