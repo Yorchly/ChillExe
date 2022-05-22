@@ -21,20 +21,17 @@ namespace ChillExe.Downloader
             this.httpClientWrapper = httpClientWrapper;
         }
 
-        public List<string> Download(List<App> apps)
+        public void Download(List<App> apps)
         {
-            var downloadedAppsPath = new List<string>();
-
             if (apps == null)
-                return downloadedAppsPath;
+                return;
 
             foreach (App app in apps)
                 if (Download(app).Result)
-                    downloadedAppsPath.Add(
-                        Path.Combine(destinationPath, app.Filename)
-                    );
-
-            return downloadedAppsPath;
+                {
+                    app.DownloadedPath = Path.Combine(destinationPath, app.Filename);
+                    app.IsDownloaded = true;
+                }
         }
 
         private async Task<bool> Download(App app)

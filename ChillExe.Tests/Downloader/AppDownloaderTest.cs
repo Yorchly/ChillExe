@@ -7,6 +7,7 @@ using NUnit.Framework;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Net.Http;
 
@@ -19,53 +20,53 @@ namespace ChillExe.Tests.Downloader
         private readonly Mock<IHttpClientWrapper> httpClientWrapperMock =
             new Mock<IHttpClientWrapper>();
         AppDownloader appDownloader;
-        List<string> downloadedAppsPath;
+        List<App> apps;
 
         [SetUp]
         public void SetUp()
         {
             appDownloader = new AppDownloader(loggerMock.Object, httpClientWrapperMock.Object);
-            downloadedAppsPath = new List<string>();
         }
 
         [TearDown]
         public void TearDown()
         {
-            if (downloadedAppsPath != null && downloadedAppsPath.Count > 0)
-                foreach (string path in downloadedAppsPath)
+            if (apps != null)
+                foreach (string path in apps.Select(app => app.DownloadedPath).Where(downloadedPath => !string.IsNullOrEmpty(downloadedPath)))
                     File.Delete(path);
         }
 
         [Test]
         public void Download_CorrectListOfApps_ReturnsListOfDownloadedAppsPath()
         {
-            List<App> apps = GetApps();
+            apps = GetApps(2);
             HttpResponseMessage httpResponseMessage =
                 GetOkHttpResponseMessage();
             httpClientWrapperMock.Setup(
                 httpClientWrapper => httpClientWrapper.GetAsync(It.IsAny<string>())
             ).ReturnsAsync(httpResponseMessage);
 
-            downloadedAppsPath = appDownloader.Download(apps);
+            appDownloader.Download(apps);
 
-            Assert.Greater(downloadedAppsPath.Count, 0);
-            CheckIfDownloadedAppsExists();
+            foreach(App app in apps)
+                CheckIfAppIsDownloadedCorrectly(app);
         }
 
-        private static List<App> GetApps() =>
-            new List<App>
-            {
-                new App { 
-                    Filename="test1.txt", 
-                    LastUpdate=DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
-                    Url="http://test1-url.com/test1.txt"
-                },
-                new App {
-                    Filename="test2.txt",
-                    LastUpdate=DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
-                    Url="http://test2-url.com/test2.txt"
-                }
-            };
+        private List<App> GetApps(int count = 1)
+        {
+            apps = new List<App>();
+            for (int i = 0; i < count; i++)
+                apps.Add(
+                    new App
+                    {
+                        Filename = $"test{i}.txt",
+                        LastUpdate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
+                        Url = $"http://test{i}-url.com/test1.txt"
+                    }
+                );
+
+            return apps;
+        }
 
         private static HttpResponseMessage GetOkHttpResponseMessage()
         {
@@ -76,80 +77,56 @@ namespace ChillExe.Tests.Downloader
             return httpResponseMessage;
         }
 
-        private void CheckIfDownloadedAppsExists()
+        private static void CheckIfAppIsDownloadedCorrectly(App app)
         {
-            foreach (string path in downloadedAppsPath)
-                Assert.IsTrue(File.Exists(path));
+            Assert.IsTrue(app.IsDownloaded);
+            Assert.IsNotNull(app.DownloadedPath);
+            Assert.IsNotEmpty(app.DownloadedPath);
+            Assert.IsTrue(File.Exists(app.DownloadedPath));   
         }
 
         [Test]
-        public void Download_WrongListOfApps_ReturnsEmptyDownloadedAppsPathList()
+        public void Download_ListOfAppsIsNull_NoChangesAreDoneToNullList()
         {
-            downloadedAppsPath = appDownloader.Download(null);
+            apps = null;
 
-            Assert.AreEqual(downloadedAppsPath.Count, 0);
+            appDownloader.Download(apps);
+
+            Assert.IsNull(apps);
         }
 
         [Test]
-        public void Download_OneOfTheURLInAppReturnsABadRequest_ReturnsDownloadedAppsPathWithoutTheWrongOne()
+        public void Download_UrlInAppReturnsBadRequest_AppDownloadedPathIsNullAndIsInstalledPropertyIsFalse()
         {
-            List<App> apps = GetApps();
-            apps.Add(
-                new App
-                {
-                    Filename = "wrongFile.txt",
-                    LastUpdate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
-                    Url = "https://wrong-url.com/wrongFile.txt"
-                }
-            );
+            apps = GetApps();
             var badHttpResponseMessage =
                 new HttpResponseMessage(HttpStatusCode.BadRequest);
-            var okHttpResponseMessage =
-                GetOkHttpResponseMessage();
             httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(apps[0].Url)
-            ).ReturnsAsync(okHttpResponseMessage);
-            httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(apps[1].Url)
-            ).ReturnsAsync(okHttpResponseMessage);
-            httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(apps[2].Url)
+                httpClientWrapper => httpClientWrapper.GetAsync(It.IsAny<string>())
             ).ReturnsAsync(badHttpResponseMessage);
 
-            downloadedAppsPath = appDownloader.Download(apps);
+            appDownloader.Download(apps);
 
-            Assert.AreEqual(downloadedAppsPath.Count, 2);
-            CheckIfDownloadedAppsExists();
+            CheckIfAppIsNotDownloaded(apps[0]);
+        }
+
+        private static void CheckIfAppIsNotDownloaded(App app)
+        {
+            Assert.IsNull(app.DownloadedPath);
+            Assert.IsFalse(app.IsDownloaded);
         }
 
         [Test]
-        public void Download_OneOfTheAppThrowsAnException_ReturnsDownloadedAppsPathWithoutTheOneWhichTriggersAnException()
+        public void Download_AppTriggersAnException_AppDownloadedPathIsNullAndIsInstalledPropertyIsFalse()
         {
-            List<App> apps = GetApps();
-            apps.Add(
-                new App
-                {
-                    Filename = "wrongFile.txt",
-                    LastUpdate = DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss"),
-                    Url = "https://wrong-url.com/wrongFile.txt"
-                }
-            );
-            var okHttpResponseMessage =
-                GetOkHttpResponseMessage();
+            apps = GetApps();
             httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(apps[0].Url)
-            ).ReturnsAsync(okHttpResponseMessage);
-            httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(apps[1].Url)
-            ).ReturnsAsync(okHttpResponseMessage);
-            httpClientWrapperMock.Setup(
-                httpClientWrapper => httpClientWrapper.GetAsync(apps[2].Url)
+                httpClientWrapper => httpClientWrapper.GetAsync(It.IsAny<string>())
             ).ThrowsAsync(new Exception());
 
-            downloadedAppsPath = appDownloader.Download(apps);
+            appDownloader.Download(apps);
 
-            Assert.AreEqual(downloadedAppsPath.Count, 2);
-            CheckIfDownloadedAppsExists();
+            CheckIfAppIsNotDownloaded(apps[0]);
         }
     }
 }
