@@ -21,6 +21,8 @@
 								</xsd:simpleType>
 							</xsd:element>
 							<xsd:element name='Filename' type='xsd:string' minOccurs='1' maxOccurs='1'/>
+							<xsd:element name='IsInstalled' type='xsd:boolean' minOccurs='1' maxOccurs='1'/>
+							<xsd:element name='IsDownloaded' type='xsd:boolean' minOccurs='1' maxOccurs='1'/>
 						</xsd:sequence>
 					</xsd:complexType>
 				</xsd:element>
