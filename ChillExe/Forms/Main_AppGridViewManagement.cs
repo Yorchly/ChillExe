@@ -15,6 +15,9 @@ namespace ChillExe.Forms
         private const int IsInstalledCellIndex = 3;
         private const int YesValueIndexInComboBoxColumn = 0;
         private const int NoValueIndexInComboBoxColumn = 1;
+        private const string UrlColumnName = "UrlColumn";
+        private const string IsDownloadedColumnName = "IsDownloadedColumn";
+        private const string IsInstalledColumnName = "IsInstalledColumn";
         private readonly Regex validUrlRegex = new Regex(@"^http[s]?\:\/\/.+\.(exe|msi)$");
         private readonly Regex appExecutableName = new Regex(@"[\w\d\-\\_\.]+\.(exe|msi)");
         private bool isColumnUrlValueValid = true;
@@ -43,7 +46,7 @@ namespace ChillExe.Forms
 
         private void appsGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
-            if (appsGridView.Columns[e.ColumnIndex].Name != "UrlColumn" ||
+            if (appsGridView.Columns[e.ColumnIndex].Name != UrlColumnName ||
                 !isColumnUrlValueValid)
                 return;
 
@@ -92,7 +95,7 @@ namespace ChillExe.Forms
 
         private void appsGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
-            if (appsGridView.Columns[e.ColumnIndex].Name != "UrlColumn")
+            if (appsGridView.Columns[e.ColumnIndex].Name != UrlColumnName)
                 return;
 
             if (!validUrlRegex.IsMatch(e.FormattedValue.ToString()))
@@ -126,14 +129,15 @@ namespace ChillExe.Forms
 
         private void appsGridView_CurrentCellDirtyStateChanged(object sender, System.EventArgs e)
         {
+            // Triggers CellValueChanged event for ComboBox column change value.
             if (appsGridView.IsCurrentCellDirty)
                 appsGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
         }
 
         private void appsGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if ((appsGridView.Columns[e.ColumnIndex].Name != "IsDownloadedColumn" &&
-                appsGridView.Columns[e.ColumnIndex].Name != "IsInstalledColumn") || 
+            if ((appsGridView.Columns[e.ColumnIndex].Name != IsDownloadedColumnName &&
+                appsGridView.Columns[e.ColumnIndex].Name != IsInstalledColumnName) || 
                 e.RowIndex < 0)
                 return;
 
