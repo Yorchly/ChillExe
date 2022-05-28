@@ -1,5 +1,6 @@
 ﻿using ChillExe.Forms.MessageBox;
 using ChillExe.Models;
+using System.Windows.Forms;
 
 namespace ChillExe.Forms
 {
@@ -18,6 +19,19 @@ namespace ChillExe.Forms
             UrlColumn.ToolTipText = stringLocalizer.GetTranslation("UrlTooltipText", "Url column");
             LastUpdatedColumn.HeaderText = stringLocalizer.GetTranslation("LastUpdated", "Last updated");
             LastUpdatedColumn.ToolTipText = stringLocalizer.GetTranslation("LastUpdatedTooltipText", "Last updated column");
+            IsDownloadedColumn.HeaderText = stringLocalizer.GetTranslation("IsDownloadedColumn", "Is downloaded");
+            IsInstalledColumn.HeaderText = stringLocalizer.GetTranslation("IsInstalledColumn", "Is installed");
+            initializeComboBoxColumnWithYesNoValues(IsDownloadedColumn);
+            initializeComboBoxColumnWithYesNoValues(IsInstalledColumn);
+        }
+
+        private void initializeComboBoxColumnWithYesNoValues(DataGridViewComboBoxColumn comboBoxColumn)
+        {
+            comboBoxColumn.Items.Clear();
+            comboBoxColumn.Items.AddRange(
+                stringLocalizer.GetTranslation("YesButton"),
+                stringLocalizer.GetTranslation("NoButton")
+            );
         }
 
         private void englishDropdownMenuItem_Click(object sender, System.EventArgs e)

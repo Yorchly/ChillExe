@@ -4,6 +4,7 @@ using ChillExe.Wrappers;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 
@@ -26,7 +27,7 @@ namespace ChillExe.Downloader
             if (apps == null)
                 return;
 
-            foreach (App app in apps)
+            foreach (App app in apps.Where(app => !string.IsNullOrEmpty(app.Url)).ToList())
                 if (Download(app).Result)
                 {
                     app.DownloadedPath = Path.Combine(destinationPath, app.Filename);

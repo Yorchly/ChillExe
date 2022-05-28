@@ -1,4 +1,6 @@
-﻿using ChillExe.Helpers;
+﻿using ChillExe.Downloader;
+using ChillExe.Helpers;
+using ChillExe.Installer;
 using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
@@ -17,6 +19,8 @@ namespace ChillExe.Forms
         private readonly IConfigurationHelper configurationHelper;
         private readonly IXmlFileHelper xmlFileHelper;
         private readonly Configuration configuration;
+        private readonly IAppDownloader appDownloader;
+        private readonly IAppInstaller appInstaller;
         private List<App> apps;
 
         public Main( 
@@ -25,7 +29,9 @@ namespace ChillExe.Forms
             IMessageBoxHelper messageBoxHelper,
             IAppHelper appHelper,
             IConfigurationHelper configurationHelper,
-            IXmlFileHelper xmlFileHelper)
+            IXmlFileHelper xmlFileHelper,
+            IAppDownloader appDownloader,
+            IAppInstaller appInstaller)
         {
             this.stringLocalizer = stringLocalizer;
             this.xmlUtils = xmlUtils;
@@ -33,6 +39,8 @@ namespace ChillExe.Forms
             this.appHelper = appHelper;
             this.configurationHelper = configurationHelper;
             this.xmlFileHelper = xmlFileHelper;
+            this.appDownloader = appDownloader;
+            this.appInstaller = appInstaller;
             apps = appHelper.GetApps() ?? new List<App>();
             configuration = configurationHelper.GetConfiguration();
 
