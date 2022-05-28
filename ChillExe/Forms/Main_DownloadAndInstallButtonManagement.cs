@@ -15,6 +15,9 @@ namespace ChillExe.Forms
                 stringLocalizer.GetTranslation("InstallingApps", "Installing apps..."),
                 InstallApps
             );
+
+            CleanApps();
+            LoadAppsInGridView();
         }
 
         private void DownloadApps(object sender, DoWorkEventArgs e)
