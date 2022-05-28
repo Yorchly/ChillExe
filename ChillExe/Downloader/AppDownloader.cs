@@ -44,7 +44,7 @@ namespace ChillExe.Downloader
                 {
                     using var fileStream = new FileStream(
                         Path.Combine(destinationPath, app.Filename),
-                        FileMode.CreateNew
+                        FileMode.Create
                     );
                     await response.Content.CopyToAsync(fileStream);
 
