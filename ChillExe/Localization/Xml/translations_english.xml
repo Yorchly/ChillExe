@@ -100,4 +100,20 @@
 		<Id>FileExportedSuccessfully</Id>
 		<Value>The file has been exported successfully.</Value>
 	</Translation>
+	<Translation>
+		<Id>DownloadingApps</Id>
+		<Value>Downloading applications. Please, wait a moment.</Value>
+	</Translation>
+	<Translation>
+		<Id>IsInstalledColumn</Id>
+		<Value>Is installed</Value>
+	</Translation>
+	<Translation>
+		<Id>IsDownloadedColumn</Id>
+		<Value>Is downloaded</Value>
+	</Translation>
+	<Translation>
+		<Id>InstallingApps</Id>
+		<Value>Installing applications. Please, wait a moment.</Value>
+	</Translation>
 </Translations>
