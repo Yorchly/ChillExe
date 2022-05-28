@@ -2,6 +2,7 @@ using ChillExe.Downloader;
 using ChillExe.Factory;
 using ChillExe.Forms;
 using ChillExe.Helpers;
+using ChillExe.Installer;
 using ChillExe.Localization;
 using ChillExe.Logger;
 using ChillExe.Models;
@@ -59,6 +60,8 @@ namespace ChillExe
                             .AddSingleton<IAppHelper, AppHelper>()
                             .AddSingleton<IAppDownloader, AppDownloader>()
                             .AddSingleton<IHttpClientWrapper, HttpClientWrapper>()
+                            .AddSingleton<IProcessWrapper, ProcessWrapper>()
+                            .AddSingleton<IAppInstaller, AppInstaller>()
                             .AddSingleton<Main>();
                 });
         }
