@@ -13,5 +13,7 @@ namespace ChillExe.Helpers
         public void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBoxFormIcon icon);
 
         public void ShowLoadingFormAndExecutingActionInBackground(string loadingFormText, Action<object, DoWorkEventArgs> actionToDoWhileLoadingFormIsShown);
+
+        public bool ShowCheckboxFormAndGetIfItsChecked(string checkboxFormText, string checkboxFormTitle = "");
     }
 }

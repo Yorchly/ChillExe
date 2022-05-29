@@ -33,6 +33,7 @@ namespace ChillExe.Tests.Services.Xml
             {
                 Language = Language.Spanish,
                 IsLanguageMessageBoxShown = true,
+                IsDownloadAndInstallWarningShown = true
             };
         }
 

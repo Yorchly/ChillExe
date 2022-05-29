@@ -162,5 +162,11 @@ namespace ChillExe.Forms
             currentRow.Cells[IsDownloadedCellIndex].Value = GetIsDownloadedColumnValue(false);
             currentRow.Cells[IsInstalledCellIndex].Value = GetIsDownloadedColumnValue(false);
         }
+
+        private void RefreshAppsInGridView()
+        {
+            appsGridView.Rows.Clear();
+            LoadAppsInGridView();
+        }
     }
 }

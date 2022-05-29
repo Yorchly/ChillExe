@@ -27,7 +27,7 @@ namespace ChillExe.Downloader
             if (apps == null)
                 return;
 
-            foreach (App app in apps.Where(app => !string.IsNullOrEmpty(app.Url)).ToList())
+            foreach (App app in apps.Where(app => !string.IsNullOrEmpty(app.Url)))
                 if (Download(app).Result)
                 {
                     app.DownloadedPath = Path.Combine(destinationPath, app.Filename);

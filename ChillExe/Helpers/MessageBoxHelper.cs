@@ -1,4 +1,5 @@
 ﻿using ChillExe.Forms.MessageBox;
+using ChillExe.Localization;
 using ChillExe.Logger;
 using System;
 using System.ComponentModel;
@@ -8,18 +9,22 @@ namespace ChillExe.Helpers
     public class MessageBoxHelper : IMessageBoxHelper
     {
         private readonly ICustomLogger logger;
+        private readonly IStringLocalizer stringLocalizer;
         private LoadingMessageBoxForm loadingForm;
 
-        public MessageBoxHelper(ICustomLogger logger) => this.logger = logger;
+        public MessageBoxHelper(ICustomLogger logger, IStringLocalizer stringLocalizer)
+        {
+            this.logger = logger;
+            this.stringLocalizer = stringLocalizer;
+        }
 
         public void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBoxFormIcon icon)
         {
-            var iconMessageBox = new IconMessageBoxForm(
+            using var iconMessageBox = new IconMessageBoxForm(
                 messageBoxTitle, messageBoxText, icon
             );
 
             iconMessageBox.ShowDialog();
-            iconMessageBox.Dispose();
         }
 
         public void ShowLoadingFormAndExecutingActionInBackground(
@@ -65,6 +70,17 @@ namespace ChillExe.Helpers
         {
             if (loadingForm != null)
                 loadingForm.DialogResult = System.Windows.Forms.DialogResult.OK;
+        }
+
+        public bool ShowCheckboxFormAndGetIfItsChecked(string checkboxFormText, string checkboxFormTitle = "")
+        {
+            using var checkboxForm = new CheckboxMessageBoxForm(
+                stringLocalizer, checkboxFormText, checkboxFormTitle
+            );
+
+            checkboxForm.ShowDialog();
+
+            return checkboxForm.notShowAgainCheckbox.Checked;
         }
     }
 }

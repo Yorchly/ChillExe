@@ -8,9 +8,9 @@ namespace ChillExe.Forms.MessageBox
         private readonly IStringLocalizer stringLocalizer;
 
         public CheckboxMessageBoxForm(
-            IStringLocalizer stringLocalizer, 
-            string formTitle, 
-            string messageBoxText)
+            IStringLocalizer stringLocalizer,
+            string messageBoxText,
+            string formTitle = "")
         {
             this.stringLocalizer = stringLocalizer;
 
@@ -20,7 +20,9 @@ namespace ChillExe.Forms.MessageBox
 
         private void SetFormComponentsText(string formTitle, string messageBoxText)
         {
-            Text = formTitle;
+            Text = string.IsNullOrEmpty(formTitle) ? 
+                stringLocalizer.GetTranslation("ImportantInformation", "Important information") : 
+                formTitle;
             this.messageBoxText.Text = messageBoxText;
             notShowAgainCheckbox.Text = stringLocalizer.GetTranslation(
                 "DontShowAgainText", "Don't show again"

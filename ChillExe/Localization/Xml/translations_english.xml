@@ -116,4 +116,8 @@
 		<Id>InstallingApps</Id>
 		<Value>Installing applications. Please, wait a moment.</Value>
 	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallWarning</Id>
+		<Value>Only those applications marked as not downloaded will be downloaded. The same applies to the installed ones.</Value>
+	</Translation>
 </Translations>

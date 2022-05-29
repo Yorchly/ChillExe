@@ -55,16 +55,14 @@ namespace ChillExe.Forms
             if (!configuration.IsLanguageMessageBoxShown)
                 return;
 
-            var checkboxMessageBoxForm = new CheckboxMessageBoxForm(
-                stringLocalizer,
-                stringLocalizer.GetTranslation("ImportantInformation", "Important information"),
-                stringLocalizer.GetTranslation("CheckboxMessageBoxText", "Language changes will not be applied until you reboot the application")
+            bool isChecked = messageBoxHelper.ShowCheckboxFormAndGetIfItsChecked(
+                stringLocalizer.GetTranslation(
+                    "CheckboxMessageBoxText", 
+                    "Language changes will not be applied until you reboot the application"
+                )
             );
 
-            checkboxMessageBoxForm.ShowDialog();
-            SetIfLanguageCheckboxMessageFormWillBeShownAgain(
-                checkboxMessageBoxForm.notShowAgainCheckbox.Checked
-            );
+            SetIfLanguageCheckboxMessageFormWillBeShownAgain(isChecked);
         }
 
         private void SetIfLanguageCheckboxMessageFormWillBeShownAgain(bool dontShow)

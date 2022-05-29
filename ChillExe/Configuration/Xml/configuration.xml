@@ -2,4 +2,5 @@
 <Configuration>
 	<Language>0</Language>
 	<IsLanguageMessageBoxShown>true</IsLanguageMessageBoxShown>
+	<IsDownloadAndInstallWarningShown>true</IsDownloadAndInstallWarningShown>
 </Configuration>

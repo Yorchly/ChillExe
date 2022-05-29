@@ -17,7 +17,7 @@ namespace ChillExe.Installer
             if (apps == null)
                 return;
 
-            foreach(App app in apps.Where(app => app.IsDownloaded))
+            foreach(App app in apps.Where(app => app.IsDownloaded && !string.IsNullOrEmpty(app.DownloadedPath)))
                 app.IsInstalled = processWrapper.Install(app.DownloadedPath);
         }
     }

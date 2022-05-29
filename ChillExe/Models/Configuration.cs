@@ -18,5 +18,6 @@ namespace ChillExe.Models
     {
         public Language Language { get; set; } = Language.Spanish;
         public bool IsLanguageMessageBoxShown { get; set; } = true;
+        public bool IsDownloadAndInstallWarningShown { get; set; } = true;
     }
 }
