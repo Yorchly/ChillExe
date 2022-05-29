@@ -54,7 +54,7 @@ namespace ChillExe.Forms
         private void InstallApps(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            //appInstaller.Install(apps);
+            appInstaller.Install(apps);
         }
     }
 }
