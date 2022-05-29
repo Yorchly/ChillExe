@@ -32,16 +32,18 @@ namespace ChillExe.Forms.MessageBox
             this.messageBoxText = new System.Windows.Forms.Label();
             this.notShowAgainCheckbox = new System.Windows.Forms.CheckBox();
             this.okButton = new System.Windows.Forms.Button();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // messageBoxText
             // 
             this.messageBoxText.AutoEllipsis = true;
             this.messageBoxText.AutoSize = true;
-            this.messageBoxText.Location = new System.Drawing.Point(29, 58);
-            this.messageBoxText.MaximumSize = new System.Drawing.Size(400, 75);
+            this.messageBoxText.Location = new System.Drawing.Point(93, 63);
+            this.messageBoxText.MaximumSize = new System.Drawing.Size(350, 75);
             this.messageBoxText.Name = "messageBoxText";
-            this.messageBoxText.Size = new System.Drawing.Size(393, 15);
+            this.messageBoxText.Size = new System.Drawing.Size(319, 30);
             this.messageBoxText.TabIndex = 0;
             this.messageBoxText.Text = "This is the default text in checkbox message box, u have to overwrite this.";
             // 
@@ -67,11 +69,22 @@ namespace ChillExe.Forms.MessageBox
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::ChillExe.Properties.Resources.warning_icon;
+            this.pictureBox1.Location = new System.Drawing.Point(12, 46);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(64, 64);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox1.TabIndex = 3;
+            this.pictureBox1.TabStop = false;
+            // 
             // CheckboxMessageBoxForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(451, 226);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.notShowAgainCheckbox);
             this.Controls.Add(this.messageBoxText);
@@ -81,6 +94,7 @@ namespace ChillExe.Forms.MessageBox
             this.Name = "CheckboxMessageBoxForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Important information";
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -91,5 +105,6 @@ namespace ChillExe.Forms.MessageBox
         private System.Windows.Forms.Label messageBoxText;
         private System.Windows.Forms.Button okButton;
         internal System.Windows.Forms.CheckBox notShowAgainCheckbox;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
