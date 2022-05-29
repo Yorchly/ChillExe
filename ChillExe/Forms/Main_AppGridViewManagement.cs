@@ -28,10 +28,12 @@ namespace ChillExe.Forms
             {
                 int rowIndex = appsGridView.Rows.Add(
                     app.Url, 
-                    app.LastUpdate,
-                    GetIsDownloadedColumnValue(app.IsDownloaded),
-                    GetIsInstalledColumnValue(app.IsInstalled)
+                    app.LastUpdate
                 );
+                appsGridView.Rows[rowIndex].Cells[IsDownloadedCellIndex].Value =
+                    GetIsDownloadedColumnValue(app.IsDownloaded);
+                appsGridView.Rows[rowIndex].Cells[IsInstalledCellIndex].Value =
+                    GetIsInstalledColumnValue(app.IsInstalled);
                 appsGridView.Rows[rowIndex].Tag = app;
             }
         }
