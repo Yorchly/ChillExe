@@ -38,19 +38,20 @@ namespace ChillExe.Forms.MessageBox
             // 
             this.messageBoxText.AutoEllipsis = true;
             this.messageBoxText.AutoSize = true;
-            this.messageBoxText.Location = new System.Drawing.Point(69, 89);
-            this.messageBoxText.MaximumSize = new System.Drawing.Size(600, 100);
+            this.messageBoxText.Location = new System.Drawing.Point(29, 58);
+            this.messageBoxText.MaximumSize = new System.Drawing.Size(400, 75);
             this.messageBoxText.Name = "messageBoxText";
-            this.messageBoxText.Size = new System.Drawing.Size(491, 20);
+            this.messageBoxText.Size = new System.Drawing.Size(393, 15);
             this.messageBoxText.TabIndex = 0;
             this.messageBoxText.Text = "This is the default text in checkbox message box, u have to overwrite this.";
             // 
             // notShowAgainCheckbox
             // 
             this.notShowAgainCheckbox.AutoSize = true;
-            this.notShowAgainCheckbox.Location = new System.Drawing.Point(248, 181);
+            this.notShowAgainCheckbox.Location = new System.Drawing.Point(152, 125);
+            this.notShowAgainCheckbox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.notShowAgainCheckbox.Name = "notShowAgainCheckbox";
-            this.notShowAgainCheckbox.Size = new System.Drawing.Size(146, 24);
+            this.notShowAgainCheckbox.Size = new System.Drawing.Size(118, 19);
             this.notShowAgainCheckbox.TabIndex = 1;
             this.notShowAgainCheckbox.Text = "Don\'t show again";
             this.notShowAgainCheckbox.UseVisualStyleBackColor = true;
@@ -58,22 +59,24 @@ namespace ChillExe.Forms.MessageBox
             // okButton
             // 
             this.okButton.DialogResult = System.Windows.Forms.DialogResult.OK;
-            this.okButton.Location = new System.Drawing.Point(269, 239);
+            this.okButton.Location = new System.Drawing.Point(170, 175);
+            this.okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(94, 29);
+            this.okButton.Size = new System.Drawing.Size(82, 22);
             this.okButton.TabIndex = 2;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
             // 
             // CheckboxMessageBoxForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(675, 301);
+            this.ClientSize = new System.Drawing.Size(451, 226);
             this.Controls.Add(this.okButton);
             this.Controls.Add(this.notShowAgainCheckbox);
             this.Controls.Add(this.messageBoxText);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "CheckboxMessageBoxForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
