@@ -26,7 +26,7 @@ namespace ChillExe.Forms
                         "Filename is not valid. Name must be {0}.", 
                         Path.GetFileName(appFilename)
                     ),
-                    MessageBox.MessageBoxIcon.Error
+                    MessageBox.MessageBoxFormIcon.Error
                 );
 
                 return;
@@ -37,7 +37,7 @@ namespace ChillExe.Forms
                 messageBoxHelper.ShowIconMessageBoxForm(
                     stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                     stringLocalizer.GetTranslation("NotValidFileImported", "File imported is not valid."),
-                    MessageBox.MessageBoxIcon.Error
+                    MessageBox.MessageBoxFormIcon.Error
                 );
                 return;
             }
@@ -48,7 +48,7 @@ namespace ChillExe.Forms
             messageBoxHelper.ShowIconMessageBoxForm(
                  stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                  stringLocalizer.GetTranslation("FileImportedSuccessfully", "File imported successfully"),
-                 MessageBox.MessageBoxIcon.Success
+                 MessageBox.MessageBoxFormIcon.Success
              );
         }
 

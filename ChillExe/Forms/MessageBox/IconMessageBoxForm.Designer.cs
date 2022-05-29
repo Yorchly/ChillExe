@@ -32,14 +32,17 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(IconMessageBoxForm));
             this.okButton = new System.Windows.Forms.Button();
             this.iconsList = new System.Windows.Forms.ImageList(this.components);
-            this.iconMessageBoxFormText = new System.Windows.Forms.Button();
+            this.iconBox = new System.Windows.Forms.PictureBox();
+            this.iconMessageBoxFormText = new System.Windows.Forms.Label();
+            ((System.ComponentModel.ISupportInitialize)(this.iconBox)).BeginInit();
             this.SuspendLayout();
             // 
             // okButton
             // 
-            this.okButton.Location = new System.Drawing.Point(210, 188);
+            this.okButton.Location = new System.Drawing.Point(184, 141);
+            this.okButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.okButton.Name = "okButton";
-            this.okButton.Size = new System.Drawing.Size(94, 29);
+            this.okButton.Size = new System.Drawing.Size(82, 22);
             this.okButton.TabIndex = 0;
             this.okButton.Text = "OK";
             this.okButton.UseVisualStyleBackColor = true;
@@ -54,37 +57,42 @@
             this.iconsList.Images.SetKeyName(1, "ok-icon.png");
             this.iconsList.Images.SetKeyName(2, "warning-icon.png");
             // 
+            // iconBox
+            // 
+            this.iconBox.Location = new System.Drawing.Point(12, 46);
+            this.iconBox.Name = "iconBox";
+            this.iconBox.Size = new System.Drawing.Size(64, 64);
+            this.iconBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.iconBox.TabIndex = 1;
+            this.iconBox.TabStop = false;
+            // 
             // iconMessageBoxFormText
             // 
-            this.iconMessageBoxFormText.BackColor = System.Drawing.SystemColors.Control;
-            this.iconMessageBoxFormText.FlatAppearance.BorderSize = 0;
-            this.iconMessageBoxFormText.FlatAppearance.MouseDownBackColor = System.Drawing.SystemColors.Control;
-            this.iconMessageBoxFormText.FlatAppearance.MouseOverBackColor = System.Drawing.SystemColors.Control;
-            this.iconMessageBoxFormText.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.iconMessageBoxFormText.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconMessageBoxFormText.ImageList = this.iconsList;
-            this.iconMessageBoxFormText.Location = new System.Drawing.Point(69, 47);
+            this.iconMessageBoxFormText.AutoSize = true;
+            this.iconMessageBoxFormText.Location = new System.Drawing.Point(105, 58);
+            this.iconMessageBoxFormText.MaximumSize = new System.Drawing.Size(270, 50);
             this.iconMessageBoxFormText.Name = "iconMessageBoxFormText";
-            this.iconMessageBoxFormText.Size = new System.Drawing.Size(399, 80);
-            this.iconMessageBoxFormText.TabIndex = 1;
+            this.iconMessageBoxFormText.Size = new System.Drawing.Size(256, 15);
+            this.iconMessageBoxFormText.TabIndex = 2;
             this.iconMessageBoxFormText.Text = "This is the default text of iconMessageBoxForm";
-            this.iconMessageBoxFormText.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.iconMessageBoxFormText.TextImageRelation = System.Windows.Forms.TextImageRelation.ImageBeforeText;
-            this.iconMessageBoxFormText.UseVisualStyleBackColor = false;
             // 
             // IconMessageBoxForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(525, 258);
+            this.ClientSize = new System.Drawing.Size(432, 194);
             this.Controls.Add(this.iconMessageBoxFormText);
+            this.Controls.Add(this.iconBox);
             this.Controls.Add(this.okButton);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.MaximizeBox = false;
             this.Name = "IconMessageBoxForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Important information";
+            ((System.ComponentModel.ISupportInitialize)(this.iconBox)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -92,6 +100,7 @@
 
         private System.Windows.Forms.Button okButton;
         private System.Windows.Forms.ImageList iconsList;
-        private System.Windows.Forms.Button iconMessageBoxFormText;
+        private System.Windows.Forms.PictureBox iconBox;
+        private System.Windows.Forms.Label iconMessageBoxFormText;
     }
 }

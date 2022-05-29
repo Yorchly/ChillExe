@@ -12,7 +12,7 @@ namespace ChillExe.Helpers
 
         public MessageBoxHelper(ICustomLogger logger) => this.logger = logger;
 
-        public void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBoxIcon icon)
+        public void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBoxFormIcon icon)
         {
             var iconMessageBox = new IconMessageBoxForm(
                 messageBoxTitle, messageBoxText, icon

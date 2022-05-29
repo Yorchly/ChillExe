@@ -22,7 +22,7 @@ namespace ChillExe.Forms
             messageBoxHelper.ShowIconMessageBoxForm(
                 stringLocalizer.GetTranslation("ImportantInformation", "Important information."),
                 stringLocalizer.GetTranslation("FileExportedSuccessfully", "The file has been exported successfully."),
-                MessageBox.MessageBoxIcon.Success
+                MessageBox.MessageBoxFormIcon.Success
             );
         }
 

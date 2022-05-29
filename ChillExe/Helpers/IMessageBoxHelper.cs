@@ -10,7 +10,7 @@ namespace ChillExe.Helpers
 {
     public interface IMessageBoxHelper
     {
-        public void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBoxIcon icon);
+        public void ShowIconMessageBoxForm(string messageBoxTitle, string messageBoxText, MessageBoxFormIcon icon);
 
         public void ShowLoadingFormAndExecutingActionInBackground(string loadingFormText, Action<object, DoWorkEventArgs> actionToDoWhileLoadingFormIsShown);
     }
