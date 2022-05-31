@@ -15,5 +15,7 @@ namespace ChillExe.Helpers
         public void ShowLoadingFormAndExecutingActionInBackground(string loadingFormText, Action<object, DoWorkEventArgs> actionToDoWhileLoadingFormIsShown);
 
         public bool ShowCheckboxFormAndGetIfItsChecked(string checkboxFormText, string checkboxFormTitle = "");
+
+        public void ShowTextboxForm(string formTitle, string textboxText);
     }
 }

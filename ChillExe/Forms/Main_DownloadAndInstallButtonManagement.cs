@@ -1,5 +1,8 @@
-﻿using System;
+﻿using ChillExe.Models;
+using System;
 using System.ComponentModel;
+using System.Linq;
+using System.Text;
 using System.Threading;
 
 namespace ChillExe.Forms
@@ -19,6 +22,8 @@ namespace ChillExe.Forms
             );
 
             RefreshAppsInGridView();
+
+            ShowNotDownloadedAndNotInstalledApps();
         }
 
         private void ShowDownloadAndInstallWarning()
@@ -43,18 +48,51 @@ namespace ChillExe.Forms
 
             configuration.IsDownloadAndInstallWarningShown = false;
             configurationHelper.SaveConfiguration(configuration);
-        }
+        } 
 
         private void DownloadApps(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            appDownloader.Download(apps);
+            //appDownloader.Download(apps);
         }
 
         private void InstallApps(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            appInstaller.Install(apps);
+            //appInstaller.Install(apps);
+        }
+
+        private void ShowNotDownloadedAndNotInstalledApps()
+        {
+            if (apps.All(app => app.IsDownloaded && app.IsInstalled))
+                return;
+
+            var notDownloadedAndNotInstalledApps = new StringBuilder();
+            GetNotDownloadedApps(notDownloadedAndNotInstalledApps);
+            GetNotInstalledApps(notDownloadedAndNotInstalledApps);
+
+            messageBoxHelper.ShowTextboxForm(
+                stringLocalizer.GetTranslation("NotDownloadedAndNotInstalledApps", "Not installed neither downloaded apps"),
+                notDownloadedAndNotInstalledApps.ToString()
+            );
+        }
+
+        private void GetNotDownloadedApps(StringBuilder stringBuilder)
+        {
+            stringBuilder.Append(
+                stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r\n"
+            );
+            foreach(App app in apps.Where(app => !app.IsDownloaded))
+                stringBuilder.Append("- " + app.Url + "\r\n");
+        }
+
+        private void GetNotInstalledApps(StringBuilder stringBuilder)
+        {
+            stringBuilder.Append(
+                "\r\n" + stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r\n"
+            );
+            foreach (App app in apps.Where(app => !app.IsInstalled))
+                stringBuilder.Append("- " + app.Url + "\r\n");
         }
     }
 }

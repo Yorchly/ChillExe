@@ -120,4 +120,16 @@
 		<Id>DownloadAndInstallWarning</Id>
 		<Value>Only those applications marked as not downloaded will be downloaded. The same applies to the installed ones.</Value>
 	</Translation>
+	<Translation>
+		<Id>NotDownloaded</Id>
+		<Value>Not downloaded:</Value>
+	</Translation>
+	<Translation>
+		<Id>NotInstalled</Id>
+		<Value>Not installed:</Value>
+	</Translation>
+	<Translation>
+		<Id>NotDownloadedAndNotInstalledApps</Id>
+		<Value>Information about not downloaded apps neither installed</Value>
+	</Translation>
 </Translations>

@@ -82,5 +82,14 @@ namespace ChillExe.Helpers
 
             return checkboxForm.notShowAgainCheckbox.Checked;
         }
+
+        public void ShowTextboxForm(string formTitle, string textboxText)
+        {
+            var textboxForm = new TextboxMessageBoxForm(
+                formTitle, textboxText
+            );
+
+            textboxForm.ShowDialog();
+        }
     }
 }
