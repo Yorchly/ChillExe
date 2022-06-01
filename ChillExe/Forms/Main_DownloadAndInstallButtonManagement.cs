@@ -1,5 +1,6 @@
 ﻿using ChillExe.Models;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -68,8 +69,16 @@ namespace ChillExe.Forms
                 return;
 
             var notDownloadedAndNotInstalledApps = new StringBuilder();
-            GetNotDownloadedApps(notDownloadedAndNotInstalledApps);
-            GetNotInstalledApps(notDownloadedAndNotInstalledApps);
+            SetAppsInStringBuilder(
+                notDownloadedAndNotInstalledApps,
+                stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r\n",
+                apps.Where(app => !app.IsDownloaded).ToList()
+            );
+            SetAppsInStringBuilder(
+                notDownloadedAndNotInstalledApps,
+                stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r\n",
+                apps.Where(app => !app.IsInstalled).ToList()
+            );
 
             messageBoxHelper.ShowTextboxForm(
                 notDownloadedAndNotInstalledApps.ToString(),
@@ -79,21 +88,16 @@ namespace ChillExe.Forms
             );
         }
 
-        private void GetNotDownloadedApps(StringBuilder stringBuilder)
+        private void SetAppsInStringBuilder(
+            StringBuilder stringBuilder, 
+            string textShownBeforeApps, 
+            List<App> apps)
         {
-            stringBuilder.Append(
-                stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r\n"
-            );
-            foreach(App app in apps.Where(app => !app.IsDownloaded))
-                stringBuilder.Append("- " + app.Url + "\r\n");
-        }
+            if (apps.Count == 0)
+                return;
 
-        private void GetNotInstalledApps(StringBuilder stringBuilder)
-        {
-            stringBuilder.Append(
-                "\r\n" + stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r\n"
-            );
-            foreach (App app in apps.Where(app => !app.IsInstalled))
+            stringBuilder.Append(textShownBeforeApps);
+            foreach (App app in apps)
                 stringBuilder.Append("- " + app.Url + "\r\n");
         }
     }
