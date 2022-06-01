@@ -5,28 +5,20 @@ namespace ChillExe.Forms.MessageBox
 {
     public partial class CheckboxMessageBoxForm : Form
     {
-        private readonly IStringLocalizer stringLocalizer;
-
         public CheckboxMessageBoxForm(
-            IStringLocalizer stringLocalizer,
+            string formTitle,
             string messageBoxText,
-            string formTitle = "")
+            string dontShowAgainText)
         {
-            this.stringLocalizer = stringLocalizer;
-
             InitializeComponent();
-            SetFormComponentsText(formTitle, messageBoxText);
+            SetFormComponentsText(formTitle, messageBoxText, dontShowAgainText);
         }
 
-        private void SetFormComponentsText(string formTitle, string messageBoxText)
+        private void SetFormComponentsText(string formTitle, string messageBoxText, string dontShowAgainText)
         {
-            Text = string.IsNullOrEmpty(formTitle) ? 
-                stringLocalizer.GetTranslation("ImportantInformation", "Important information") : 
-                formTitle;
+            Text = formTitle;
             this.messageBoxText.Text = messageBoxText;
-            notShowAgainCheckbox.Text = stringLocalizer.GetTranslation(
-                "DontShowAgainText", "Don't show again"
-            );
+            notShowAgainCheckbox.Text = dontShowAgainText;
         }
     }
 }

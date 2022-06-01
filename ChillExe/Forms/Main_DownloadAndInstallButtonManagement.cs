@@ -72,8 +72,10 @@ namespace ChillExe.Forms
             GetNotInstalledApps(notDownloadedAndNotInstalledApps);
 
             messageBoxHelper.ShowTextboxForm(
-                stringLocalizer.GetTranslation("NotDownloadedAndNotInstalledApps", "Not installed neither downloaded apps"),
-                notDownloadedAndNotInstalledApps.ToString()
+                notDownloadedAndNotInstalledApps.ToString(),
+                stringLocalizer.GetTranslation(
+                    "NotDownloadedAndNotInstalledApps", "Not installed neither downloaded apps"
+                )
             );
         }
 
