@@ -54,31 +54,44 @@ namespace ChillExe.Forms
         private void DownloadApps(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            //appDownloader.Download(apps);
+            appDownloader.Download(apps);
         }
 
         private void InstallApps(object sender, DoWorkEventArgs e)
         {
             Thread.Sleep(2000);
-            //appInstaller.Install(apps);
+            appInstaller.Install(apps);
         }
 
         private void ShowNotDownloadedAndNotInstalledApps()
         {
-            if (apps.All(app => app.IsDownloaded && app.IsInstalled))
+            List<App> notDownloadedApps = apps.Where(app => !app.IsDownloaded).ToList();
+            List<App> notInstalledApps = apps.Where(app => !app.IsInstalled).ToList();
+
+            if (notDownloadedApps.Count == 0 && notInstalledApps.Count == 0)
                 return;
 
             var notDownloadedAndNotInstalledApps = new StringBuilder();
-            SetAppsInStringBuilder(
-                notDownloadedAndNotInstalledApps,
-                stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r\n",
-                apps.Where(app => !app.IsDownloaded).ToList()
-            );
-            SetAppsInStringBuilder(
-                notDownloadedAndNotInstalledApps,
-                stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r\n",
-                apps.Where(app => !app.IsInstalled).ToList()
-            );
+
+            if(notDownloadedApps.Count > 0)
+            {
+                notDownloadedAndNotInstalledApps.AppendLine(
+                    stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r"
+                );
+                notDownloadedAndNotInstalledApps.AppendLine(
+                    string.Join("\r\n", notDownloadedApps.Select(app => "-" + app.Url))
+                );
+            }
+
+            if (notInstalledApps.Count > 0)
+            {
+                notDownloadedAndNotInstalledApps.AppendLine(
+                    stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r"
+                );
+                notDownloadedAndNotInstalledApps.AppendLine(
+                    string.Join("\r\n", notInstalledApps.Select(app => "-" + app.Url))
+                );
+            }
 
             messageBoxHelper.ShowTextboxForm(
                 notDownloadedAndNotInstalledApps.ToString(),
@@ -86,19 +99,6 @@ namespace ChillExe.Forms
                     "NotDownloadedAndNotInstalledApps", "Not installed neither downloaded apps"
                 )
             );
-        }
-
-        private void SetAppsInStringBuilder(
-            StringBuilder stringBuilder, 
-            string textShownBeforeApps, 
-            List<App> apps)
-        {
-            if (apps.Count == 0)
-                return;
-
-            stringBuilder.Append(textShownBeforeApps);
-            foreach (App app in apps)
-                stringBuilder.Append("- " + app.Url + "\r\n");
         }
     }
 }
