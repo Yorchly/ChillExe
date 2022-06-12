@@ -132,4 +132,12 @@
 		<Id>NotDownloadedAndNotInstalledApps</Id>
 		<Value>Información sobre aplicaciones no descargas ni instaladas.</Value>
 	</Translation>
+	<Translation>
+		<Id>SaveChangesButton</Id>
+		<Value>Guardar cambios</Value>
+	</Translation>
+	<Translation>
+		<Id>LastSavedChanges</Id>
+		<Value>Últimos cambios guardados el {0}</Value>
+	</Translation>
 </Translations>

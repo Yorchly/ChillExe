@@ -132,4 +132,12 @@
 		<Id>NotDownloadedAndNotInstalledApps</Id>
 		<Value>Information about not downloaded apps neither installed</Value>
 	</Translation>
+	<Translation>
+		<Id>SaveChangesButton</Id>
+		<Value>Save changes</Value>
+	</Translation>
+	<Translation>
+		<Id>LastSavedChanges</Id>
+		<Value>Last changes are saved at {0}</Value>
+	</Translation>
 </Translations>

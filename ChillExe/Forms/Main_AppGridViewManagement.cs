@@ -1,7 +1,5 @@
 ﻿using ChillExe.Models;
 using System;
-using System.Collections.Generic;
-using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -13,13 +11,8 @@ namespace ChillExe.Forms
         private const int LastUpdateCellIndex = 1;
         private const int IsDownloadedCellIndex = 2;
         private const int IsInstalledCellIndex = 3;
-        private const int YesValueIndexInComboBoxColumn = 0;
-        private const int NoValueIndexInComboBoxColumn = 1;
         private const string UrlColumnName = "UrlColumn";
-        private const string IsDownloadedColumnName = "IsDownloadedColumn";
-        private const string IsInstalledColumnName = "IsInstalledColumn";
-        private readonly Regex validUrlRegex = new Regex(@"^http[s]?\:\/\/.+\.(exe|msi)$");
-        private readonly Regex appExecutableName = new Regex(@"[\w\d\-\\_\.]+\.(exe|msi)");
+        private readonly Regex validUrlRegex = new Regex(@"^http[s]?\:\/\/.+(?:[Dd]ownload|\.(exe|msi)$)");
         private bool isColumnUrlValueValid = true;
 
         public void LoadAppsInGridView()
@@ -28,23 +21,16 @@ namespace ChillExe.Forms
             {
                 int rowIndex = appsGridView.Rows.Add(
                     app.Url, 
-                    app.LastUpdate
+                    app.LastUpdate,
+                    GetYesNoTranslateStringFromBoolean(app.IsDownloaded),
+                    GetYesNoTranslateStringFromBoolean(app.IsInstalled)
                 );
-                appsGridView.Rows[rowIndex].Cells[IsDownloadedCellIndex].Value =
-                    GetIsDownloadedColumnValue(app.IsDownloaded);
-                appsGridView.Rows[rowIndex].Cells[IsInstalledCellIndex].Value =
-                    GetIsInstalledColumnValue(app.IsInstalled);
                 appsGridView.Rows[rowIndex].Tag = app;
             }
         }
 
-        private string GetIsDownloadedColumnValue(bool isDownloaded) =>
-            isDownloaded ? IsDownloadedColumn.Items[YesValueIndexInComboBoxColumn].ToString() : 
-            IsDownloadedColumn.Items[NoValueIndexInComboBoxColumn].ToString();
-
-        private string GetIsInstalledColumnValue(bool isInstalled) =>
-            isInstalled ? IsInstalledColumn.Items[YesValueIndexInComboBoxColumn].ToString() : 
-            IsInstalledColumn.Items[NoValueIndexInComboBoxColumn].ToString();
+        private string GetYesNoTranslateStringFromBoolean(bool value) =>
+            value ? stringLocalizer.GetTranslation("YesButton", "Yes") : stringLocalizer.GetTranslation("NoButton", "No");
 
         private void appsGridView_CellEndEdit(object sender, DataGridViewCellEventArgs e)
         {
@@ -62,6 +48,9 @@ namespace ChillExe.Forms
 
                 currentRow.Tag = app;
                 apps.Add(app);
+
+                currentRow.Cells[IsDownloadedCellIndex].Value = GetYesNoTranslateStringFromBoolean(app.IsDownloaded);
+                currentRow.Cells[IsInstalledCellIndex].Value = GetYesNoTranslateStringFromBoolean(app.IsInstalled);
             }
             else
             {
@@ -78,22 +67,19 @@ namespace ChillExe.Forms
         {
             return new App
             {
-                Filename = GetFilenameFromUrl(row.Cells[UrlCellIndex].Value.ToString()),
+                Filename = GetFilename(),
                 Url = row.Cells[UrlCellIndex].Value.ToString(),
                 LastUpdate = row.Cells[LastUpdateCellIndex].Value.ToString(),
-                IsDownloaded = GetIsDownloadedValueFromCellValue(row.Cells[IsDownloadedCellIndex].Value.ToString()),
-                IsInstalled = GetIsInstalledValueFromCellValue(row.Cells[IsInstalledCellIndex].Value.ToString())
+                IsDownloaded = GetBoolValueFromYesNoString(row.Cells[IsDownloadedCellIndex].Value?.ToString()),
+                IsInstalled = GetBoolValueFromYesNoString(row.Cells[IsInstalledCellIndex].Value?.ToString())
             };
         }
 
-        private string GetFilenameFromUrl(string url) =>
-            appExecutableName.Match(url).ToString();
+        private string GetFilename() =>
+            "App_" + Guid.NewGuid().ToString() + ".exe";
 
-        private bool GetIsDownloadedValueFromCellValue(string isDownloadedStringValue) =>
-            IsDownloadedColumn.Items[YesValueIndexInComboBoxColumn].ToString() == isDownloadedStringValue;
-
-        private bool GetIsInstalledValueFromCellValue(string isInstalledStringValue) =>
-            IsInstalledColumn.Items[YesValueIndexInComboBoxColumn].ToString() == isInstalledStringValue;
+        private bool GetBoolValueFromYesNoString(string yesNoValue) =>
+            !string.IsNullOrEmpty(yesNoValue) && stringLocalizer.GetTranslation("YesButton", "Yes") == yesNoValue;
 
         private void appsGridView_CellValidating(object sender, DataGridViewCellValidatingEventArgs e)
         {
@@ -116,8 +102,21 @@ namespace ChillExe.Forms
             }
         }
 
-        private void appsGridView_Leave(object sender, EventArgs e) =>
+        private void appsGridView_Leave(object sender, EventArgs e)
+        {
             appHelper.SaveApps(apps);
+            ChangeLastSavedTime();
+        }
+
+        private void ChangeLastSavedTime()
+        {
+            lastSaveLabel.Text =
+                stringLocalizer.GetTranslation(
+                    "LastSavedChanges",
+                    "Last changes saved at {0}",
+                    DateTime.Now.ToString("dd/MM/yyyy HH:mm:ss")
+                );
+        }
 
         private void appsGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
@@ -129,40 +128,12 @@ namespace ChillExe.Forms
             apps.Remove(app);
         }
 
-        private void appsGridView_CurrentCellDirtyStateChanged(object sender, System.EventArgs e)
-        {
-            // Triggers CellValueChanged event for ComboBox column change value.
-            if (appsGridView.IsCurrentCellDirty)
-                appsGridView.CommitEdit(DataGridViewDataErrorContexts.Commit);
-        }
-
-        private void appsGridView_CellValueChanged(object sender, DataGridViewCellEventArgs e)
-        {
-            if ((appsGridView.Columns[e.ColumnIndex].Name != IsDownloadedColumnName &&
-                appsGridView.Columns[e.ColumnIndex].Name != IsInstalledColumnName) || 
-                e.RowIndex < 0)
-                return;
-
-            DataGridViewRow currentRow = appsGridView.Rows[e.RowIndex];
-
-            if (currentRow.Tag == null)
-                return;
-
-            App app = (App)currentRow.Tag;
-            app.IsInstalled = GetIsDownloadedValueFromCellValue(
-                currentRow.Cells[IsInstalledCellIndex].Value.ToString()
-            );
-            app.IsDownloaded = GetIsInstalledValueFromCellValue(
-                currentRow.Cells[IsDownloadedCellIndex].Value.ToString()
-            );
-        }
-
         private void appsGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             DataGridViewRow currentRow = appsGridView.Rows[e.RowIndex];
 
-            currentRow.Cells[IsDownloadedCellIndex].Value = GetIsDownloadedColumnValue(false);
-            currentRow.Cells[IsInstalledCellIndex].Value = GetIsDownloadedColumnValue(false);
+            currentRow.Cells[IsDownloadedCellIndex].Value = GetYesNoTranslateStringFromBoolean(false);
+            currentRow.Cells[IsInstalledCellIndex].Value = GetYesNoTranslateStringFromBoolean(false);
         }
 
         private void RefreshAppsInGridView()

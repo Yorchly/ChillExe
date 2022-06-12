@@ -1,5 +1,4 @@
 ﻿using ChillExe.Models;
-using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -74,30 +73,35 @@ namespace ChillExe.Forms
             var notDownloadedAndNotInstalledApps = new StringBuilder();
 
             if(notDownloadedApps.Count > 0)
-            {
-                notDownloadedAndNotInstalledApps.AppendLine(
-                    stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r"
+                SetAppsInStringBuilder(
+                    notDownloadedAndNotInstalledApps,
+                    stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r",
+                    notDownloadedApps
                 );
-                notDownloadedAndNotInstalledApps.AppendLine(
-                    string.Join("\r\n", notDownloadedApps.Select(app => "-" + app.Url))
-                );
-            }
 
             if (notInstalledApps.Count > 0)
-            {
-                notDownloadedAndNotInstalledApps.AppendLine(
-                    stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r"
+                SetAppsInStringBuilder(
+                    notDownloadedAndNotInstalledApps,
+                    stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r",
+                    notInstalledApps
                 );
-                notDownloadedAndNotInstalledApps.AppendLine(
-                    string.Join("\r\n", notInstalledApps.Select(app => "-" + app.Url))
-                );
-            }
 
             messageBoxHelper.ShowTextboxForm(
                 notDownloadedAndNotInstalledApps.ToString(),
                 stringLocalizer.GetTranslation(
                     "NotDownloadedAndNotInstalledApps", "Not installed neither downloaded apps"
                 )
+            );
+        }
+
+        private void SetAppsInStringBuilder(
+            StringBuilder stringBuilder,
+            string textShownBeforeApps,
+            List<App> apps)
+        {
+            stringBuilder.AppendLine(textShownBeforeApps);
+            stringBuilder.AppendLine(
+                string.Join("\r\n", apps.Select(app => "-" + app.Url))
             );
         }
     }

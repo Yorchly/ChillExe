@@ -21,17 +21,8 @@ namespace ChillExe.Forms
             LastUpdatedColumn.ToolTipText = stringLocalizer.GetTranslation("LastUpdatedTooltipText", "Last updated column");
             IsDownloadedColumn.HeaderText = stringLocalizer.GetTranslation("IsDownloadedColumn", "Is downloaded");
             IsInstalledColumn.HeaderText = stringLocalizer.GetTranslation("IsInstalledColumn", "Is installed");
-            initializeComboBoxColumnWithYesNoValues(IsDownloadedColumn);
-            initializeComboBoxColumnWithYesNoValues(IsInstalledColumn);
-        }
-
-        private void initializeComboBoxColumnWithYesNoValues(DataGridViewComboBoxColumn comboBoxColumn)
-        {
-            comboBoxColumn.Items.Clear();
-            comboBoxColumn.Items.AddRange(
-                stringLocalizer.GetTranslation("YesButton"),
-                stringLocalizer.GetTranslation("NoButton")
-            );
+            saveChangesButton.Text = stringLocalizer.GetTranslation("SaveChangesButton", "Save changes");
+            lastSaveLabel.Text = stringLocalizer.GetTranslation("LastSavedChanges", "Last changes saved at {0}", "");
         }
 
         private void englishDropdownMenuItem_Click(object sender, System.EventArgs e)

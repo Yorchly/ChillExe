@@ -31,6 +31,10 @@ namespace ChillExe.Forms
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
             this.appsGridView = new System.Windows.Forms.DataGridView();
+            this.UrlColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.LastUpdatedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsDownloadedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.IsInstalledColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.languageDropDown = new System.Windows.Forms.ToolStripDropDownButton();
             this.spanishDropdownMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -41,10 +45,8 @@ namespace ChillExe.Forms
             this.cleanListButton = new System.Windows.Forms.Button();
             this.importFileDialog = new System.Windows.Forms.OpenFileDialog();
             this.exportFileDialog = new System.Windows.Forms.SaveFileDialog();
-            this.UrlColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.LastUpdatedColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.IsDownloadedColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
-            this.IsInstalledColumn = new System.Windows.Forms.DataGridViewComboBoxColumn();
+            this.lastSaveLabel = new System.Windows.Forms.Label();
+            this.saveChangesButton = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.appsGridView)).BeginInit();
             this.toolStrip1.SuspendLayout();
             this.SuspendLayout();
@@ -66,11 +68,44 @@ namespace ChillExe.Forms
             this.appsGridView.TabIndex = 0;
             this.appsGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.appsGridView_CellEndEdit);
             this.appsGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appsGridView_CellValidating);
-            this.appsGridView.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.appsGridView_CellValueChanged);
-            this.appsGridView.CurrentCellDirtyStateChanged += new System.EventHandler(this.appsGridView_CurrentCellDirtyStateChanged);
             this.appsGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.appsGridView_RowsAdded);
             this.appsGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.appsGridView_RowsRemoved);
             this.appsGridView.Leave += new System.EventHandler(this.appsGridView_Leave);
+            // 
+            // UrlColumn
+            // 
+            this.UrlColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.UrlColumn.HeaderText = "Url";
+            this.UrlColumn.MinimumWidth = 6;
+            this.UrlColumn.Name = "UrlColumn";
+            // 
+            // LastUpdatedColumn
+            // 
+            this.LastUpdatedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
+            this.LastUpdatedColumn.HeaderText = "Last Updated";
+            this.LastUpdatedColumn.MinimumWidth = 6;
+            this.LastUpdatedColumn.Name = "LastUpdatedColumn";
+            this.LastUpdatedColumn.ReadOnly = true;
+            // 
+            // IsDownloadedColumn
+            // 
+            this.IsDownloadedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.IsDownloadedColumn.HeaderText = "Is downloaded";
+            this.IsDownloadedColumn.MinimumWidth = 6;
+            this.IsDownloadedColumn.Name = "IsDownloadedColumn";
+            this.IsDownloadedColumn.ReadOnly = true;
+            this.IsDownloadedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IsDownloadedColumn.Width = 109;
+            // 
+            // IsInstalledColumn
+            // 
+            this.IsInstalledColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
+            this.IsInstalledColumn.HeaderText = "Is installed";
+            this.IsInstalledColumn.MinimumWidth = 6;
+            this.IsInstalledColumn.Name = "IsInstalledColumn";
+            this.IsInstalledColumn.ReadOnly = true;
+            this.IsInstalledColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
+            this.IsInstalledColumn.Width = 87;
             // 
             // toolStrip1
             // 
@@ -172,50 +207,34 @@ namespace ChillExe.Forms
             this.exportFileDialog.InitialDirectory = "c:\\\\";
             this.exportFileDialog.Title = "Choose directory where you want to save the list of apps";
             // 
-            // UrlColumn
+            // lastSaveLabel
             // 
-            this.UrlColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.UrlColumn.HeaderText = "Url";
-            this.UrlColumn.MinimumWidth = 6;
-            this.UrlColumn.Name = "UrlColumn";
+            this.lastSaveLabel.AutoSize = true;
+            this.lastSaveLabel.Location = new System.Drawing.Point(10, 507);
+            this.lastSaveLabel.Name = "lastSaveLabel";
+            this.lastSaveLabel.Size = new System.Drawing.Size(105, 15);
+            this.lastSaveLabel.TabIndex = 6;
+            this.lastSaveLabel.Text = "Changes saved at: ";
             // 
-            // LastUpdatedColumn
+            // saveChangesButton
             // 
-            this.LastUpdatedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.Fill;
-            this.LastUpdatedColumn.HeaderText = "Last Updated";
-            this.LastUpdatedColumn.MinimumWidth = 6;
-            this.LastUpdatedColumn.Name = "LastUpdatedColumn";
-            this.LastUpdatedColumn.ReadOnly = true;
-            // 
-            // IsDownloadedColumn
-            // 
-            this.IsDownloadedColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.IsDownloadedColumn.HeaderText = "Is downloaded";
-            this.IsDownloadedColumn.Items.AddRange(new object[] {
-            "Yes",
-            "No"});
-            this.IsDownloadedColumn.MinimumWidth = 6;
-            this.IsDownloadedColumn.Name = "IsDownloadedColumn";
-            this.IsDownloadedColumn.Resizable = System.Windows.Forms.DataGridViewTriState.True;
-            this.IsDownloadedColumn.SortMode = System.Windows.Forms.DataGridViewColumnSortMode.Automatic;
-            this.IsDownloadedColumn.Width = 109;
-            // 
-            // IsInstalledColumn
-            // 
-            this.IsInstalledColumn.AutoSizeMode = System.Windows.Forms.DataGridViewAutoSizeColumnMode.ColumnHeader;
-            this.IsInstalledColumn.HeaderText = "Is installed";
-            this.IsInstalledColumn.Items.AddRange(new object[] {
-            "Yes",
-            "No"});
-            this.IsInstalledColumn.MinimumWidth = 6;
-            this.IsInstalledColumn.Name = "IsInstalledColumn";
-            this.IsInstalledColumn.Width = 68;
+            this.saveChangesButton.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
+            this.saveChangesButton.Location = new System.Drawing.Point(839, 101);
+            this.saveChangesButton.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.saveChangesButton.Name = "saveChangesButton";
+            this.saveChangesButton.Size = new System.Drawing.Size(183, 27);
+            this.saveChangesButton.TabIndex = 7;
+            this.saveChangesButton.Text = "Save changes";
+            this.saveChangesButton.UseVisualStyleBackColor = true;
+            this.saveChangesButton.Click += new System.EventHandler(this.saveChangesButton_Click);
             // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1047, 516);
+            this.ClientSize = new System.Drawing.Size(1047, 529);
+            this.Controls.Add(this.saveChangesButton);
+            this.Controls.Add(this.lastSaveLabel);
             this.Controls.Add(this.cleanListButton);
             this.Controls.Add(this.exportButton);
             this.Controls.Add(this.importButton);
@@ -247,10 +266,12 @@ namespace ChillExe.Forms
         private System.Windows.Forms.Button cleanListButton;
         private System.Windows.Forms.OpenFileDialog importFileDialog;
         private System.Windows.Forms.SaveFileDialog exportFileDialog;
+        private System.Windows.Forms.Label lastSaveLabel;
+        private System.Windows.Forms.Button saveChangesButton;
         private System.Windows.Forms.DataGridViewTextBoxColumn UrlColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn LastUpdatedColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn IsDownloadedColumn;
-        private System.Windows.Forms.DataGridViewComboBoxColumn IsInstalledColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsDownloadedColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn IsInstalledColumn;
     }
 }
 
