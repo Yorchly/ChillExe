@@ -118,7 +118,7 @@
 	</Translation>
 	<Translation>
 		<Id>DownloadAndInstallWarning</Id>
-		<Value>Sólo se descargarán aquellas aplicaciones que estén marcadas como no descargadas. Lo mismo pasará con las instalaciones.</Value>
+		<Value>Se volverán a descargar las aplicaciones independientemente de si se han descargado e instalado ya.</Value>
 	</Translation>
 	<Translation>
 		<Id>NotDownloaded</Id>
