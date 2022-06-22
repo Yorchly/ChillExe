@@ -73,18 +73,26 @@ namespace ChillExe.Forms
             var notDownloadedAndNotInstalledApps = new StringBuilder();
 
             if(notDownloadedApps.Count > 0)
+            {
+                notDownloadedAndNotInstalledApps.AppendLine(
+                    stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r"
+                );
                 SetAppsInStringBuilder(
                     notDownloadedAndNotInstalledApps,
-                    stringLocalizer.GetTranslation("NotDownloaded", "Not downloaded:") + "\r",
                     notDownloadedApps
                 );
+            }
 
             if (notInstalledApps.Count > 0)
+            {
+                notDownloadedAndNotInstalledApps.AppendLine(
+                    stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r"
+                );
                 SetAppsInStringBuilder(
                     notDownloadedAndNotInstalledApps,
-                    stringLocalizer.GetTranslation("NotInstalled", "Not installed:") + "\r",
                     notInstalledApps
                 );
+            }
 
             messageBoxHelper.ShowTextboxForm(
                 notDownloadedAndNotInstalledApps.ToString(),
@@ -94,15 +102,9 @@ namespace ChillExe.Forms
             );
         }
 
-        private void SetAppsInStringBuilder(
-            StringBuilder stringBuilder,
-            string textShownBeforeApps,
-            List<App> apps)
-        {
-            stringBuilder.AppendLine(textShownBeforeApps);
+        private static void SetAppsInStringBuilder(StringBuilder stringBuilder, List<App> apps) =>
             stringBuilder.AppendLine(
                 string.Join("\r\n", apps.Select(app => "-" + app.Url))
             );
-        }
     }
 }
