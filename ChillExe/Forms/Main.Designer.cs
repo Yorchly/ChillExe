@@ -68,7 +68,6 @@ namespace ChillExe.Forms
             this.appsGridView.TabIndex = 0;
             this.appsGridView.CellEndEdit += new System.Windows.Forms.DataGridViewCellEventHandler(this.appsGridView_CellEndEdit);
             this.appsGridView.CellValidating += new System.Windows.Forms.DataGridViewCellValidatingEventHandler(this.appsGridView_CellValidating);
-            this.appsGridView.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.appsGridView_RowsAdded);
             this.appsGridView.RowsRemoved += new System.Windows.Forms.DataGridViewRowsRemovedEventHandler(this.appsGridView_RowsRemoved);
             this.appsGridView.Leave += new System.EventHandler(this.appsGridView_Leave);
             // 

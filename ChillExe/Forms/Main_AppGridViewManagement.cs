@@ -75,7 +75,7 @@ namespace ChillExe.Forms
             };
         }
 
-        private string GetFilename() =>
+        private static string GetFilename() =>
             "App_" + Guid.NewGuid().ToString() + ".exe";
 
         private bool GetBoolValueFromYesNoString(string yesNoValue) =>
@@ -120,21 +120,23 @@ namespace ChillExe.Forms
 
         private void appsGridView_RowsRemoved(object sender, DataGridViewRowsRemovedEventArgs e)
         {
-            if (appsGridView.Rows.Count == 0 || appsGridView.Rows[e.RowIndex].Tag == null)
+            if (appsGridView.Rows.Count == 0)
                 return;
+
+            // There is a bug with non empty last row. Tag is null when it shouldnt, so I
+            // have to delete the element from app list directly.
+            if (appsGridView.Rows[e.RowIndex].Tag == null && IsAppGridLastRow(e.RowIndex))
+            {
+                apps.RemoveAt(e.RowIndex);
+                return;
+            }
 
             var app = (App)appsGridView.Rows[e.RowIndex].Tag;
 
             apps.Remove(app);
         }
 
-        private void appsGridView_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
-        {
-            DataGridViewRow currentRow = appsGridView.Rows[e.RowIndex];
-
-            currentRow.Cells[IsDownloadedCellIndex].Value = GetYesNoTranslateStringFromBoolean(false);
-            currentRow.Cells[IsInstalledCellIndex].Value = GetYesNoTranslateStringFromBoolean(false);
-        }
+        private bool IsAppGridLastRow(int rowIndex) => appsGridView.Rows.Count - 1 == rowIndex;
 
         private void RefreshAppsInGridView()
         {
