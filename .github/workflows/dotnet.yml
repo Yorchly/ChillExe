@@ -12,7 +12,7 @@ jobs:
     runs-on: windows-latest
     
     env:
-      Solution_Name: ChillExe.sln
+      Solution_Name: ChillExe\ChillExe.sln
 
     steps:
     - uses: actions/checkout@v3
