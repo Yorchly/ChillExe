@@ -3,7 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChillExe", "ChillExe.csproj", "{2F9DD462-4163-4B7E-B47B-FC496B1667F7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ChillExe", "ChillExe.csproj", "{2F9DD462-4163-4B7E-B47B-FC496B1667F7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ChillExe.Tests", "..\ChillExe.Tests\ChillExe.Tests.csproj", "{AFCB08C3-C3C9-4B95-9AED-0022DB5934ED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +17,10 @@ Global
 		{2F9DD462-4163-4B7E-B47B-FC496B1667F7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2F9DD462-4163-4B7E-B47B-FC496B1667F7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F9DD462-4163-4B7E-B47B-FC496B1667F7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFCB08C3-C3C9-4B95-9AED-0022DB5934ED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFCB08C3-C3C9-4B95-9AED-0022DB5934ED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFCB08C3-C3C9-4B95-9AED-0022DB5934ED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFCB08C3-C3C9-4B95-9AED-0022DB5934ED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

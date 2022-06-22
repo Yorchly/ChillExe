@@ -1,0 +1,11 @@
+﻿<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="Configuration">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="Language" type="xs:int" minOccurs="1" maxOccurs="1" default="0"/>
+				<xs:element name="IsLanguageMessageBoxShown" type="xs:boolean" minOccurs="1" maxOccurs="1" default="true"/>
+				<xs:element name="IsDownloadAndInstallWarningShown" type="xs:boolean" minOccurs="1" maxOccurs="1" default="true"/>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

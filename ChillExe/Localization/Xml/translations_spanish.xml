@@ -1,0 +1,143 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Translations>
+	<Translation>
+		<Id>Url</Id>
+		<Value>Url</Value>
+	</Translation>
+	<Translation>
+		<Id>Filename</Id>
+		<Value>Nombre del fichero</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdated</Id>
+		<Value>Última actualización</Value>
+	</Translation>
+	<Translation>
+		<Id>UrlTooltipText</Id>
+		<Value>Esta es la url de la que se descargará el programa a instalar.</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdatedTooltipText</Id>
+		<Value>Esta columna muestra la última vez que se modificó la información contenida en la fila.</Value>
+	</Translation>
+	<Translation>
+		<Id>LanguageDropdown</Id>
+		<Value>Idioma</Value>
+	</Translation>
+	<Translation>
+		<Id>EnglishDropdownMenuItem</Id>
+		<Value>Inglés</Value>
+	</Translation>
+	<Translation>
+		<Id>SpanishDropdownMenuItem</Id>
+		<Value>Español</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallButton</Id>
+		<Value>Descargar e instalar</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportButton</Id>
+		<Value>Importar lista</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportButton</Id>
+		<Value>Exportar lista</Value>
+	</Translation>
+	<Translation>
+		<Id>CleanButton</Id>
+		<Value>Limpiar lista</Value>
+	</Translation>
+	<Translation>
+		<Id>CheckboxMessageBoxText</Id>
+		<Value>Los cambios en el idioma no serán aplicados hasta que no reinicies la aplicación</Value>
+	</Translation>
+	<Translation>
+		<Id>DontShowAgainText</Id>
+		<Value>No mostrar de nuevo</Value>
+	</Translation>
+	<Translation>
+		<Id>UrlNotValid</Id>
+		<Value>La url debe contener http/https en el principio y .exe/msi al final de la misma. Por ej: https//test.com/App.exe</Value>
+	</Translation>
+	<Translation>
+		<Id>YesNoMessageBoxText</Id>
+		<Value>¿Estás seguro de querer continuar? Vas a borrar todos los elementos en la lista</Value>
+	</Translation>
+	<Translation>
+		<Id>YesButton</Id>
+		<Value>Si</Value>
+	</Translation>
+	<Translation>
+		<Id>NoButton</Id>
+		<Value>No</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportantInformation</Id>
+		<Value>Información importante.</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportFileDialog</Id>
+		<Value>Selecciona el documento que quieres importar.</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportFileDialog</Id>
+		<Value>Selecciona el directorio donde quieres guardar la lista de apps.</Value>
+	</Translation>
+	<Translation>
+		<Id>NotValidFileImported</Id>
+		<Value>El fichero importado no es válido.</Value>
+	</Translation>
+	<Translation>
+		<Id>InvalidImportedFileName</Id>
+		<Value>El nombre del fichero importado no es válido. El nombre debe ser {0}.</Value>
+	</Translation>
+	<Translation>
+		<Id>FileImportedSuccessfully</Id>
+		<Value>El fichero ha sido importado correctamente.</Value>
+	</Translation>
+	<Translation>
+		<Id>FileExportedSuccessfully</Id>
+		<Value>El fichero ha sido exportado correctamente.</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadingApps</Id>
+		<Value>Descargando aplicaciones. Espere un momento por favor.</Value>
+	</Translation>
+	<Translation>
+		<Id>IsInstalledColumn</Id>
+		<Value>Está instalado</Value>
+	</Translation>
+	<Translation>
+		<Id>IsDownloadedColumn</Id>
+		<Value>Está descargado</Value>
+	</Translation>
+	<Translation>
+		<Id>InstallingApps</Id>
+		<Value>Instalando aplicaciones. Espere un momento por favor.</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallWarning</Id>
+		<Value>Se volverán a descargar las aplicaciones independientemente de si se han descargado e instalado ya.</Value>
+	</Translation>
+	<Translation>
+		<Id>NotDownloaded</Id>
+		<Value>No descargados:</Value>
+	</Translation>
+	<Translation>
+		<Id>NotInstalled</Id>
+		<Value>No instalados:</Value>
+	</Translation>
+	<Translation>
+		<Id>NotDownloadedAndNotInstalledApps</Id>
+		<Value>Información sobre aplicaciones no descargas ni instaladas.</Value>
+	</Translation>
+	<Translation>
+		<Id>SaveChangesButton</Id>
+		<Value>Guardar cambios</Value>
+	</Translation>
+	<Translation>
+		<Id>LastSavedChanges</Id>
+		<Value>Últimos cambios guardados el {0}</Value>
+	</Translation>
+</Translations>
