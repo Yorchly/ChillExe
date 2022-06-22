@@ -1,1 +1,143 @@
-﻿<?xml version="1.0" encoding="utf-8" ?> 
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<Translations>
+	<Translation>
+		<Id>Url</Id>
+		<Value>Url</Value>
+	</Translation>
+	<Translation>
+		<Id>Filename</Id>
+		<Value>Filename</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdated</Id>
+		<Value>Last updated</Value>
+	</Translation>
+	<Translation>
+		<Id>UrlTooltipText</Id>
+		<Value>This column shows the url of the program that will be installed.</Value>
+	</Translation>
+	<Translation>
+		<Id>LastUpdatedTooltipText</Id>
+		<Value>This column shows the last time the information contained in the row was modified.</Value>
+	</Translation>
+	<Translation>
+		<Id>LanguageDropdown</Id>
+		<Value>Language</Value>
+	</Translation>
+	<Translation>
+		<Id>EnglishDropdownMenuItem</Id>
+		<Value>English</Value>
+	</Translation>
+	<Translation>
+		<Id>SpanishDropdownMenuItem</Id>
+		<Value>Spanish</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallButton</Id>
+		<Value>Download and Install</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportButton</Id>
+		<Value>Import list</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportButton</Id>
+		<Value>Export list</Value>
+	</Translation>
+	<Translation>
+		<Id>CleanButton</Id>
+		<Value>Clean list</Value>
+	</Translation>
+	<Translation>
+		<Id>CheckboxMessageBoxText</Id>
+		<Value>Language changes will not be applied until you reboot the application</Value>
+	</Translation>
+	<Translation>
+		<Id>DontShowAgainText</Id>
+		<Value>Don't show again</Value>
+	</Translation>
+	<Translation>
+		<Id>UrlNotValid</Id>
+		<Value>Url must contains http/https at the beginning and .exe/.msi at the end. E.g. https//test.com/App.exe</Value>
+	</Translation>
+	<Translation>
+		<Id>YesNoMessageBoxText</Id>
+		<Value>Are u sure about this? You are going to delete all elements in list.</Value>
+	</Translation>
+	<Translation>
+		<Id>YesButton</Id>
+		<Value>Yes</Value>
+	</Translation>
+	<Translation>
+		<Id>NoButton</Id>
+		<Value>No</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportantInformation</Id>
+		<Value>Important information.</Value>
+	</Translation>
+	<Translation>
+		<Id>ImportFileDialog</Id>
+		<Value>Choose document you want to import.</Value>
+	</Translation>
+	<Translation>
+		<Id>ExportFileDialog</Id>
+		<Value>Choose directory where you want to save the list of apps.</Value>
+	</Translation>
+	<Translation>
+		<Id>NotValidFileImported</Id>
+		<Value>Imported file is not valid.</Value>
+	</Translation>
+	<Translation>
+		<Id>InvalidImportedFileName</Id>
+		<Value>The imported filename is not valid. The name must be {0}.</Value>
+	</Translation>
+	<Translation>
+		<Id>FileImportedSuccessfully</Id>
+		<Value>The file has been imported successfully.</Value>
+	</Translation>
+	<Translation>
+		<Id>FileExportedSuccessfully</Id>
+		<Value>The file has been exported successfully.</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadingApps</Id>
+		<Value>Downloading applications. Please, wait a moment.</Value>
+	</Translation>
+	<Translation>
+		<Id>IsInstalledColumn</Id>
+		<Value>Is installed</Value>
+	</Translation>
+	<Translation>
+		<Id>IsDownloadedColumn</Id>
+		<Value>Is downloaded</Value>
+	</Translation>
+	<Translation>
+		<Id>InstallingApps</Id>
+		<Value>Installing applications. Please, wait a moment.</Value>
+	</Translation>
+	<Translation>
+		<Id>DownloadAndInstallWarning</Id>
+		<Value>Applications will be downloaded and installed even if you have already downloaded and installed them.</Value>
+	</Translation>
+	<Translation>
+		<Id>NotDownloaded</Id>
+		<Value>Not downloaded:</Value>
+	</Translation>
+	<Translation>
+		<Id>NotInstalled</Id>
+		<Value>Not installed:</Value>
+	</Translation>
+	<Translation>
+		<Id>NotDownloadedAndNotInstalledApps</Id>
+		<Value>Information about not downloaded apps neither installed</Value>
+	</Translation>
+	<Translation>
+		<Id>SaveChangesButton</Id>
+		<Value>Save changes</Value>
+	</Translation>
+	<Translation>
+		<Id>LastSavedChanges</Id>
+		<Value>Last changes are saved at {0}</Value>
+	</Translation>
+</Translations>

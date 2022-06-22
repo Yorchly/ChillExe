@@ -11,6 +11,13 @@ namespace ChillExe.Models
         public string LastUpdate { get; set; }
 
         public string Filename { get; set; }
+
+        public bool IsDownloaded { get; set; }
+
+        public bool IsInstalled { get; set; }
+
+        [XmlIgnore]
+        public string DownloadedPath { get; set; }
     }
 
     public class Apps
