@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading;
 
 namespace ChillExe.Forms
 {
@@ -22,6 +21,8 @@ namespace ChillExe.Forms
             );
 
             RefreshAppsInGridView();
+            appHelper.SaveApps(apps);
+            ChangeLastSavedTime();
 
             ShowNotDownloadedAndNotInstalledApps();
         }
@@ -50,17 +51,11 @@ namespace ChillExe.Forms
             configurationHelper.SaveConfiguration(configuration);
         } 
 
-        private void DownloadApps(object sender, DoWorkEventArgs e)
-        {
-            Thread.Sleep(2000);
+        private void DownloadApps(object sender, DoWorkEventArgs e) =>
             appDownloader.Download(apps);
-        }
 
-        private void InstallApps(object sender, DoWorkEventArgs e)
-        {
-            Thread.Sleep(2000);
+        private void InstallApps(object sender, DoWorkEventArgs e) =>
             appInstaller.Install(apps);
-        }
 
         private void ShowNotDownloadedAndNotInstalledApps()
         {

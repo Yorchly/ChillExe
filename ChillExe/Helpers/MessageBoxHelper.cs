@@ -3,6 +3,7 @@ using ChillExe.Localization;
 using ChillExe.Logger;
 using System;
 using System.ComponentModel;
+using System.Threading;
 
 namespace ChillExe.Helpers
 {
@@ -38,8 +39,8 @@ namespace ChillExe.Helpers
             {
                 using var backgroundWorker = new BackgroundWorker();
 
-                // Background worker is needed in order to use a secondary thread to download the apps.
-                // Main thread is blocked by loadingForm.
+                // Background worker is needed in order to use a secondary thread to do the action while
+                // loading form is shown.
                 backgroundWorker.DoWork += actionToDoWhileLoadingFormIsShown.Invoke;
                 backgroundWorker.DoWork += CloseLoadingForm;
                 backgroundWorker.RunWorkerAsync();
