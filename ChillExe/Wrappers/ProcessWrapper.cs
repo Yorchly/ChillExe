@@ -15,9 +15,9 @@ namespace ChillExe.Wrappers
         {
             try
             {
-                var process = new Process();
+                using var process = new Process();
                 process.StartInfo.FileName = downloadedAppPath;
-                process.StartInfo.UseShellExecute = false;
+                process.StartInfo.UseShellExecute = true;
                 process.StartInfo.Verb = "runas";
                 process.Start();
                 process.WaitForExit();
