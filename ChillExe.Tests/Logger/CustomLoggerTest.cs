@@ -65,7 +65,6 @@ namespace ChillExe.Tests.Logger
 
             Assert.IsTrue(fileText.Contains(testLine));
             Assert.IsTrue(fileText.Contains(logLevel.ToString()));
-            Assert.IsTrue(fileText.Contains(DateTime.Now.ToString("dd/MM/yyyy HH:mm")));
         }
 
         [Test]
